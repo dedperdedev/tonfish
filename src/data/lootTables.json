@@ -1,0 +1,37 @@
+{
+  "stick": [
+    { "itemId": "tadpole", "name": "Головастик", "type": "fish", "weight": 75, "payoutMulRange": [0.8, 1.2] },
+    { "itemId": "mud", "name": "Ил", "type": "junk", "weight": 25, "payoutMulRange": [0.2, 0.6] }
+  ],
+  "reed": [
+    { "itemId": "frog", "name": "Лягушка", "type": "fish", "weight": 55, "payoutMulRange": [0.9, 1.25] },
+    { "itemId": "goby", "name": "Бычок", "type": "fish", "weight": 35, "payoutMulRange": [0.95, 1.3] },
+    { "itemId": "algae", "name": "Тина", "type": "junk", "weight": 10, "payoutMulRange": [0.2, 0.6] }
+  ],
+  "bamboo": [
+    { "itemId": "crucian", "name": "Карась", "type": "fish", "weight": 55, "payoutMulRange": [0.9, 1.25] },
+    { "itemId": "can", "name": "Консервная банка", "type": "junk", "weight": 30, "payoutMulRange": [0.25, 0.75] },
+    { "itemId": "bag", "name": "Пакет", "type": "junk", "weight": 15, "payoutMulRange": [0.2, 0.7] }
+  ],
+  "telescopic": [
+    { "itemId": "perch", "name": "Окунь", "type": "fish", "weight": 60, "payoutMulRange": [0.95, 1.3] },
+    { "itemId": "boot", "name": "Сапог", "type": "junk", "weight": 30, "payoutMulRange": [0.25, 0.8] },
+    { "itemId": "lure", "name": "Старая блесна", "type": "junk", "weight": 10, "payoutMulRange": [0.35, 0.95] }
+  ],
+  "spinning": [
+    { "itemId": "pike", "name": "Щука", "type": "fish", "weight": 55, "payoutMulRange": [1.0, 1.35] },
+    { "itemId": "zander", "name": "Судак", "type": "fish", "weight": 35, "payoutMulRange": [1.0, 1.4] },
+    { "itemId": "chain", "name": "Ржавая цепь", "type": "junk", "weight": 10, "payoutMulRange": [0.35, 0.95] }
+  ],
+  "feeder": [
+    { "itemId": "carp", "name": "Карп", "type": "fish", "weight": 55, "payoutMulRange": [1.0, 1.4] },
+    { "itemId": "amur", "name": "Амур", "type": "fish", "weight": 35, "payoutMulRange": [1.0, 1.45] },
+    { "itemId": "anchor", "name": "Якорь-брелок", "type": "junk", "weight": 10, "payoutMulRange": [0.45, 1.05] }
+  ],
+  "boom": [
+    { "itemId": "shark", "name": "Акула", "type": "fish", "weight": 75, "payoutMulRange": [1.0, 1.55] },
+    { "itemId": "chest", "name": "Сундук", "type": "junk", "weight": 20, "payoutMulRange": [0.8, 1.2] },
+    { "itemId": "bone", "name": "Кость", "type": "junk", "weight": 5, "payoutMulRange": [0.5, 1.1] }
+  ]
+}
+

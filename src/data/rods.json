@@ -1,0 +1,74 @@
+[
+  {
+    "id": "stick",
+    "name": "Палка",
+    "rarity": "Common",
+    "currency": "FISH",
+    "minStake": 500,
+    "maxStake": 500,
+    "priceFish": 500,
+    "dailyYieldPct": 0.0,
+    "loot": ["Головастик"]
+  },
+  {
+    "id": "reed",
+    "name": "Камышовая",
+    "rarity": "Uncommon",
+    "currency": "TON",
+    "minStake": 0.1,
+    "maxStake": 25,
+    "dailyYieldPct": 0.02,
+    "loot": ["Лягушка", "Бычок", "Тина"]
+  },
+  {
+    "id": "bamboo",
+    "name": "Бамбуковая",
+    "rarity": "Rare",
+    "currency": "TON",
+    "minStake": 25,
+    "maxStake": 50,
+    "dailyYieldPct": 0.022,
+    "loot": ["Консервная банка", "Карась"]
+  },
+  {
+    "id": "telescopic",
+    "name": "Телескопическая",
+    "rarity": "Epic",
+    "currency": "TON",
+    "minStake": 50,
+    "maxStake": 100,
+    "dailyYieldPct": 0.024,
+    "loot": ["Сапог", "Окунь"]
+  },
+  {
+    "id": "spinning",
+    "name": "Спиннинг",
+    "rarity": "Legendary",
+    "currency": "TON",
+    "minStake": 100,
+    "maxStake": 180,
+    "dailyYieldPct": 0.026,
+    "loot": ["Щука", "Судак"]
+  },
+  {
+    "id": "feeder",
+    "name": "Фидерная",
+    "rarity": "Mythic",
+    "currency": "TON",
+    "minStake": 180,
+    "maxStake": 280,
+    "dailyYieldPct": 0.028,
+    "loot": ["Карп", "Амур"]
+  },
+  {
+    "id": "boom",
+    "name": "Boom Bait",
+    "rarity": "Apex",
+    "currency": "TON",
+    "minStake": 280,
+    "maxStake": 560,
+    "dailyYieldPct": 0.03,
+    "loot": ["Акула"]
+  }
+]
+

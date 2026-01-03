@@ -1,0 +1,80 @@
+export interface Rod {
+  id: string;
+  name: string;
+  rarity: 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary' | 'Mythic' | 'Apex';
+  currency: 'TON' | 'FISH';
+  minStake: number;
+  maxStake: number;
+  priceFish?: number;
+  dailyYieldPct: number;
+  loot: string[];
+}
+
+export interface LootTableEntry {
+  itemId: string;
+  name: string;
+  type: 'fish' | 'junk';
+  weight: number;
+  payoutMulRange: [number, number];
+}
+
+export interface FishingSession {
+  id: string;
+  rodId: string;
+  stakeAmount: number;
+  currency: 'TON' | 'FISH';
+  startAt: number;
+  endAt: number;
+  status: 'idle' | 'running' | 'ready' | 'claimed';
+}
+
+export interface CatchResult {
+  id: string;
+  rodId: string;
+  itemId: string;
+  name: string;
+  type: 'fish' | 'junk';
+  payoutTon: number;
+  payoutFish: number;
+  createdAt: number;
+  soldAt?: number;
+  status?: 'in_modal' | 'in_inventory' | 'sold';
+}
+
+export interface Task {
+  id: string;
+  title: string;
+  desc: string;
+  reward: number;
+  claimedAt: number;
+}
+
+export interface FriendsState {
+  code: string;
+  invited: number;
+  active: number;
+  earnedFish: number;
+  leaderboard: Array<{
+    name: string;
+    earned: number;
+  }>;
+}
+
+export interface UserState {
+  balances: {
+    ton: number;
+    fish: number;
+  };
+  ownedRods: string[];
+  equippedRodId: string | null;
+  session: FishingSession | null;
+  inventory: CatchResult[];
+  market: {
+    listed: CatchResult[];
+    history: CatchResult[];
+  };
+  tasks: Record<string, Task>;
+  friends: FriendsState;
+  devTap: number;
+}
+

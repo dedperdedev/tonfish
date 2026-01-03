@@ -1,0 +1,128 @@
+import { useState } from 'react';
+import { useGameStore, rods } from '../store/gameStore';
+import { formatTon } from '../utils/formatters';
+
+interface StartFishingModalProps {
+  rodId: string;
+  onStart: (stakeAmount: number) => void;
+  onClose: () => void;
+}
+
+const rodIcons: Record<string, string> = {
+  stick: '🪵',
+  reed: '🌾',
+  bamboo: '🎋',
+  telescopic: '📏',
+  spinning: '🎣',
+  feeder: '🧺',
+  boom: '💥',
+};
+
+export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModalProps) {
+  const rod = rods.find((r) => r.id === rodId);
+  const ownedRods = useGameStore((s) => s.ownedRods);
+  const balances = useGameStore((s) => s.balances);
+
+  if (!rod) return null;
+
+  const isOwned = ownedRods.includes(rodId);
+  const defaultStake =
+    rod.currency === 'TON'
+      ? Math.max(rod.minStake, Math.min(rod.maxStake, rod.minStake + (rod.maxStake - rod.minStake) * 0.55))
+      : rod.priceFish || rod.minStake;
+
+  const [stakeAmount, setStakeAmount] = useState(defaultStake);
+
+  const canAfford =
+    rod.currency === 'TON'
+      ? balances.ton >= stakeAmount
+      : balances.fish >= (rod.priceFish || rod.minStake);
+
+  const handleStart = () => {
+    if (!canAfford && !isOwned) return;
+    onStart(rod.currency === 'TON' ? stakeAmount : (rod.priceFish || rod.minStake));
+  };
+
+  return (
+    <div
+      className="absolute inset-0 bg-[rgba(0,20,30,.28)] flex items-center justify-center z-20 p-4.5 animate-fade-in"
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-[420px] rounded-[32px] glass-card shadow-[0_28px_80px_rgba(0,30,45,.35)] overflow-hidden animate-pop-in"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="p-4.5 pb-0">
+          <h2 className="m-0 text-lg font-black font-heading">Начать рыбалку</h2>
+          <p className="mt-1.5 mb-0 text-muted font-extrabold text-xs">
+            {rod.name} • {rod.rarity}
+          </p>
+        </div>
+        <div className="px-4.5 pb-4.5 grid gap-2.5">
+          <div className="game-card">
+            <div className="flex gap-3 items-start">
+              <div className="w-[54px] h-[54px] rounded-[18px] bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center relative overflow-hidden">
+                <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,.65),rgba(255,255,255,0)_55%)] rotate-[18deg]"></div>
+                <span className="text-2xl z-[2]">{rodIcons[rod.id] || '🎣'}</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="m-0 text-base font-black tracking-wide">{rod.name}</h3>
+                <div className="mt-0.5 flex gap-2 flex-wrap items-center">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-gradient-to-br from-sun/55 to-sun2/42 text-[#281600] border border-white/88 text-xs font-black">
+                    {rod.rarity}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
+                    <strong className="text-ink">{rod.currency}</strong>{' '}
+                    {rod.currency === 'TON'
+                      ? `${rod.minStake}–${rod.maxStake}`
+                      : `${rod.priceFish}`}
+                  </span>
+                  {rod.dailyYieldPct > 0 && (
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
+                      <strong className="text-ink">
+                        {(rod.dailyYieldPct * 100).toFixed(1)}%/сутки
+                      </strong>
+                    </span>
+                  )}
+                </div>
+                {rod.currency === 'TON' && (
+                  <div className="mt-2.5 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85">
+                    <div className="flex justify-between items-center font-black text-xs text-muted mb-2.5">
+                      <span>Сумма</span>
+                      <b className="text-ink">
+                        <span>{formatTon(stakeAmount)}</span> TON
+                      </b>
+                    </div>
+                    <input
+                      type="range"
+                      min={rod.minStake}
+                      max={rod.maxStake}
+                      step={rod.minStake < 1 ? 0.1 : 1}
+                      value={stakeAmount}
+                      onChange={(e) => setStakeAmount(parseFloat(e.target.value))}
+                      className="w-full accent-[#ffb23b]"
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <button
+            className={`game-button ${!canAfford && !isOwned ? 'opacity-50' : ''}`}
+            onClick={handleStart}
+            disabled={!canAfford && !isOwned}
+          >
+            {isOwned ? 'Начать' : canAfford ? 'Купить и начать' : 'Недостаточно средств'}
+          </button>
+          <button
+            className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm"
+            onClick={onClose}
+          >
+            Отмена
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
