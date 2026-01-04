@@ -1,18 +1,32 @@
 import { useGameStore } from '../store/gameStore';
 import { Header } from '../components/Header';
 import { VideoBackground } from '../components/VideoBackground';
-import { formatFish } from '../utils/formatters';
+import { Copy, Users } from 'lucide-react';
+import { useState } from 'react';
 
 export function FriendsPage() {
   const friends = useGameStore((s) => s.friends);
+  const [copied, setCopied] = useState(false);
+
+  const referralLink = `t.me/bot?startapp=referr_${friends.code}`;
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(friends.code);
-      // You could add a toast here
+      await navigator.clipboard.writeText(referralLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
       // Handle error
     }
+  };
+
+  const handleInvite = () => {
+    // Telegram share functionality would go here
+    handleCopy();
+  };
+
+  const getInitial = (name: string) => {
+    return name.charAt(0).toUpperCase();
   };
 
   return (
@@ -34,103 +48,74 @@ export function FriendsPage() {
         />
 
         <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-24 -webkit-overflow-scrolling-touch">
+          {/* Реферальная ссылка */}
+          <div className="game-card mb-2.5">
+            <div className="font-black mb-2.5">Реферальная ссылка</div>
+            <div className="flex items-center gap-2.5 mb-2.5">
+              <div className="flex-1 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85 font-mono text-sm font-black text-ink break-all">
+                {referralLink}
+              </div>
+              <button
+                className="px-3.5 py-2.5 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer flex items-center justify-center flex-shrink-0"
+                onClick={handleCopy}
+                title={copied ? 'Скопировано' : 'Копировать'}
+              >
+                <Copy size={18} strokeWidth={2.5} className={copied ? 'text-green-600' : 'text-ink'} />
+              </button>
+            </div>
+            <button
+              className="w-full px-3.5 py-3.5 rounded-[18px] bg-gradient-to-br from-sun/55 to-sun2/45 text-[#281600] border border-white/88 shadow-[0_10px_22px_rgba(255,156,30,.22)] font-black cursor-pointer flex items-center justify-center gap-2"
+              onClick={handleInvite}
+            >
+              <Users size={18} strokeWidth={2.5} />
+              Пригласить друзей
+            </button>
+          </div>
+
+          {/* Уровни реферальной системы */}
+          <div className="grid grid-cols-3 gap-2.5 mb-2.5">
+            {/* Уровень 1 */}
+            <div className="game-card border-2 border-[rgba(255,215,0,0.6)] bg-gradient-to-br from-[rgba(255,215,0,0.15)] to-[rgba(255,215,0,0.05)]">
+              <div className="text-xs font-extrabold text-muted mb-1">1 уровень</div>
+              <div className="text-3xl font-black text-[#FFD700] mb-1">{friends.level1.invited}</div>
+              <div className="text-xs font-black text-[#FFD700]">
+                {friends.level1.percentage?.toFixed(2) || '5.00'}%
+              </div>
+            </div>
+
+            {/* Уровень 2 */}
+            <div className="game-card">
+              <div className="text-xs font-extrabold text-muted mb-1">2 уровень</div>
+              <div className="text-3xl font-black text-ink mb-1">{friends.level2.invited}</div>
+              <div className="text-xs font-black text-[#FFD700]">
+                {friends.level2.percentage?.toFixed(2) || '3.00'}%
+              </div>
+            </div>
+
+            {/* Уровень 3 */}
+            <div className="game-card">
+              <div className="text-xs font-extrabold text-muted mb-1">3 уровень</div>
+              <div className="text-3xl font-black text-ink mb-1">{friends.level3.invited}</div>
+              <div className="text-xs font-black text-[#FFD700]">
+                {friends.level3.percentage?.toFixed(2) || '2.00'}%
+              </div>
+            </div>
+          </div>
+
+          {/* Список друзей */}
           <div className="game-card">
-            <div className="font-black flex justify-between items-center">
-              <span>Твой код</span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-gradient-to-br from-sun/55 to-sun2/42 text-[#281600] border border-white/88 text-xs font-black">
-                {friends.code}
-              </span>
-            </div>
-            <div className="text-xs font-extrabold text-muted leading-[1.35] mt-2">
-              Бонусы тут моковые, но UI настоящий.
-            </div>
-          </div>
-
-          <div className="game-card mt-2.5">
-            <div className="font-black mb-2.5">Реферальная система</div>
+            <div className="font-black mb-2.5">Друзья</div>
             <div className="grid gap-2.5">
-              <div className="px-3 py-2.5 rounded-[18px] bg-gradient-to-br from-aqua/25 to-aqua2/15 border border-white/85">
-                <div className="flex justify-between items-center mb-1.5">
-                  <div className="font-black text-sm">Уровень 1</div>
-                  <div className="text-xs font-extrabold text-muted">
-                    {formatFish(friends.level1.earnedFish)} FISH
-                  </div>
-                </div>
-                <div className="flex gap-2.5 flex-wrap items-center">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
-                    <strong className="text-ink">{friends.level1.invited}</strong> приглашено
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
-                    <strong className="text-ink">{friends.level1.active}</strong> активных
-                  </span>
-                </div>
-              </div>
-
-              <div className="px-3 py-2.5 rounded-[18px] bg-gradient-to-br from-sun/25 to-sun2/15 border border-white/85">
-                <div className="flex justify-between items-center mb-1.5">
-                  <div className="font-black text-sm">Уровень 2</div>
-                  <div className="text-xs font-extrabold text-muted">
-                    {formatFish(friends.level2.earnedFish)} FISH
-                  </div>
-                </div>
-                <div className="flex gap-2.5 flex-wrap items-center">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
-                    <strong className="text-ink">{friends.level2.invited}</strong> приглашено
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
-                    <strong className="text-ink">{friends.level2.active}</strong> активных
-                  </span>
-                </div>
-              </div>
-
-              <div className="px-3 py-2.5 rounded-[18px] bg-gradient-to-br from-purple-400/25 to-purple-500/15 border border-white/85">
-                <div className="flex justify-between items-center mb-1.5">
-                  <div className="font-black text-sm">Уровень 3</div>
-                  <div className="text-xs font-extrabold text-muted">
-                    {formatFish(friends.level3.earnedFish)} FISH
-                  </div>
-                </div>
-                <div className="flex gap-2.5 flex-wrap items-center">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
-                    <strong className="text-ink">{friends.level3.invited}</strong> приглашено
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
-                    <strong className="text-ink">{friends.level3.active}</strong> активных
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="mt-2.5 pt-2.5 border-t border-white/30">
-              <div className="flex justify-between items-center">
-                <div className="text-xs font-extrabold text-muted">Всего заработано</div>
-                <div className="font-black text-sm">{formatFish(friends.totalEarnedFish)} FISH</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="game-card mt-2.5">
-            <div className="font-black">Топ друзей</div>
-            <div className="text-xs font-extrabold text-muted leading-[1.35] mt-2">
-              Мок-таблица, чтобы экран не выглядел как пустыня.
-            </div>
-            <div className="grid gap-2.5 mt-2.5">
               {friends.leaderboard.map((user, index) => (
-                <div key={index} className="game-card">
-                  <div className="flex justify-between items-center gap-2.5">
-                    <div className="flex gap-2.5 items-center min-w-0">
-                      <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
-                        {index + 1}
-                      </div>
-                      <div className="min-w-0">
-                        <div className="font-black">{user.name}</div>
-                        <div className="text-xs font-extrabold text-muted leading-[1.35] mt-0.5">
-                          {formatFish(user.earned)} FISH
-                        </div>
-                      </div>
-                    </div>
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
-                      топ
-                    </span>
+                <div
+                  key={index}
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85"
+                >
+                  <div className="w-[40px] h-[40px] rounded-full bg-gradient-to-br from-[rgba(255,215,0,0.3)] to-[rgba(255,215,0,0.1)] border-2 border-[rgba(255,215,0,0.6)] grid place-items-center flex-shrink-0">
+                    <span className="text-lg font-black text-ink">{getInitial(user.name)}</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-black text-sm">{user.name}</div>
                   </div>
                 </div>
               ))}

@@ -53,6 +53,7 @@ export interface ReferralLevel {
   invited: number;
   active: number;
   earnedFish: number;
+  percentage: number; // Процент комиссии для уровня
 }
 
 export interface FriendsState {
