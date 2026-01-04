@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameStore, rods } from '../store/gameStore';
-import { Hud } from '../components/Hud';
+import { Header } from '../components/Header';
 import { FloatBobber } from '../components/FloatBobber';
 import { VideoBackground } from '../components/VideoBackground';
 import { formatTime, getProgress } from '../utils/session';
@@ -41,7 +41,7 @@ export function FishingPage() {
       <div className="relative h-full w-full">
         <VideoBackground />
         <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
-          <Hud />
+          <Header />
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center">
               <p className="font-black text-lg">Сессия не запущена</p>
@@ -79,7 +79,7 @@ export function FishingPage() {
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
-        <Hud />
+        <Header />
 
         <div className="relative z-[4] flex-1 flex items-center justify-center pt-4.5">
           <div className="w-[240px] h-[240px] rounded-full glass-card shadow-game grid place-items-center relative overflow-hidden">

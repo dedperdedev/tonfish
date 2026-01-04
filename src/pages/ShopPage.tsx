@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGameStore, rods } from '../store/gameStore';
-import { Hud } from '../components/Hud';
+import { Header } from '../components/Header';
 import { VideoBackground } from '../components/VideoBackground';
 import { formatTon, formatFish } from '../utils/formatters';
 import { getRarityColors } from '../utils/rarity';
@@ -75,33 +75,33 @@ export function ShopPage() {
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
-        <div className="relative z-[3] flex gap-2.5 items-center justify-between mt-1.5 mb-2.5">
-          <h1 className="m-0 text-xl font-black tracking-wide font-heading">Магазин</h1>
-          <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white/62 border border-white/86 shadow-game-sm backdrop-blur-[12px]">
-            <button
-              className={`border-0 rounded-full px-3 py-2.5 font-black bg-transparent cursor-pointer transition-all ${
-                tab === 'shop'
-                  ? 'bg-gradient-to-br from-sun/55 to-sun2/45 text-[#281600] shadow-[0_10px_22px_rgba(255,156,30,.22)]'
-                  : 'text-muted'
-              }`}
-              onClick={() => setTab('shop')}
-            >
-              Магазин
-            </button>
-            <button
-              className={`border-0 rounded-full px-3 py-2.5 font-black bg-transparent cursor-pointer transition-all ${
-                tab === 'inv'
-                  ? 'bg-gradient-to-br from-sun/55 to-sun2/45 text-[#281600] shadow-[0_10px_22px_rgba(255,156,30,.22)]'
-                  : 'text-muted'
-              }`}
-              onClick={() => setTab('inv')}
-            >
-              Инвентарь
-            </button>
-          </div>
-        </div>
-
-        <Hud />
+        <Header
+          title="Магазин"
+          rightContent={
+            <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white/62 border border-white/86 shadow-game-sm backdrop-blur-[12px]">
+              <button
+                className={`border-0 rounded-full px-3 py-2.5 font-black bg-transparent cursor-pointer transition-all ${
+                  tab === 'shop'
+                    ? 'bg-gradient-to-br from-sun/55 to-sun2/45 text-[#281600] shadow-[0_10px_22px_rgba(255,156,30,.22)]'
+                    : 'text-muted'
+                }`}
+                onClick={() => setTab('shop')}
+              >
+                Магазин
+              </button>
+              <button
+                className={`border-0 rounded-full px-3 py-2.5 font-black bg-transparent cursor-pointer transition-all ${
+                  tab === 'inv'
+                    ? 'bg-gradient-to-br from-sun/55 to-sun2/45 text-[#281600] shadow-[0_10px_22px_rgba(255,156,30,.22)]'
+                    : 'text-muted'
+                }`}
+                onClick={() => setTab('inv')}
+              >
+                Инвентарь
+              </button>
+            </div>
+          }
+        />
 
         <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-20 -webkit-overflow-scrolling-touch">
           {tab === 'shop' ? (

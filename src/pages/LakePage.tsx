@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/gameStore';
-import { Hud } from '../components/Hud';
+import { Header } from '../components/Header';
 import { BottomPanel } from '../components/BottomPanel';
 import { StartFishingModal } from '../components/StartFishingModal';
 import { CatchModal } from '../components/CatchModal';
@@ -62,7 +62,7 @@ export function LakePage() {
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
-        <Hud />
+        <Header />
         <BottomPanel onStartClick={handleStartClick} onOpenFishing={handleOpenFishing} />
       </div>
 

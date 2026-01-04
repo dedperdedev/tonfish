@@ -1,5 +1,5 @@
 import { useGameStore } from '../store/gameStore';
-import { Hud } from '../components/Hud';
+import { Header } from '../components/Header';
 import { VideoBackground } from '../components/VideoBackground';
 import { formatFish } from '../utils/formatters';
 
@@ -30,17 +30,17 @@ export function TasksPage() {
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
-        <div className="relative z-[3] flex gap-2.5 items-center justify-between mt-1.5 mb-2.5">
-          <h1 className="m-0 text-xl font-black tracking-wide font-heading">Таски</h1>
-          <button
-            className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
-            onClick={handleReset}
-          >
-            ↻
-          </button>
-        </div>
-
-        <Hud />
+        <Header
+          title="Таски"
+          rightContent={
+            <button
+              className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
+              onClick={handleReset}
+            >
+              ↻
+            </button>
+          }
+        />
 
         <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-20 -webkit-overflow-scrolling-touch">
           <div className="grid gap-2.5">
