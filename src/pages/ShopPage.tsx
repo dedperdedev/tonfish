@@ -104,20 +104,11 @@ export function ShopPage() {
                       </div>
                       <div className="min-w-0">
                         <h3 className="m-0 text-base font-black tracking-wide">{rod.name}</h3>
-                        <div className="mt-0.5 flex gap-2 flex-wrap items-center">
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
-                            <strong className="text-ink">{rod.currency}</strong>{' '}
-                            {rod.currency === 'TON' ? `${rod.minStake}–${rod.maxStake}` : `${rod.priceFish}`}
-                          </span>
-                        </div>
 
                         {rod.currency === 'TON' ? (
                           <div className="mt-2.5 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85">
-                            <div className="flex justify-between items-center font-black text-xs text-muted mb-2.5">
-                              <span>Введи сумму покупки</span>
-                              <span className="text-xs text-muted">
-                                {rod.minStake}–{rod.maxStake} TON
-                              </span>
+                            <div className="font-black text-xs text-muted mb-2.5">
+                              <span>Сумма покупки</span>
                             </div>
                             <input
                               type="number"
