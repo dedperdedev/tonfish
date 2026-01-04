@@ -5,6 +5,7 @@ import { FishingPage } from './pages/FishingPage';
 import { MarketPage } from './pages/MarketPage';
 import { TasksPage } from './pages/TasksPage';
 import { FriendsPage } from './pages/FriendsPage';
+import { WalletPage } from './pages/WalletPage';
 import { BottomTabs } from './components/BottomTabs';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/market" element={<MarketPage />} />
         <Route path="/tasks" element={<TasksPage />} />
         <Route path="/friends" element={<FriendsPage />} />
+        <Route path="/wallet" element={<WalletPage />} />
       </Routes>
       <BottomTabs />
     </div>

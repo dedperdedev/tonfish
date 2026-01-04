@@ -1,6 +1,8 @@
 import { useGameStore } from '../store/gameStore';
 import { formatTon, formatFish } from '../utils/formatters';
 import { useState, ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Wallet } from 'lucide-react';
 
 interface HeaderProps {
   title?: string;
@@ -8,6 +10,7 @@ interface HeaderProps {
 }
 
 export function Header({ title, rightContent }: HeaderProps) {
+  const navigate = useNavigate();
   const balances = useGameStore((s) => s.balances);
   const devAddResources = useGameStore((s) => s.devAddResources);
   const [weather] = useState(() => {
@@ -55,6 +58,13 @@ export function Header({ title, rightContent }: HeaderProps) {
           <div className="inline-flex items-center justify-center px-3 py-2.5 rounded-full scrim shadow-game-sm w-auto h-auto min-w-[54px]">
             <span className="text-xl">{weather}</span>
           </div>
+          <button
+            className="inline-flex items-center justify-center px-3 py-2.5 rounded-full scrim shadow-game-sm w-auto h-auto min-w-[54px] cursor-pointer hover:opacity-80 transition-opacity"
+            onClick={() => navigate('/wallet')}
+            title="Кошелёк"
+          >
+            <Wallet size={20} strokeWidth={2.5} className="text-ink" />
+          </button>
         </div>
       </div>
     </div>
