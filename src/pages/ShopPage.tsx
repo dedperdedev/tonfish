@@ -142,9 +142,6 @@ export function ShopPage() {
                             </span>
                           )}
                         </div>
-                        <div className="text-xs font-extrabold text-muted leading-[1.35] mt-2">
-                          Лут: {rod.loot.join(' / ')}
-                        </div>
 
                         {rod.currency === 'TON' ? (
                           <div className="mt-2.5 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85">
