@@ -8,6 +8,7 @@ import { LakeBackground } from '../components/LakeBackground';
 import { triggerHaptic } from '../utils/haptics';
 import { formatTime, getProgress } from '../utils/session';
 import { formatTon, formatFish } from '../utils/formatters';
+import type { CatchResult } from '../types';
 
 const CIRCUMFERENCE = 590.619;
 
@@ -19,7 +20,7 @@ export function FishingPage() {
   const [timeRemaining, setTimeRemaining] = useState('--:--:--');
   const [progress, setProgress] = useState(0);
   const [showCatchModal, setShowCatchModal] = useState(false);
-  const [catchResult, setCatchResult] = useState<any>(null);
+  const [catchResult, setCatchResult] = useState<CatchResult | null>(null);
 
   useEffect(() => {
     if (!session) return;

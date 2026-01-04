@@ -6,6 +6,7 @@ import { BottomPanel } from '../components/BottomPanel';
 import { StartFishingModal } from '../components/StartFishingModal';
 import { CatchModal } from '../components/CatchModal';
 import { LakeBackground } from '../components/LakeBackground';
+import type { CatchResult } from '../types';
 
 export function LakePage() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export function LakePage() {
 
   const [showStartModal, setShowStartModal] = useState(false);
   const [showCatchModal, setShowCatchModal] = useState(false);
-  const [catchResult, setCatchResult] = useState<any>(null);
+  const [catchResult, setCatchResult] = useState<CatchResult | null>(null);
 
   const handleStartClick = () => {
     if (!equippedRodId) {
