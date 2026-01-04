@@ -8,7 +8,8 @@
     "maxStake": 500,
     "priceFish": 500,
     "dailyYieldPct": 0.0,
-    "loot": ["Головастик"]
+    "loot": ["Головастик"],
+    "icon": "/icons/rod_01_palka.png"
   },
   {
     "id": "reed",
@@ -18,7 +19,8 @@
     "minStake": 0.1,
     "maxStake": 25,
     "dailyYieldPct": 0.02,
-    "loot": ["Лягушка", "Бычок", "Тина"]
+    "loot": ["Лягушка", "Бычок", "Тина"],
+    "icon": "/icons/rod_02_kamysh.png"
   },
   {
     "id": "bamboo",
@@ -28,7 +30,8 @@
     "minStake": 25,
     "maxStake": 50,
     "dailyYieldPct": 0.022,
-    "loot": ["Консервная банка", "Карась"]
+    "loot": ["Консервная банка", "Карась"],
+    "icon": "/icons/rod_03_bamboo.png"
   },
   {
     "id": "telescopic",
@@ -38,7 +41,8 @@
     "minStake": 50,
     "maxStake": 100,
     "dailyYieldPct": 0.024,
-    "loot": ["Сапог", "Окунь"]
+    "loot": ["Сапог", "Окунь"],
+    "icon": "/icons/rod_04_telescopic.png"
   },
   {
     "id": "spinning",
@@ -48,7 +52,8 @@
     "minStake": 100,
     "maxStake": 180,
     "dailyYieldPct": 0.026,
-    "loot": ["Щука", "Судак"]
+    "loot": ["Щука", "Судак"],
+    "icon": "/icons/rod_05_spinning.png"
   },
   {
     "id": "feeder",
@@ -58,7 +63,8 @@
     "minStake": 180,
     "maxStake": 280,
     "dailyYieldPct": 0.028,
-    "loot": ["Карп", "Амур"]
+    "loot": ["Карп", "Амур"],
+    "icon": "/icons/rod_06_feeder.png"
   },
   {
     "id": "boom",
@@ -68,7 +74,8 @@
     "minStake": 280,
     "maxStake": 560,
     "dailyYieldPct": 0.03,
-    "loot": ["Акула"]
+    "loot": ["Акула"],
+    "icon": "/icons/rod_07_dynamite.png"
   }
 ]
 

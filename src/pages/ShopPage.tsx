@@ -4,7 +4,6 @@ import { Header } from '../components/Header';
 import { LakeBackground } from '../components/LakeBackground';
 import { formatTon, formatFish } from '../utils/formatters';
 import { getRarityColors } from '../utils/rarity';
-import { Icon, rodEmojiFallbacks } from '../utils/icons';
 import { triggerHaptic } from '../utils/haptics';
 
 export function ShopPage() {
@@ -74,15 +73,17 @@ export function ShopPage() {
 
                 return (
                   <div key={rod.id} className="game-card">
-                    <div className="grid grid-cols-[54px_1fr] gap-2.5 items-start">
-                      <div className="w-[54px] h-[54px] rounded-[18px] bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center relative overflow-hidden">
-                        <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,.65),rgba(255,255,255,0)_55%)] rotate-[18deg]"></div>
-                        <Icon
-                          src={rod.iconPath}
-                          fallback={rodEmojiFallbacks[rod.id] || '🎣'}
+                    <div className="grid grid-cols-[96px_1fr] gap-3 items-center">
+                      <div className="flex items-center justify-center relative overflow-visible">
+                        <img
+                          src={rod.icon}
                           alt={rod.name}
-                          size={32}
-                          className="z-[2]"
+                          style={{
+                            width: 88,
+                            height: 'auto',
+                            objectFit: 'contain',
+                            transform: 'rotate(-12deg)',
+                          }}
                         />
                       </div>
                       <div className="min-w-0">
@@ -191,11 +192,10 @@ export function ShopPage() {
                       <div className="flex justify-between items-center gap-2.5">
                         <div className="flex gap-2.5 items-center min-w-0">
                           <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
-                            <Icon
-                              src={rod.iconPath}
-                              fallback={rodEmojiFallbacks[rod.id] || '🎣'}
+                            <img
+                              src={rod.icon}
                               alt={rod.name}
-                              size={32}
+                              style={{ width: 32, height: 32, objectFit: 'contain' }}
                             />
                           </div>
                           <div className="min-w-0">

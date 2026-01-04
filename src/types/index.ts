@@ -8,7 +8,7 @@ export interface Rod {
   priceFish?: number;
   dailyYieldPct: number;
   loot: string[];
-  iconPath?: string;
+  icon: string;
 }
 
 export interface LootTableEntry {

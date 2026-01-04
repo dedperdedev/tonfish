@@ -32,18 +32,6 @@ export function Icon({ src, fallback, alt, className = '', size = 48 }: IconProp
   );
 }
 
-// Fallback emoji maps (used only when icon is missing)
-export const rodEmojiFallbacks: Record<string, string> = {
-  stick: '🪵',
-  reed: '🌾',
-  bamboo: '🎋',
-  telescopic: '📏',
-  spinning: '🎣',
-  feeder: '🧺',
-  boom: '💥',
-};
-
-
 export const taskEmojiFallbacks: Record<string, string> = {
   daily: '📅',
   sub: '📣',

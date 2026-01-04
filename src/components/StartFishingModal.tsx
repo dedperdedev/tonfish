@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useGameStore, rods } from '../store/gameStore';
 import { getRarityColors } from '../utils/rarity';
-import { Icon, rodEmojiFallbacks } from '../utils/icons';
 import { triggerHaptic } from '../utils/haptics';
 
 interface StartFishingModalProps {
@@ -56,11 +55,10 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
             <div className="flex gap-2.5 items-start">
               <div className="w-[54px] h-[54px] rounded-[18px] bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center relative overflow-hidden">
                 <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,.65),rgba(255,255,255,0)_55%)] rotate-[18deg]"></div>
-                <Icon
-                  src={rod.iconPath}
-                  fallback={rodEmojiFallbacks[rod.id] || '🎣'}
+                <img
+                  src={rod.icon}
                   alt={rod.name}
-                  size={32}
+                  style={{ width: 32, height: 32, objectFit: 'contain' }}
                   className="z-[2]"
                 />
               </div>

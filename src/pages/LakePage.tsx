@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGameStore } from '../store/gameStore';
+import { useGameStore, rods } from '../store/gameStore';
 import { Header } from '../components/Header';
 import { BottomPanel } from '../components/BottomPanel';
 import { StartFishingModal } from '../components/StartFishingModal';
@@ -62,11 +62,37 @@ export function LakePage() {
   // Determine if cast overlay should be active
   const isCastActive = !!equippedRodId || (session?.status === 'running' || session?.status === 'ready');
   const castKey = session?.startAt || session?.id || Date.now();
+  const equippedRod = equippedRodId ? rods.find((r) => r.id === equippedRodId) : null;
 
   return (
     <div className="relative h-full w-full">
       {/* Lake scene background */}
       <LakeBackground />
+
+      {/* Rod image overlay */}
+      {equippedRod && (
+        <div
+          className="absolute inset-0 pointer-events-none z-[2]"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <img
+            src={equippedRod.icon}
+            alt={equippedRod.name}
+            style={{
+              width: 'auto',
+              height: '60%',
+              maxWidth: '40%',
+              objectFit: 'contain',
+              opacity: 0.15,
+              transform: 'rotate(-5deg)',
+            }}
+          />
+        </div>
+      )}
 
       {/* Cast overlay */}
       <LakeCastOverlay
