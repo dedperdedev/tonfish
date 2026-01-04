@@ -1,12 +1,9 @@
-import { useGameStore } from '../store/gameStore';
 import { Header } from '../components/Header';
 import { VideoBackground } from '../components/VideoBackground';
-import { formatTon, formatFish } from '../utils/formatters';
-import { Wallet, Copy, Check } from 'lucide-react';
+import { Copy, Check } from 'lucide-react';
 import { useState } from 'react';
 
 export function WalletPage() {
-  const balances = useGameStore((s) => s.balances);
   const [copied, setCopied] = useState(false);
 
   // Mock wallet address
@@ -31,20 +28,6 @@ export function WalletPage() {
 
         <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-24 -webkit-overflow-scrolling-touch">
           <div className="game-card mb-2.5">
-            <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-[54px] h-[54px] rounded-[18px] bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
-                <Wallet size={28} strokeWidth={2.5} className="text-ink" />
-              </div>
-              <div>
-                <div className="font-black text-lg">Кошелёк</div>
-                <div className="text-xs font-extrabold text-muted leading-[1.35] mt-0.5">
-                  Баланс и транзакции
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="game-card mb-2.5">
             <div className="font-black mb-2.5">Адрес кошелька</div>
             <div className="flex items-center gap-2.5">
               <div className="flex-1 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85 font-mono text-sm font-black text-ink break-all">
@@ -66,43 +49,6 @@ export function WalletPage() {
                   </>
                 )}
               </button>
-            </div>
-          </div>
-
-          <div className="game-card mb-2.5">
-            <div className="font-black mb-2.5">Балансы</div>
-            <div className="grid gap-2.5">
-              <div className="flex items-center justify-between px-3 py-3 rounded-[18px] bg-white/55 border border-white/85">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-[40px] h-[40px] rounded-full bg-gradient-to-br from-aqua to-aqua2 shadow-[inset_0_0_0_2px_rgba(255,255,255,.8),0_6px_12px_rgba(0,0,0,.12)]"></div>
-                  <div>
-                    <div className="text-xs font-extrabold text-muted">TON</div>
-                    <div className="font-black text-lg">{formatTon(balances.ton)}</div>
-                  </div>
-                </div>
-                <div className="text-xs font-extrabold text-muted">
-                  ≈ {formatFish(balances.ton * 1000)} FISH
-                </div>
-              </div>
-              <div className="flex items-center justify-between px-3 py-3 rounded-[18px] bg-white/55 border border-white/85">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-[40px] h-[40px] rounded-full bg-gradient-to-br from-sun to-sun2 shadow-[inset_0_0_0_2px_rgba(255,255,255,.8),0_6px_12px_rgba(0,0,0,.12)]"></div>
-                  <div>
-                    <div className="text-xs font-extrabold text-muted">FISH</div>
-                    <div className="font-black text-lg">{formatFish(balances.fish)}</div>
-                  </div>
-                </div>
-                <div className="text-xs font-extrabold text-muted">
-                  ≈ {formatTon(balances.fish / 1000)} TON
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="game-card">
-            <div className="font-black mb-2.5">История транзакций</div>
-            <div className="text-xs font-extrabold text-muted leading-[1.35]">
-              История транзакций будет отображаться здесь.
             </div>
           </div>
         </div>
