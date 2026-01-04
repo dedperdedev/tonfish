@@ -42,11 +42,11 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
         </div>
         <div className="mx-3.5 my-3.5 rounded-2xl bg-gradient-to-b from-aqua/28 to-sun/18 border border-white/90 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] h-[180px] min-h-[180px] grid place-items-center relative overflow-hidden flex-shrink-0">
           <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,.75),rgba(255,255,255,0)_60%)] rotate-[18deg]"></div>
-          <div className="z-[2] translate-y-1 flex items-center justify-center">
+          <div className="z-[2] flex items-center justify-center w-full h-full">
             <img
               src={catchResult.icon}
               alt={catchResult.name}
-              style={{ width: 120, height: 120, objectFit: 'contain' }}
+              style={{ width: 160, height: 160, objectFit: 'contain' }}
             />
           </div>
         </div>
