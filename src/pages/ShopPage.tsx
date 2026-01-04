@@ -73,30 +73,25 @@ export function ShopPage() {
 
                 return (
                   <div key={rod.id} className="game-card">
-                    <div className="grid grid-cols-[96px_1fr] gap-3 items-center">
-                      <div className="flex items-center justify-center relative overflow-visible">
-                        <img
-                          src={rod.icon}
-                          alt={rod.name}
-                          style={{
-                            width: 88,
-                            height: 'auto',
-                            objectFit: 'contain',
-                            transform: 'rotate(-12deg)',
-                          }}
-                        />
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="m-0 text-base font-black tracking-wide">{rod.name}</h3>
-                        <div className="mt-0.5 flex gap-2 flex-wrap items-center">
+                    <div className="grid grid-cols-[96px_1fr] gap-3 items-start">
+                      <div className="flex flex-col items-center gap-1.5">
+                        <div className="flex items-center justify-center relative overflow-visible">
+                          <img
+                            src={rod.icon}
+                            alt={rod.name}
+                            style={{
+                              width: 88,
+                              height: 'auto',
+                              objectFit: 'contain',
+                              transform: 'rotate(-12deg)',
+                            }}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1 items-center w-full">
                           <span
                             className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border text-xs font-black ${getRarityColors(rod.rarity).bg} ${getRarityColors(rod.rarity).text} ${getRarityColors(rod.rarity).border}`}
                           >
                             {rod.rarity}
-                          </span>
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
-                            <strong className="text-ink">{rod.currency}</strong>{' '}
-                            {rod.currency === 'TON' ? `${rod.minStake}–${rod.maxStake}` : `${rod.priceFish}`}
                           </span>
                           {rod.dailyYieldPct > 0 && (
                             <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
@@ -105,6 +100,15 @@ export function ShopPage() {
                               </strong>
                             </span>
                           )}
+                        </div>
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="m-0 text-base font-black tracking-wide">{rod.name}</h3>
+                        <div className="mt-0.5 flex gap-2 flex-wrap items-center">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
+                            <strong className="text-ink">{rod.currency}</strong>{' '}
+                            {rod.currency === 'TON' ? `${rod.minStake}–${rod.maxStake}` : `${rod.priceFish}`}
+                          </span>
                         </div>
 
                         {rod.currency === 'TON' ? (
