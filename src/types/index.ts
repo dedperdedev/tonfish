@@ -49,11 +49,18 @@ export interface Task {
   claimedAt: number;
 }
 
-export interface FriendsState {
-  code: string;
+export interface ReferralLevel {
   invited: number;
   active: number;
   earnedFish: number;
+}
+
+export interface FriendsState {
+  code: string;
+  level1: ReferralLevel;
+  level2: ReferralLevel;
+  level3: ReferralLevel;
+  totalEarnedFish: number;
   leaderboard: Array<{
     name: string;
     earned: number;

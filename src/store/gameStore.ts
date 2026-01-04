@@ -32,9 +32,22 @@ function getDefaultState(): UserState {
     },
     friends: {
       code: refCode,
-      invited: 24,
-      active: 9,
-      earnedFish: 12400,
+      level1: {
+        invited: 12,
+        active: 5,
+        earnedFish: 8400,
+      },
+      level2: {
+        invited: 8,
+        active: 3,
+        earnedFish: 3200,
+      },
+      level3: {
+        invited: 4,
+        active: 1,
+        earnedFish: 800,
+      },
+      totalEarnedFish: 12400,
       leaderboard: [
         { name: 'piskun_v', earned: 3200 },
         { name: 'serg_ua', earned: 2180 },
