@@ -42,25 +42,25 @@ export function FriendsPage() {
           {/* Реферальная ссылка */}
           <div className="game-card mb-2.5">
             <div className="font-black mb-2.5">Реферальная ссылка</div>
-            <div className="flex items-center gap-2.5 mb-2.5">
-              <div className="flex-1 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85 font-mono text-sm font-black text-ink break-all">
-                {referralLink}
-              </div>
+            <div className="px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85 font-mono text-sm font-black text-ink break-all mb-2.5">
+              {referralLink}
+            </div>
+            <div className="grid grid-cols-2 gap-2.5">
               <button
-                className="px-3.5 py-2.5 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer flex items-center justify-center flex-shrink-0"
+                className="px-3.5 py-3.5 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer flex items-center justify-center gap-2"
                 onClick={handleCopy}
-                title={copied ? 'Скопировано' : 'Копировать'}
               >
                 <Copy size={18} strokeWidth={2.5} className={copied ? 'text-green-600' : 'text-ink'} />
+                <span className="text-sm">{copied ? 'Скопировано' : 'Копировать'}</span>
+              </button>
+              <button
+                className="px-3.5 py-3.5 rounded-[18px] bg-gradient-to-br from-sun/55 to-sun2/45 text-[#281600] border border-white/88 shadow-[0_10px_22px_rgba(255,156,30,.22)] font-black cursor-pointer flex items-center justify-center gap-2"
+                onClick={handleInvite}
+              >
+                <Users size={18} strokeWidth={2.5} />
+                <span className="text-sm">Пригласить друзей</span>
               </button>
             </div>
-            <button
-              className="w-full px-3.5 py-3.5 rounded-[18px] bg-gradient-to-br from-sun/55 to-sun2/45 text-[#281600] border border-white/88 shadow-[0_10px_22px_rgba(255,156,30,.22)] font-black cursor-pointer flex items-center justify-center gap-2"
-              onClick={handleInvite}
-            >
-              <Users size={18} strokeWidth={2.5} />
-              Пригласить друзей
-            </button>
           </div>
 
           {/* Уровни реферальной системы */}
