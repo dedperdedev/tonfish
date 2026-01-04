@@ -103,7 +103,7 @@ export function ShopPage() {
 
         <Hud />
 
-        <div className="relative z-[3] flex-1 overflow-auto pb-3 -webkit-overflow-scrolling-touch">
+        <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-20 -webkit-overflow-scrolling-touch">
           {tab === 'shop' ? (
             <div className="grid gap-2.5">
               {rods.map((rod) => {

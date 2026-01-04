@@ -34,7 +34,7 @@ export function FriendsPage() {
 
         <Hud />
 
-        <div className="relative z-[3] flex-1 overflow-auto pb-3 -webkit-overflow-scrolling-touch">
+        <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-20 -webkit-overflow-scrolling-touch">
           <div className="game-card">
             <div className="font-black flex justify-between items-center">
               <span>Твой код</span>
