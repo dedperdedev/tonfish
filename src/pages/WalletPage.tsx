@@ -134,7 +134,7 @@ export function WalletPage() {
             <button className="game-button text-sm py-3.5 px-3.5 min-h-[48px]">
               Пополнить
             </button>
-            <button className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm">
+            <button className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/85 font-black cursor-pointer shadow-game-sm">
               Вывести
             </button>
           </div>
