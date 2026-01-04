@@ -146,20 +146,23 @@ export function ShopPage() {
                           <div className="mt-2.5 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85">
                             <div className="flex justify-between items-center font-black text-xs text-muted mb-2.5">
                               <span>Сумма</span>
-                              <b className="text-ink">
-                                {formatTon(stake)} TON
-                              </b>
+                              <span className="text-xs text-muted">
+                                {rod.minStake}–{rod.maxStake} TON
+                              </span>
                             </div>
                             <input
-                              type="range"
+                              type="number"
                               min={rod.minStake}
                               max={rod.maxStake}
                               step={rod.minStake < 1 ? 0.1 : 1}
                               value={stake}
-                              onChange={(e) =>
-                                setStakeAmounts({ ...stakeAmounts, [rod.id]: parseFloat(e.target.value) })
-                              }
-                              className="w-full accent-[#ffb23b]"
+                              onChange={(e) => {
+                                const value = parseFloat(e.target.value) || rod.minStake;
+                                const clamped = Math.max(rod.minStake, Math.min(rod.maxStake, value));
+                                setStakeAmounts({ ...stakeAmounts, [rod.id]: clamped });
+                              }}
+                              className="w-full px-3 py-2.5 rounded-[14px] bg-white/80 border border-white/90 font-black text-ink text-base focus:outline-none focus:ring-2 focus:ring-sun/50"
+                              placeholder={`${rod.minStake}–${rod.maxStake}`}
                             />
                           </div>
                         ) : (
