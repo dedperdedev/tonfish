@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ton Fish — Fishing Game</title>
+    <script>
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafgraph/spa-github-pages
+      // This script takes the current url and converts the path and query
+      // string into just a query string, and then redirects the browser
+      // to the new url with only a query string and hash fragment,
+      // e.g., https://www.foo.tld/one/two?a=b&c=d#qwe, becomes
+      // https://www.foo.tld/?/one/two&a=b~and~c=d#qwe.
+      // Note: this 404.html file must be at least 512 bytes for some
+      // browsers to recognize it as a valid 404 page.
+      (function() {
+        var path = window.location.pathname;
+        var segments = path.split('/').filter(function(segment) {
+          return segment !== '';
+        });
+        // Remove the base path if it exists
+        if (segments[0] === 'tonfish') {
+          segments.shift();
+        }
+        var pathStr = segments.join('/');
+        var query = window.location.search.slice(1);
+        var hash = window.location.hash;
+        var newPath = window.location.origin + '/tonfish/';
+        if (pathStr) {
+          newPath += '?/' + pathStr;
+        }
+        if (query) {
+          newPath += (pathStr ? '&' : '?/') + query.replace(/&/g, '~and~');
+        }
+        if (hash) {
+          newPath += hash;
+        }
+        window.location.replace(newPath);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
+
