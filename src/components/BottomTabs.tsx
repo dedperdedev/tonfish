@@ -15,7 +15,7 @@ export function BottomTabs() {
   const location = useLocation();
 
   return (
-    <nav className="absolute left-3.5 right-3.5 bottom-[calc(var(--safe-bottom)+8px)] z-[6] h-14 rounded-[24px] grid grid-cols-5 gap-1 p-1.5 glass-card shadow-game">
+    <nav className="absolute left-2 right-2 bottom-[calc(var(--safe-bottom)+8px)] z-[6] h-14 rounded-[24px] grid grid-cols-5 gap-1 pl-2 pr-2 glass-card shadow-game" style={{ margin: 0, border: 0, paddingTop: 0, paddingBottom: 0 }}>
       {tabs.map((tab) => {
         const isActive = location.pathname === tab.path || (tab.path === '/lake' && location.pathname === '/');
         const Icon = tab.Icon;
