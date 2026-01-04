@@ -71,7 +71,7 @@ export function MarketPage() {
           </div>
         </div>
 
-        <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-20 -webkit-overflow-scrolling-touch">
+        <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-24 -webkit-overflow-scrolling-touch">
           {tab === 'sell' ? (
             <div className="grid gap-2.5">
               {listed.length === 0 ? (
