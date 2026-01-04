@@ -43,7 +43,6 @@ export function Header({ title, rightContent }: HeaderProps) {
             className="inline-flex items-center gap-2 px-3 py-2.5 rounded-full scrim shadow-game-sm cursor-pointer select-none h-[42px]"
             onClick={handleBalanceClick}
           >
-            <span className="w-[22px] h-[22px] rounded-full bg-gradient-to-br from-aqua to-aqua2 shadow-[inset_0_0_0_2px_rgba(255,255,255,.8),0_6px_12px_rgba(0,0,0,.12)] flex-shrink-0"></span>
             <small className="text-muted font-extrabold">TON</small>
             <b className="font-black tracking-wide">{formatTon(balances.ton)}</b>
           </div>
@@ -51,7 +50,6 @@ export function Header({ title, rightContent }: HeaderProps) {
             className="inline-flex items-center gap-2 px-3 py-2.5 rounded-full scrim shadow-game-sm cursor-pointer select-none h-[42px]"
             onClick={handleBalanceClick}
           >
-            <span className="w-[22px] h-[22px] rounded-full bg-gradient-to-br from-sun to-sun2 shadow-[inset_0_0_0_2px_rgba(255,255,255,.8),0_6px_12px_rgba(0,0,0,.12)] flex-shrink-0"></span>
             <small className="text-muted font-extrabold">FISH</small>
             <b className="font-black tracking-wide">{formatFish(balances.fish)}</b>
           </div>
