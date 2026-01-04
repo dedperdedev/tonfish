@@ -194,12 +194,6 @@ export function ShopPage() {
             </div>
           ) : (
             <>
-              <div className="game-card mb-2.5">
-                <div className="font-black">Мои удочки</div>
-                <div className="text-xs font-extrabold text-muted leading-[1.35] mt-2">
-                  Экипируй одну и запускай сессию на озере.
-                </div>
-              </div>
               <div className="grid gap-2.5">
                 {ownedRods.map((rodId) => {
                   const rod = rods.find((r) => r.id === rodId);
