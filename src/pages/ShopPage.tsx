@@ -162,7 +162,7 @@ export function ShopPage() {
                                 setStakeAmounts({ ...stakeAmounts, [rod.id]: clamped });
                               }}
                               className="w-full px-3 py-2.5 rounded-[14px] bg-white/80 border border-white/90 font-black text-ink text-base focus:outline-none focus:ring-2 focus:ring-sun/50"
-                              placeholder={`${rod.minStake}–${rod.maxStake}`}
+                              placeholder="Введи сумму покупки"
                             />
                           </div>
                         ) : (
