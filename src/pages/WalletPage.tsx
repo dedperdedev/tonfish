@@ -30,25 +30,14 @@ export function WalletPage() {
         <Header />
 
         <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-24 -webkit-overflow-scrolling-touch">
-          <div className="game-card mb-2.5">
-            <div className="font-black mb-2.5">Баланс кошелька</div>
-            <div className="grid gap-2.5">
-              <div className="flex items-center justify-between px-3 py-3 rounded-[18px] bg-white/55 border border-white/85">
-                <div className="flex items-center gap-2.5">
-                  <div>
-                    <div className="text-xs font-extrabold text-muted">TON</div>
-                    <div className="font-black text-lg">{formatTon(balances.ton)}</div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between px-3 py-3 rounded-[18px] bg-white/55 border border-white/85">
-                <div className="flex items-center gap-2.5">
-                  <div>
-                    <div className="text-xs font-extrabold text-muted">FISH</div>
-                    <div className="font-black text-lg">{formatFish(balances.fish)}</div>
-                  </div>
-                </div>
-              </div>
+          <div className="grid grid-cols-2 gap-2.5 mb-2.5">
+            <div className="game-card">
+              <div className="text-xs font-extrabold text-muted mb-1">TON</div>
+              <div className="font-black text-lg">{formatTon(balances.ton)}</div>
+            </div>
+            <div className="game-card">
+              <div className="text-xs font-extrabold text-muted mb-1">FISH</div>
+              <div className="font-black text-lg">{formatFish(balances.fish)}</div>
             </div>
           </div>
 
