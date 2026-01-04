@@ -25,7 +25,7 @@ export function Header({ title, rightContent }: HeaderProps) {
   };
 
   return (
-    <div className="relative z-[3] flex gap-2.5 items-center justify-between mb-2.5">
+    <div className="relative z-[3] flex gap-2.5 items-center justify-between mb-2.5" style={{ margin: 0, border: 0 }}>
       {title && (
         <h1 className="m-0 text-xl font-black tracking-wide font-heading">{title}</h1>
       )}

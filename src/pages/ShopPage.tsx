@@ -38,10 +38,10 @@ export function ShopPage() {
       <LakeBackground opacity={0.25} />
 
       {/* Screen content */}
-      <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
+      <div className="absolute inset-0 flex flex-col pt-1 pr-2 pb-[calc(var(--safe-bottom)+98px)] pl-2 overflow-hidden" style={{ margin: 0, border: 0 }}>
         <Header />
 
-        <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-24 -webkit-overflow-scrolling-touch">
+        <div className="relative z-[2] flex-1 overflow-auto pb-24 -webkit-overflow-scrolling-touch">
           <div className="flex justify-center mb-2.5">
             <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white/62 border border-white/86 shadow-game-sm backdrop-blur-[12px]">
               <button
