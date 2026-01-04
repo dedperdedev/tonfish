@@ -82,56 +82,58 @@ export function FishingPage() {
         <Header />
 
         <div className="relative z-[4] flex-1 flex items-center justify-center pt-4.5">
-          {session.status === 'ready' ? (
-            <button
-              className="w-[240px] h-[240px] rounded-full glass-card shadow-game grid place-items-center relative overflow-hidden cursor-pointer hover:opacity-90 transition-opacity game-button pulse"
-              onClick={handleClaim}
-            >
-              <div className="text-center z-[2]">
-                <h2 className="m-0 text-[34px] font-black tracking-wide font-heading">
-                  Подсечь
-                </h2>
-              </div>
-            </button>
-          ) : (
-            <div className="w-[240px] h-[240px] rounded-full glass-card shadow-game grid place-items-center relative overflow-hidden">
-              <svg
-                width="240"
-                height="240"
-                viewBox="0 0 240 240"
-                className="absolute inset-0"
+          <div className="w-[240px] h-[240px] rounded-full glass-card shadow-game grid place-items-center relative overflow-hidden">
+            {session.status === 'ready' ? (
+              <button
+                className="w-full h-full rounded-full grid place-items-center cursor-pointer hover:opacity-90 transition-opacity z-[2] relative"
+                onClick={handleClaim}
               >
-                <circle
-                  cx="120"
-                  cy="120"
-                  r="94"
-                  fill="none"
-                  stroke="rgba(11,42,51,.10)"
-                  strokeWidth="14"
-                />
-                <circle
-                  cx="120"
-                  cy="120"
-                  r="94"
-                  fill="none"
-                  stroke="rgba(31,225,194,.85)"
-                  strokeWidth="14"
-                  strokeLinecap="round"
-                  strokeDasharray={CIRCUMFERENCE}
-                  strokeDashoffset={strokeDashoffset}
-                  transform="rotate(-90 120 120)"
-                />
-              </svg>
-              <div className="text-center z-[2]">
-                <h2 className="m-0 text-[34px] font-black tracking-wide font-heading">
-                  {timeRemaining}
-                </h2>
-                <p className="mt-1.5 mb-0 text-[13px] font-black text-muted">
-                  до улова
-                </p>
-              </div>
-            </div>
-          )}
+                <div className="text-center">
+                  <h2 className="m-0 text-[34px] font-black tracking-wide font-heading pulse">
+                    Подсечь
+                  </h2>
+                </div>
+              </button>
+            ) : (
+              <>
+                <svg
+                  width="240"
+                  height="240"
+                  viewBox="0 0 240 240"
+                  className="absolute inset-0"
+                >
+                  <circle
+                    cx="120"
+                    cy="120"
+                    r="94"
+                    fill="none"
+                    stroke="rgba(11,42,51,.10)"
+                    strokeWidth="14"
+                  />
+                  <circle
+                    cx="120"
+                    cy="120"
+                    r="94"
+                    fill="none"
+                    stroke="rgba(31,225,194,.85)"
+                    strokeWidth="14"
+                    strokeLinecap="round"
+                    strokeDasharray={CIRCUMFERENCE}
+                    strokeDashoffset={strokeDashoffset}
+                    transform="rotate(-90 120 120)"
+                  />
+                </svg>
+                <div className="text-center z-[2]">
+                  <h2 className="m-0 text-[34px] font-black tracking-wide font-heading">
+                    {timeRemaining}
+                  </h2>
+                  <p className="mt-1.5 mb-0 text-[13px] font-black text-muted">
+                    до улова
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
         </div>
 
         <FloatBobber />
