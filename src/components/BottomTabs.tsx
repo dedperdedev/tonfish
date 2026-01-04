@@ -15,27 +15,28 @@ export function BottomTabs() {
   const location = useLocation();
 
   return (
-    <nav className="absolute left-2 right-2 bottom-[calc(var(--safe-bottom)+8px)] z-[6] h-14 rounded-[24px] grid grid-cols-5 gap-1 shadow-game" style={{ margin: 0, border: 0, paddingTop: '5px', paddingBottom: '5px', paddingLeft: '8px', paddingRight: '8px', background: 'rgba(255, 255, 255, 0.8)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}>
+    <nav className="absolute left-2 right-2 bottom-[calc(var(--safe-bottom)+8px)] z-[6] h-14 rounded-2xl grid grid-cols-5 gap-1 glass-card" style={{ margin: 0, border: 0, paddingTop: '5px', paddingBottom: '5px', paddingLeft: '8px', paddingRight: '8px' }}>
       {tabs.map((tab) => {
         const isActive = location.pathname === tab.path || (tab.path === '/lake' && location.pathname === '/');
         const Icon = tab.Icon;
         return (
           <button
             key={tab.id}
-            className={`border-0 bg-transparent rounded-[18px] grid place-items-center gap-0.5 cursor-pointer transition-all duration-120 select-none ${
+            className={`border-0 bg-transparent rounded-2xl grid place-items-center gap-0.5 cursor-pointer transition-all duration-200 select-none ${
               isActive
-                ? 'bg-aqua/18 text-ink translate-y-[-1px]'
+                ? 'bg-white/30 text-ink'
                 : 'text-[rgba(11,42,51,.70)]'
             }`}
             onClick={() => {
               triggerHaptic('light');
               navigate(tab.path);
             }}
+            onMouseDown={() => triggerHaptic('light')}
           >
             <span
-              className={`w-[22px] h-[22px] grid place-items-center rounded-xl ${
+              className={`w-[22px] h-[22px] grid place-items-center rounded-xl transition-all ${
                 isActive
-                  ? 'bg-gradient-to-br from-aqua/35 to-aqua2/22'
+                  ? 'bg-white/40'
                   : ''
               }`}
             >

@@ -108,11 +108,11 @@ export function WalletPage() {
 
           <div className="game-card mb-2.5">
             <div className="flex items-center gap-2.5">
-              <div className="flex-1 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85 font-mono text-sm font-black text-ink break-all">
+              <div className="flex-1 px-3 py-2.5 rounded-2xl glass-surface font-mono text-sm font-bold text-ink break-all">
                 {walletAddress}
               </div>
               <button
-                className="px-3.5 py-2.5 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer flex items-center gap-1.5"
+                className="glass-button px-3.5 py-2.5 rounded-2xl font-bold cursor-pointer flex items-center gap-1.5 text-sm"
                 onClick={handleCopy}
               >
                 {copied ? (
@@ -134,7 +134,7 @@ export function WalletPage() {
             <button className="game-button text-sm py-3.5 px-3.5 min-h-[48px]">
               Пополнить
             </button>
-            <button className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/85 font-black cursor-pointer shadow-game-sm">
+            <button className="glass-button w-full px-4 py-3 rounded-2xl font-bold cursor-pointer">
               Вывести
             </button>
           </div>
@@ -145,7 +145,7 @@ export function WalletPage() {
               {transactions.map((tx) => (
                 <div
                   key={tx.id}
-                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85"
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-2xl glass-surface"
                 >
                   <div
                     className={`w-[40px] h-[40px] rounded-full grid place-items-center flex-shrink-0 ${

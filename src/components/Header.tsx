@@ -36,21 +36,21 @@ export function Header({ title, rightContent }: HeaderProps) {
         
         <div className="flex gap-2.5 items-center">
           <div
-            className="inline-flex items-center gap-2 px-3 py-2.5 rounded-full scrim shadow-game-sm cursor-pointer select-none h-[42px]"
+            className="inline-flex items-center gap-2 px-3 py-2.5 rounded-2xl glass-surface cursor-pointer select-none h-[42px] transition-transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={handleBalanceClick}
           >
             <small className="text-muted font-extrabold">TON</small>
             <b className="font-black tracking-wide">{formatTon(balances.ton)}</b>
           </div>
           <div
-            className="inline-flex items-center gap-2 px-3 py-2.5 rounded-full scrim shadow-game-sm cursor-pointer select-none h-[42px]"
+            className="inline-flex items-center gap-2 px-3 py-2.5 rounded-2xl glass-surface cursor-pointer select-none h-[42px] transition-transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={handleBalanceClick}
           >
             <small className="text-muted font-extrabold">FISH</small>
             <b className="font-black tracking-wide">{formatFish(balances.fish)}</b>
           </div>
           <button
-            className="inline-flex items-center justify-center px-3 py-2.5 rounded-full scrim shadow-game-sm h-[42px] w-[54px] flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+            className="inline-flex items-center justify-center px-3 py-2.5 rounded-2xl glass-surface h-[42px] w-[54px] flex-shrink-0 cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={() => navigate('/wallet')}
             title="Кошелёк"
           >

@@ -33,7 +33,7 @@ export function TasksPage() {
                 <div key={task.id} className="game-card">
                   <div className="flex justify-between items-center gap-2.5">
                     <div className="flex gap-2.5 items-center min-w-0">
-                      <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
+                      <div className="w-[46px] h-[46px] rounded-2xl glass-surface grid place-items-center">
                         <Icon
                           src={task.iconPath}
                           fallback={taskEmojiFallbacks[task.id] || '✅'}
@@ -49,11 +49,11 @@ export function TasksPage() {
                       </div>
                     </div>
                     <div className="flex gap-2.5 items-center">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full glass-surface text-xs font-bold text-muted">
                         <strong className="text-ink">+{formatFish(task.reward)}</strong> FISH
                       </span>
                       <button
-                        className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer disabled:opacity-50"
+                        className="glass-button px-4 py-2.5 rounded-2xl font-bold cursor-pointer disabled:opacity-50 text-sm"
                         onClick={() => {
                           triggerHaptic('success');
                           claimTask(task.id);

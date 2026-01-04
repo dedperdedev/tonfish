@@ -198,54 +198,70 @@ body {
   }
 }
 
-/* Utility classes */
-.scrim {
-  background: rgba(255, 255, 255, 0.62);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.78);
-}
-
+/* Liquid Glass - Unified Style */
 .glass-card {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: none;
 }
 
 .game-card {
-  @apply glass-card rounded-xl shadow-game-sm p-3.5;
+  @apply glass-card rounded-2xl p-4;
 }
 
+/* Glass Button (Secondary Actions) */
+.glass-button {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: none;
+  transition: all 0.2s ease;
+  border-radius: 1rem;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.01);
+}
+
+.glass-button:active {
+  transform: scale(0.99);
+  transition-duration: 0.1s;
+}
+
+/* Primary Button (Orange Accent) */
 .game-button {
-  @apply w-full px-4 py-3.5 rounded-[22px] font-black text-base cursor-pointer transition-all duration-150;
+  @apply w-full px-4 py-3 rounded-2xl font-bold text-base cursor-pointer transition-all duration-200;
   background: linear-gradient(135deg, theme('colors.sun'), theme('colors.sun2'));
   color: #281600;
-  box-shadow: 0 14px 34px rgba(255, 156, 30, 0.35);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(255, 156, 30, 0.25);
+  border: none;
 }
 
-.game-button::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.2s;
+.game-button:hover {
+  box-shadow: 0 6px 20px rgba(255, 156, 30, 0.3);
+  transform: scale(1.01);
 }
 
 .game-button:active {
-  transform: scale(0.97);
-  box-shadow: 0 8px 20px rgba(255, 156, 30, 0.45);
-}
-
-.game-button:active::before {
-  opacity: 1;
+  transform: scale(0.99);
+  transition-duration: 0.1s;
 }
 
 .game-button.pulse {
   animation: pulse-glow 1.2s ease-in-out infinite;
+}
+
+/* Glass Surface (for balance chips, etc.) */
+.glass-surface {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: none;
 }
 
 .animate-bob {

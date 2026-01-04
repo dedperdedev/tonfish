@@ -60,7 +60,7 @@ export function MarketPage() {
                   <div key={item.id} className="game-card">
                     <div className="flex justify-between items-center gap-2.5">
                       <div className="flex gap-2.5 items-center min-w-0">
-                        <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
+                        <div className="w-[46px] h-[46px] rounded-2xl glass-surface grid place-items-center">
                           <img
                             src={item.icon}
                             alt={item.name}
@@ -78,7 +78,7 @@ export function MarketPage() {
                         </div>
                       </div>
                       <button
-                        className="game-button w-auto min-w-[120px] px-3.5 py-3 text-sm"
+                        className="game-button w-auto min-w-[120px] px-4 py-2.5 rounded-2xl text-sm"
                         onClick={() => {
                           triggerHaptic('success');
                           sellItem(item.id);
@@ -108,7 +108,7 @@ export function MarketPage() {
                     <div key={item.id} className="game-card">
                       <div className="flex justify-between items-center gap-2.5">
                         <div className="flex gap-2.5 items-center min-w-0">
-                          <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
+                          <div className="w-[46px] h-[46px] rounded-2xl glass-surface grid place-items-center">
                             <img
                               src={item.icon}
                               alt={item.name}

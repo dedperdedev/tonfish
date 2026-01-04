@@ -37,29 +37,27 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
 
   return (
     <div
-      className="absolute inset-0 bg-[rgba(0,20,30,.28)] flex items-center justify-center z-20 p-4.5 animate-fade-in"
+      className="absolute inset-0 bg-[rgba(0,20,30,.25)] backdrop-blur-[2px] flex items-center justify-center z-20 p-4 animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-[420px] max-h-[90vh] rounded-[32px] glass-card shadow-[0_28px_80px_rgba(0,30,45,.35)] overflow-hidden animate-pop-in flex flex-col"
+        className="w-full max-w-[420px] max-h-[90vh] rounded-3xl glass-card overflow-hidden animate-pop-in flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-4.5 pb-0 flex-shrink-0">
+        <div className="p-4 pb-0 flex-shrink-0">
           <h2 className="m-0 text-lg font-black font-heading">Начать рыбалку</h2>
           <p className="mt-1.5 mb-0 text-muted font-extrabold text-xs break-words">
             {rod.name} • {rod.rarity}
           </p>
         </div>
-        <div className="px-4.5 pb-4.5 grid gap-2.5 overflow-y-auto flex-1 min-h-0">
+        <div className="px-4 pb-4 grid gap-3 overflow-y-auto flex-1 min-h-0">
           <div className="game-card">
-            <div className="flex gap-2.5 items-start">
-              <div className="w-[54px] h-[54px] rounded-[18px] bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center relative overflow-hidden">
-                <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,.65),rgba(255,255,255,0)_55%)] rotate-[18deg]"></div>
+            <div className="flex gap-3 items-start">
+              <div className="w-[54px] h-[54px] rounded-2xl glass-surface grid place-items-center relative overflow-hidden flex-shrink-0">
                 <img
                   src={rod.icon}
                   alt={rod.name}
                   style={{ width: 32, height: 32, objectFit: 'contain' }}
-                  className="z-[2]"
                 />
               </div>
               <div className="flex-1 min-w-0">
@@ -107,7 +105,7 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
                           setStakeAmount('');
                         }
                       }}
-                      className="w-full px-3 py-2.5 rounded-[14px] bg-white/80 border border-white/90 font-black text-ink text-base focus:outline-none focus:ring-2 focus:ring-sun/50 placeholder:text-muted"
+                      className="w-full px-3 py-2.5 rounded-2xl glass-surface font-medium text-ink text-sm focus:outline-none focus:ring-2 focus:ring-sun/50 placeholder:text-muted"
                       placeholder={`${rod.minStake}–${rod.maxStake} TON`}
                     />
                   </div>
@@ -124,7 +122,7 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
             {isOwned ? 'Закинуть' : canAfford ? 'Купить и закинуть' : 'Недостаточно средств'}
           </button>
           <button
-            className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm flex-shrink-0 transition-transform active:scale-95"
+            className="glass-button w-full px-4 py-3 rounded-2xl font-bold cursor-pointer flex-shrink-0"
             onClick={onClose}
             onMouseDown={() => triggerHaptic('light')}
           >

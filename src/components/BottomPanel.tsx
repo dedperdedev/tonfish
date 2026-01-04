@@ -58,15 +58,15 @@ export function BottomPanel({ onStartClick, onOpenFishing }: BottomPanelProps) {
 
   return (
     <div className="absolute left-3.5 right-3.5 bottom-[calc(var(--safe-bottom)+84px)] z-[4] p-3.5">
-      <div className="glass-card rounded-xl shadow-game p-3.5">
-        <div className="flex gap-2.5 items-center justify-between mb-2.5">
+      <div className="glass-card rounded-2xl p-4">
+        <div className="flex gap-2.5 items-center justify-between mb-3">
           <div className="min-w-0">
             <div className="font-black tracking-wide">{title}</div>
             <div className="text-xs font-extrabold text-muted">{subtitle}</div>
           </div>
           {session && session.status === 'running' && (
             <button
-              className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
+              className="glass-button px-3 py-2.5 rounded-2xl font-bold cursor-pointer text-sm"
               onClick={fastForwardSession}
               title="Dev: Завершить сессию"
             >

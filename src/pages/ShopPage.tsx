@@ -161,12 +161,12 @@ export function ShopPage() {
                                   setStakeAmounts(newAmounts);
                                 }
                               }}
-                              className="w-full px-2.5 py-2 rounded-[14px] bg-white/45 border border-white/70 font-medium text-ink text-sm focus:outline-none focus:ring-2 focus:ring-sun/50 placeholder:text-muted"
+                              className="w-full px-3 py-2 rounded-2xl glass-surface font-medium text-ink text-sm focus:outline-none focus:ring-2 focus:ring-sun/50 placeholder:text-muted"
                               placeholder={`${rod.minStake}–${rod.maxStake} TON`}
                             />
                           </div>
                         ) : (
-                          <div className="mb-2.5 px-2.5 py-2 rounded-[14px] bg-white/45 border border-white/70">
+                          <div className="mb-2.5 px-3 py-2 rounded-2xl glass-surface">
                             <div className="flex justify-between items-center text-sm font-medium text-muted">
                               <span>Цена</span>
                               <span className="text-ink">{rod.priceFish} FISH</span>
@@ -208,7 +208,7 @@ export function ShopPage() {
                     <div key={rodId} className="game-card">
                       <div className="flex justify-between items-center gap-2.5">
                         <div className="flex gap-2.5 items-center min-w-0">
-                          <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
+                          <div className="w-[46px] h-[46px] rounded-2xl glass-surface grid place-items-center">
                             <img
                               src={rod.icon}
                               alt={rod.name}
@@ -249,7 +249,7 @@ export function ShopPage() {
                   <div key={item.id} className="game-card">
                     <div className="flex justify-between items-center gap-2.5">
                       <div className="flex gap-2.5 items-center min-w-0">
-                        <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
+                        <div className="w-[46px] h-[46px] rounded-2xl glass-surface grid place-items-center">
                           <img
                             src={item.icon}
                             alt={item.name}
