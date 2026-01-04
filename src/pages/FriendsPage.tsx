@@ -66,29 +66,44 @@ export function FriendsPage() {
           {/* Уровни реферальной системы */}
           <div className="grid grid-cols-3 gap-2.5 mb-2.5">
             {/* Уровень 1 */}
-            <div className="game-card border-2 border-[rgba(255,215,0,0.6)] bg-gradient-to-br from-[rgba(255,215,0,0.15)] to-[rgba(255,215,0,0.05)]">
-              <div className="text-xs font-extrabold text-muted mb-1">1 уровень</div>
-              <div className="text-3xl font-black text-[#FFD700] mb-1">{friends.level1.invited}</div>
-              <div className="text-xs font-black text-[#FFD700]">
-                {friends.level1.percentage?.toFixed(2) || '5.00'}%
+            <div className="relative px-3 py-3.5 rounded-[20px] bg-gradient-to-br from-[rgba(255,215,0,0.25)] via-[rgba(255,215,0,0.15)] to-[rgba(255,215,0,0.08)] border-2 border-[rgba(255,215,0,0.5)] shadow-[0_8px_24px_rgba(255,215,0,0.2),inset_0_1px_0_rgba(255,255,255,0.3)] overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,215,0,0.15),transparent_70%)]"></div>
+              <div className="relative z-[1]">
+                <div className="text-[10px] font-black text-[rgba(255,215,0,0.9)] uppercase tracking-wide mb-1.5">1 уровень</div>
+                <div className="text-[32px] font-black text-[#FFD700] mb-1.5 leading-none drop-shadow-[0_2px_8px_rgba(255,215,0,0.4)]">
+                  {friends.level1.invited}
+                </div>
+                <div className="text-xs font-black text-[#FFD700] opacity-90">
+                  {friends.level1.percentage?.toFixed(2) || '5.00'}%
+                </div>
               </div>
             </div>
 
             {/* Уровень 2 */}
-            <div className="game-card">
-              <div className="text-xs font-extrabold text-muted mb-1">2 уровень</div>
-              <div className="text-3xl font-black text-ink mb-1">{friends.level2.invited}</div>
-              <div className="text-xs font-black text-[#FFD700]">
-                {friends.level2.percentage?.toFixed(2) || '3.00'}%
+            <div className="relative px-3 py-3.5 rounded-[20px] bg-gradient-to-br from-[rgba(100,200,255,0.2)] via-[rgba(100,200,255,0.12)] to-[rgba(100,200,255,0.06)] border border-[rgba(100,200,255,0.4)] shadow-[0_6px_20px_rgba(100,200,255,0.15),inset_0_1px_0_rgba(255,255,255,0.25)] overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(100,200,255,0.12),transparent_70%)]"></div>
+              <div className="relative z-[1]">
+                <div className="text-[10px] font-black text-muted uppercase tracking-wide mb-1.5">2 уровень</div>
+                <div className="text-[32px] font-black text-ink mb-1.5 leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)]">
+                  {friends.level2.invited}
+                </div>
+                <div className="text-xs font-black text-[#FFD700] opacity-90">
+                  {friends.level2.percentage?.toFixed(2) || '3.00'}%
+                </div>
               </div>
             </div>
 
             {/* Уровень 3 */}
-            <div className="game-card">
-              <div className="text-xs font-extrabold text-muted mb-1">3 уровень</div>
-              <div className="text-3xl font-black text-ink mb-1">{friends.level3.invited}</div>
-              <div className="text-xs font-black text-[#FFD700]">
-                {friends.level3.percentage?.toFixed(2) || '2.00'}%
+            <div className="relative px-3 py-3.5 rounded-[20px] bg-gradient-to-br from-[rgba(200,150,255,0.2)] via-[rgba(200,150,255,0.12)] to-[rgba(200,150,255,0.06)] border border-[rgba(200,150,255,0.4)] shadow-[0_6px_20px_rgba(200,150,255,0.15),inset_0_1px_0_rgba(255,255,255,0.25)] overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(200,150,255,0.12),transparent_70%)]"></div>
+              <div className="relative z-[1]">
+                <div className="text-[10px] font-black text-muted uppercase tracking-wide mb-1.5">3 уровень</div>
+                <div className="text-[32px] font-black text-ink mb-1.5 leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)]">
+                  {friends.level3.invited}
+                </div>
+                <div className="text-xs font-black text-[#FFD700] opacity-90">
+                  {friends.level3.percentage?.toFixed(2) || '2.00'}%
+                </div>
               </div>
             </div>
           </div>
