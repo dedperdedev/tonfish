@@ -40,8 +40,8 @@ export function Hud() {
           <b className="font-black tracking-wide">{formatFish(balances.fish)}</b>
         </div>
       </div>
-      <div className="glass-card rounded-xl shadow-game p-3 w-[54px] h-[54px] grid place-items-center">
-        <span className="text-2xl">{weather}</span>
+      <div className="inline-flex items-center justify-center px-3 py-2.5 rounded-full scrim shadow-game-sm w-auto h-auto min-w-[54px]">
+        <span className="text-xl">{weather}</span>
       </div>
     </div>
   );
