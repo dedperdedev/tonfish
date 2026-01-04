@@ -117,7 +117,7 @@ export function ShopPage() {
 
                 return (
                   <div key={rod.id} className="game-card">
-                    <div className="grid grid-cols-[54px_1fr] gap-3 items-start">
+                    <div className="grid grid-cols-[54px_1fr] gap-2.5 items-start">
                       <div className="w-[54px] h-[54px] rounded-[18px] bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center relative overflow-hidden">
                         <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,.65),rgba(255,255,255,0)_55%)] rotate-[18deg]"></div>
                         <span className="text-2xl z-[2]">{rodIcons[rod.id] || '🎣'}</span>
@@ -172,7 +172,7 @@ export function ShopPage() {
                           </div>
                         )}
 
-                        <div className="flex gap-2.5 items-center justify-between mt-3">
+                        <div className="flex gap-2.5 items-center justify-between mt-2.5">
                           {owned && (
                             <button
                               className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
@@ -242,7 +242,7 @@ export function ShopPage() {
                 })}
               </div>
 
-              <div className="game-card mt-3">
+              <div className="game-card mt-2.5">
                 <div className="font-black">Мои предметы</div>
                 <div className="text-xs font-extrabold text-muted leading-[1.35] mt-2">
                   {inventory.length === 0 ? 'Пока пусто.' : ''}

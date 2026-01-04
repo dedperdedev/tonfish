@@ -61,7 +61,7 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
         </div>
         <div className="px-4.5 pb-4.5 grid gap-2.5">
           <div className="game-card">
-            <div className="flex gap-3 items-start">
+            <div className="flex gap-2.5 items-start">
               <div className="w-[54px] h-[54px] rounded-[18px] bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center relative overflow-hidden">
                 <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,.65),rgba(255,255,255,0)_55%)] rotate-[18deg]"></div>
                 <span className="text-2xl z-[2]">{rodIcons[rod.id] || '🎣'}</span>

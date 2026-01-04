@@ -49,7 +49,7 @@ export function FriendsPage() {
 
           <div className="game-card mt-2.5">
             <div className="font-black">Статистика</div>
-            <div className="flex gap-2 flex-wrap items-center mt-2.5">
+            <div className="flex gap-2.5 flex-wrap items-center mt-2.5">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
                 <strong className="text-ink">{friends.invited}</strong> приглашено
               </span>

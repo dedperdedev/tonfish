@@ -1,6 +1,6 @@
 import { useGameStore } from '../store/gameStore';
 import { formatTon, formatFish } from '../utils/formatters';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export function Hud() {
   const balances = useGameStore((s) => s.balances);

@@ -18,7 +18,7 @@ export function VideoBackground({ opacity = 1, className = '' }: VideoBackground
           opacity,
         }}
       >
-        <source src={`${import.meta.env.BASE_URL}ozero.mp4`} type="video/mp4" />
+        <source src={import.meta.env.DEV ? '/ozero.mp4' : `${import.meta.env.BASE_URL}ozero.mp4`} type="video/mp4" />
       </video>
       <div className="shimmer-overlay"></div>
     </div>
