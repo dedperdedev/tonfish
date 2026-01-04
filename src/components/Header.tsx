@@ -13,10 +13,6 @@ export function Header({ title, rightContent }: HeaderProps) {
   const navigate = useNavigate();
   const balances = useGameStore((s) => s.balances);
   const devAddResources = useGameStore((s) => s.devAddResources);
-  const [weather] = useState(() => {
-    const weathers = ['☀️', '🌤️', '⛅', '🌦️'];
-    return weathers[Math.floor(Math.random() * weathers.length)];
-  });
   const [tapCount, setTapCount] = useState(0);
 
   const handleBalanceClick = () => {
@@ -52,9 +48,6 @@ export function Header({ title, rightContent }: HeaderProps) {
           >
             <small className="text-muted font-extrabold">FISH</small>
             <b className="font-black tracking-wide">{formatFish(balances.fish)}</b>
-          </div>
-          <div className="inline-flex items-center justify-center px-3 py-2.5 rounded-full scrim shadow-game-sm h-[42px] w-[54px] flex-shrink-0">
-            <span className="text-xl">{weather}</span>
           </div>
           <button
             className="inline-flex items-center justify-center px-3 py-2.5 rounded-full scrim shadow-game-sm h-[42px] w-[54px] flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
