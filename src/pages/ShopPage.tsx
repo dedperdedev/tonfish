@@ -74,40 +74,36 @@ export function ShopPage() {
                 return (
                   <div key={rod.id} className="game-card">
                     <div className="grid grid-cols-[96px_1fr] gap-3 items-start">
-                      <div className="flex flex-col items-center gap-1.5">
-                        <div className="flex items-center justify-center relative overflow-visible">
-                          <img
-                            src={rod.icon}
-                            alt={rod.name}
-                            style={{
-                              width: 88,
-                              height: 'auto',
-                              objectFit: 'contain',
-                              transform: 'rotate(-12deg)',
-                            }}
-                          />
-                        </div>
-                        <div className="flex flex-col gap-1 items-center w-full">
+                      <div className="flex items-center justify-center relative overflow-visible">
+                        <img
+                          src={rod.icon}
+                          alt={rod.name}
+                          style={{
+                            width: 88,
+                            height: 'auto',
+                            objectFit: 'contain',
+                            transform: 'rotate(-12deg)',
+                          }}
+                        />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap mb-1">
+                          <h3 className="m-0 text-base font-black tracking-wide">{rod.name}</h3>
                           <span
-                            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border text-xs font-black ${getRarityColors(rod.rarity).bg} ${getRarityColors(rod.rarity).text} ${getRarityColors(rod.rarity).border}`}
+                            className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[10px] font-black ${getRarityColors(rod.rarity).bg} ${getRarityColors(rod.rarity).text} ${getRarityColors(rod.rarity).border}`}
                           >
                             {rod.rarity}
                           </span>
-                          {rod.dailyYieldPct > 0 && (
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
-                              <strong className="text-ink">
-                                {(rod.dailyYieldPct * 100).toFixed(1)}%/сутки
-                              </strong>
-                            </span>
-                          )}
                         </div>
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="m-0 text-base font-black tracking-wide">{rod.name}</h3>
+                        {rod.dailyYieldPct > 0 && (
+                          <div className="text-xs font-semibold text-muted mb-2.5">
+                            {(rod.dailyYieldPct * 100).toFixed(1)}% / сутки
+                          </div>
+                        )}
 
                         {rod.currency === 'TON' ? (
-                          <div className="mt-2.5 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85">
-                            <div className="font-black text-xs text-muted mb-2.5">
+                          <div className="mb-2.5">
+                            <div className="text-xs font-semibold text-muted mb-1.5">
                               <span>Сумма покупки</span>
                             </div>
                             <input
@@ -127,23 +123,23 @@ export function ShopPage() {
                                   setStakeAmounts(newAmounts);
                                 }
                               }}
-                              className="w-full px-3 py-2.5 rounded-[14px] bg-white/80 border border-white/90 font-black text-ink text-base focus:outline-none focus:ring-2 focus:ring-sun/50 placeholder:text-muted"
+                              className="w-full px-2.5 py-2 rounded-[14px] bg-white/45 border border-white/70 font-medium text-ink text-sm focus:outline-none focus:ring-2 focus:ring-sun/50 placeholder:text-muted"
                               placeholder={`${rod.minStake}–${rod.maxStake} TON`}
                             />
                           </div>
                         ) : (
-                          <div className="mt-2.5 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85">
-                            <div className="flex justify-between items-center font-black text-xs text-muted">
+                          <div className="mb-2.5 px-2.5 py-2 rounded-[14px] bg-white/45 border border-white/70">
+                            <div className="flex justify-between items-center text-sm font-medium text-muted">
                               <span>Цена</span>
-                              <b className="text-ink">{rod.priceFish} FISH</b>
+                              <span className="text-ink">{rod.priceFish} FISH</span>
                             </div>
                           </div>
                         )}
 
-                        <div className="flex gap-2.5 items-center justify-between mt-2.5">
+                        <div className="flex gap-2.5 items-center justify-between">
                           {owned && (
                             <button
-                              className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
+                              className="px-3.5 py-2.5 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-semibold cursor-pointer text-sm"
                               onClick={() => {
                                 triggerHaptic('light');
                                 equipRod(rod.id);
@@ -154,7 +150,7 @@ export function ShopPage() {
                             </button>
                           )}
                           <button
-                            className="game-button w-auto min-w-[140px] px-3.5 py-3 text-sm"
+                            className="game-button w-auto min-w-[140px] px-3.5 py-2.5 text-sm font-bold"
                             onClick={() => {
                               triggerHaptic('medium');
                               handleBuy(rod.id);
