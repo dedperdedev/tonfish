@@ -329,6 +329,11 @@ export const useGameStore = create<GameStore>()(
               totalEarnedFish: oldFriends.earnedFish || 0,
               leaderboard: oldFriends.leaderboard || [],
             };
+          } else if (oldFriends.level1 && !oldFriends.level1.percentage) {
+            // Add percentage to existing levels if missing
+            persistedState.friends.level1.percentage = 5.0;
+            persistedState.friends.level2.percentage = 3.0;
+            persistedState.friends.level3.percentage = 2.0;
           }
         }
         return persistedState as UserState;
