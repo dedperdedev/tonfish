@@ -66,42 +66,42 @@ export function FriendsPage() {
           {/* Уровни реферальной системы */}
           <div className="grid grid-cols-3 gap-2.5 mb-2.5">
             {/* Уровень 1 */}
-            <div className="relative px-3 py-3.5 rounded-[20px] bg-gradient-to-br from-[rgba(255,215,0,0.65)] via-[rgba(255,215,0,0.55)] to-[rgba(255,215,0,0.45)] border-2 border-[rgba(255,215,0,0.8)] shadow-[0_8px_24px_rgba(255,215,0,0.3),inset_0_1px_0_rgba(255,255,255,0.5)] overflow-hidden backdrop-blur-[8px]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.3),transparent_70%)]"></div>
-              <div className="relative z-[1]">
-                <div className="text-[10px] font-black text-[rgba(40,24,0,0.9)] uppercase tracking-wide mb-1.5">1 уровень</div>
-                <div className="text-[32px] font-black text-[#281600] mb-1.5 leading-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]">
+            <div className="relative px-3 py-4 rounded-[20px] bg-gradient-to-br from-[rgba(255,215,0,0.75)] via-[rgba(255,215,0,0.65)] to-[rgba(255,215,0,0.55)] border-2 border-[rgba(255,215,0,0.9)] shadow-[0_8px_24px_rgba(255,215,0,0.35),inset_0_1px_0_rgba(255,255,255,0.6)] overflow-hidden backdrop-blur-[8px]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.4),transparent_70%)]"></div>
+              <div className="relative z-[1] flex flex-col items-center text-center">
+                <div className="text-[11px] font-black text-[rgba(40,24,0,0.95)] uppercase tracking-wider mb-2">1 уровень</div>
+                <div className="text-[36px] font-black text-[#281600] mb-2 leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]">
                   {friends.level1.invited}
                 </div>
-                <div className="text-xs font-black text-[#281600]">
+                <div className="text-sm font-black text-[#281600] opacity-95">
                   {friends.level1.percentage?.toFixed(2) || '5.00'}%
                 </div>
               </div>
             </div>
 
             {/* Уровень 2 */}
-            <div className="relative px-3 py-3.5 rounded-[20px] bg-gradient-to-br from-[rgba(100,200,255,0.6)] via-[rgba(100,200,255,0.5)] to-[rgba(100,200,255,0.4)] border border-[rgba(100,200,255,0.7)] shadow-[0_6px_20px_rgba(100,200,255,0.25),inset_0_1px_0_rgba(255,255,255,0.4)] overflow-hidden backdrop-blur-[8px]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.25),transparent_70%)]"></div>
-              <div className="relative z-[1]">
-                <div className="text-[10px] font-black text-muted uppercase tracking-wide mb-1.5">2 уровень</div>
-                <div className="text-[32px] font-black text-ink mb-1.5 leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.2)]">
+            <div className="relative px-3 py-4 rounded-[20px] bg-gradient-to-br from-[rgba(100,200,255,0.7)] via-[rgba(100,200,255,0.6)] to-[rgba(100,200,255,0.5)] border border-[rgba(100,200,255,0.8)] shadow-[0_6px_20px_rgba(100,200,255,0.3),inset_0_1px_0_rgba(255,255,255,0.5)] overflow-hidden backdrop-blur-[8px]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.3),transparent_70%)]"></div>
+              <div className="relative z-[1] flex flex-col items-center text-center">
+                <div className="text-[11px] font-black text-ink uppercase tracking-wider mb-2 opacity-90">2 уровень</div>
+                <div className="text-[36px] font-black text-ink mb-2 leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]">
                   {friends.level2.invited}
                 </div>
-                <div className="text-xs font-black text-[#FFD700]">
+                <div className="text-sm font-black text-[#FFD700]">
                   {friends.level2.percentage?.toFixed(2) || '3.00'}%
                 </div>
               </div>
             </div>
 
             {/* Уровень 3 */}
-            <div className="relative px-3 py-3.5 rounded-[20px] bg-gradient-to-br from-[rgba(200,150,255,0.6)] via-[rgba(200,150,255,0.5)] to-[rgba(200,150,255,0.4)] border border-[rgba(200,150,255,0.7)] shadow-[0_6px_20px_rgba(200,150,255,0.25),inset_0_1px_0_rgba(255,255,255,0.4)] overflow-hidden backdrop-blur-[8px]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.25),transparent_70%)]"></div>
-              <div className="relative z-[1]">
-                <div className="text-[10px] font-black text-muted uppercase tracking-wide mb-1.5">3 уровень</div>
-                <div className="text-[32px] font-black text-ink mb-1.5 leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.2)]">
+            <div className="relative px-3 py-4 rounded-[20px] bg-gradient-to-br from-[rgba(200,150,255,0.7)] via-[rgba(200,150,255,0.6)] to-[rgba(200,150,255,0.5)] border border-[rgba(200,150,255,0.8)] shadow-[0_6px_20px_rgba(200,150,255,0.3),inset_0_1px_0_rgba(255,255,255,0.5)] overflow-hidden backdrop-blur-[8px]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.3),transparent_70%)]"></div>
+              <div className="relative z-[1] flex flex-col items-center text-center">
+                <div className="text-[11px] font-black text-ink uppercase tracking-wider mb-2 opacity-90">3 уровень</div>
+                <div className="text-[36px] font-black text-ink mb-2 leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]">
                   {friends.level3.invited}
                 </div>
-                <div className="text-xs font-black text-[#FFD700]">
+                <div className="text-sm font-black text-[#FFD700]">
                   {friends.level3.percentage?.toFixed(2) || '2.00'}%
                 </div>
               </div>
