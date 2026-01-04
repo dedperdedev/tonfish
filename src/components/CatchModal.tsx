@@ -37,7 +37,6 @@ function getEmoji(name: string): string {
 
 export function CatchModal({ catchResult, onClose }: CatchModalProps) {
   const navigate = useNavigate();
-  const addToInventory = useGameStore((s) => s.addToInventory);
 
   if (!catchResult) return null;
 
@@ -53,12 +52,6 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
     onClose();
   };
 
-  const handleKeep = () => {
-    // Just add to inventory
-    addToInventory(catchResult);
-    navigate('/shop');
-    onClose();
-  };
 
   return (
     <div
@@ -71,9 +64,6 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
       >
         <div className="p-4.5 pb-0 flex-shrink-0">
           <h2 className="m-0 text-lg font-black font-heading">Улов!</h2>
-          <p className="mt-1.5 mb-0 text-muted font-extrabold text-xs">
-            Продать или оставить?
-          </p>
         </div>
         <div className="mx-3.5 my-3.5 rounded-2xl bg-gradient-to-b from-aqua/28 to-sun/18 border border-white/90 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] h-[180px] min-h-[180px] grid place-items-center relative overflow-hidden flex-shrink-0">
           <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,.75),rgba(255,255,255,0)_60%)] rotate-[18deg]"></div>
@@ -85,9 +75,6 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
           <div className="flex items-start justify-between gap-3 px-3.5 py-3 rounded-[18px] glass-card flex-shrink-0">
             <div className="min-w-0 flex-1">
               <div className="text-lg font-black break-words leading-tight">{catchResult.name}</div>
-              <div className="text-xs font-black text-muted mt-1">
-                {catchResult.type === 'fish' ? 'Рыба' : 'Барахло'}
-              </div>
             </div>
             <div className="text-right flex-shrink-0 ml-2">
               {catchResult.payoutTon > 0 && (
@@ -100,22 +87,8 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2.5 flex-shrink-0">
-            <button className="game-button text-sm py-3.5 px-3.5 min-h-[48px]" onClick={handleSell}>
-              Продать
-            </button>
-            <button
-              className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm min-h-[48px]"
-              onClick={handleKeep}
-            >
-              Оставить
-            </button>
-          </div>
-          <button
-            className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm flex-shrink-0"
-            onClick={onClose}
-          >
-            Закрыть
+          <button className="game-button text-sm py-3.5 px-3.5 min-h-[48px] flex-shrink-0" onClick={handleSell}>
+            Продать
           </button>
         </div>
       </div>
