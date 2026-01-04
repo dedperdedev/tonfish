@@ -71,33 +71,74 @@ export function ShopPage() {
                 const owned = ownedRods.includes(rod.id);
                 const equipped = equippedRodId === rod.id;
 
+                const rarityColors = getRarityColors(rod.rarity);
+                // Get rarity tint color for background (5-8% opacity)
+                const rarityTintMap: Record<string, string> = {
+                  Common: 'rgba(156, 163, 175, 0.06)', // gray
+                  Uncommon: 'rgba(34, 197, 94, 0.07)', // green
+                  Rare: 'rgba(59, 130, 246, 0.07)', // blue
+                  Epic: 'rgba(168, 85, 247, 0.08)', // purple
+                  Legendary: 'rgba(251, 191, 36, 0.08)', // yellow
+                  Mythic: 'rgba(236, 72, 153, 0.08)', // pink
+                  Apex: 'rgba(239, 68, 68, 0.08)', // red
+                };
+                const rarityTint = rarityTintMap[rod.rarity] || 'rgba(156, 163, 175, 0.06)';
+                
+                // Get rarity accent line color
+                const rarityLineMap: Record<string, string> = {
+                  Common: 'rgba(156, 163, 175, 0.4)',
+                  Uncommon: 'rgba(34, 197, 94, 0.5)',
+                  Rare: 'rgba(59, 130, 246, 0.5)',
+                  Epic: 'rgba(168, 85, 247, 0.5)',
+                  Legendary: 'rgba(251, 191, 36, 0.5)',
+                  Mythic: 'rgba(236, 72, 153, 0.5)',
+                  Apex: 'rgba(239, 68, 68, 0.6)',
+                };
+                const rarityLineColor = rarityLineMap[rod.rarity] || 'rgba(156, 163, 175, 0.4)';
+
                 return (
-                  <div key={rod.id} className="game-card">
-                    <div className="grid grid-cols-[96px_1fr] gap-3 items-start">
-                      <div className="flex items-center justify-center relative overflow-visible">
+                  <div 
+                    key={rod.id} 
+                    className="game-card relative overflow-visible"
+                    style={{
+                      background: `linear-gradient(to right, ${rarityTint} 0%, transparent 8%)`,
+                    }}
+                  >
+                    {/* Rarity accent line */}
+                    <div
+                      className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl"
+                      style={{
+                        background: rarityLineColor,
+                      }}
+                    />
+                    
+                    <div className="grid grid-cols-[110px_1fr] gap-3 items-start relative">
+                      <div className="flex items-start justify-center relative" style={{ marginTop: '-8px' }}>
                         <img
                           src={rod.icon}
                           alt={rod.name}
                           style={{
-                            width: 88,
+                            width: 100,
                             height: 'auto',
                             objectFit: 'contain',
                             transform: 'rotate(-12deg)',
+                            filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12))',
                           }}
                         />
                       </div>
-                      <div className="min-w-0">
+                      <div className="min-w-0 pt-1">
                         <div className="flex items-center gap-2 flex-wrap mb-1">
                           <h3 className="m-0 text-base font-black tracking-wide">{rod.name}</h3>
                           <span
-                            className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[10px] font-black ${getRarityColors(rod.rarity).bg} ${getRarityColors(rod.rarity).text} ${getRarityColors(rod.rarity).border}`}
+                            className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[10px] font-black ${rarityColors.bg} ${rarityColors.text} ${rarityColors.border}`}
                           >
                             {rod.rarity}
                           </span>
                         </div>
                         {rod.dailyYieldPct > 0 && (
-                          <div className="text-xs font-semibold text-muted mb-2.5">
-                            {(rod.dailyYieldPct * 100).toFixed(1)}% / сутки
+                          <div className="flex items-center gap-1.5 text-xs font-semibold text-muted mb-2.5">
+                            <span className="w-1 h-1 rounded-full bg-sun/60"></span>
+                            <span>{(rod.dailyYieldPct * 100).toFixed(1)}% / сутки</span>
                           </div>
                         )}
 
@@ -139,7 +180,7 @@ export function ShopPage() {
                         <div className="flex gap-2.5 items-center justify-between">
                           {owned && (
                             <button
-                              className="px-3.5 py-2.5 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-semibold cursor-pointer text-sm"
+                              className="px-3.5 py-2.5 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-semibold cursor-pointer text-sm transition-transform hover:scale-[1.02] active:scale-[0.98]"
                               onClick={() => {
                                 triggerHaptic('light');
                                 equipRod(rod.id);
@@ -150,7 +191,7 @@ export function ShopPage() {
                             </button>
                           )}
                           <button
-                            className="game-button w-auto min-w-[140px] px-3.5 py-2.5 text-sm font-bold"
+                            className="game-button w-auto min-w-[160px] px-3.5 py-2.5 text-sm font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]"
                             onClick={() => {
                               triggerHaptic('medium');
                               handleBuy(rod.id);
