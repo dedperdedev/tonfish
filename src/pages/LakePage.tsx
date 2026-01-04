@@ -5,6 +5,7 @@ import { Hud } from '../components/Hud';
 import { BottomPanel } from '../components/BottomPanel';
 import { StartFishingModal } from '../components/StartFishingModal';
 import { CatchModal } from '../components/CatchModal';
+import { VideoBackground } from '../components/VideoBackground';
 
 export function LakePage() {
   const navigate = useNavigate();
@@ -56,17 +57,8 @@ export function LakePage() {
 
   return (
     <div className="relative h-full w-full">
-      {/* Background scene */}
-      <div
-        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(${import.meta.env.BASE_URL}lake_bg.jpg)`,
-          transform: 'scale(1.02)',
-          filter: 'saturate(1.04) contrast(1.02)',
-        }}
-      >
-        <div className="shimmer-overlay"></div>
-      </div>
+      {/* Background video */}
+      <VideoBackground />
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">

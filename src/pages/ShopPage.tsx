@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useGameStore, rods } from '../store/gameStore';
 import { Hud } from '../components/Hud';
+import { VideoBackground } from '../components/VideoBackground';
 import { formatTon, formatFish } from '../utils/formatters';
 
 const rodIcons: Record<string, string> = {
@@ -68,14 +69,8 @@ export function ShopPage() {
 
   return (
     <div className="relative h-full w-full">
-      {/* Background scene */}
-      <div
-        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-25"
-        style={{
-          backgroundImage: `url(${import.meta.env.BASE_URL}lake_bg.jpg)`,
-          filter: 'saturate(1.02) contrast(1)',
-        }}
-      />
+      {/* Background video */}
+      <VideoBackground opacity={0.25} />
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">

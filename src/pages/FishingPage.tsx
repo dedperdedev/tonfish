@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGameStore, rods } from '../store/gameStore';
 import { Hud } from '../components/Hud';
 import { FloatBobber } from '../components/FloatBobber';
+import { VideoBackground } from '../components/VideoBackground';
 import { formatTime, getProgress } from '../utils/session';
 import { formatTon, formatFish } from '../utils/formatters';
 
@@ -38,10 +39,7 @@ export function FishingPage() {
   if (!session) {
     return (
       <div className="relative h-full w-full">
-        <div
-          className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${import.meta.env.BASE_URL}lake_bg.jpg)` }}
-        />
+        <VideoBackground />
         <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
           <Hud />
           <div className="flex-1 flex items-center justify-center">
@@ -76,17 +74,8 @@ export function FishingPage() {
 
   return (
     <div className="relative h-full w-full">
-      {/* Background scene */}
-      <div
-        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(${import.meta.env.BASE_URL}lake_bg.jpg)`,
-          transform: 'scale(1.02)',
-          filter: 'saturate(1.04) contrast(1.02)',
-        }}
-      >
-        <div className="shimmer-overlay"></div>
-      </div>
+      {/* Background video */}
+      <VideoBackground />
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
