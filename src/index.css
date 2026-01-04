@@ -83,6 +83,78 @@ body {
   }
 }
 
+/* Lake Cast Overlay Animations */
+.lake-cast-overlay {
+  pointer-events: none;
+}
+
+.cast-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: cast-line 500ms ease-out forwards;
+}
+
+@keyframes cast-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.bobber-container {
+  animation: bob-cast 2s ease-in-out infinite;
+}
+
+@keyframes bob-cast {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -0.4px);
+  }
+}
+
+.ripple {
+  transform-origin: center;
+}
+
+.ripple-1 {
+  animation: ripple-expand 2s ease-out infinite;
+}
+
+.ripple-2 {
+  animation: ripple-expand 2s ease-out 0.4s infinite;
+}
+
+.ripple-3 {
+  animation: ripple-expand 2s ease-out 0.8s infinite;
+}
+
+@keyframes ripple-expand {
+  0% {
+    r: 9;
+    opacity: 0.6;
+  }
+  100% {
+    r: 25;
+    opacity: 0;
+  }
+}
+
+.spark {
+  animation: spark-flicker 0.3s ease-in-out infinite;
+}
+
+@keyframes spark-flicker {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
 @keyframes pulse-glow {
   0%,
   100% {

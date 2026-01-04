@@ -6,6 +6,8 @@ import { BottomPanel } from '../components/BottomPanel';
 import { StartFishingModal } from '../components/StartFishingModal';
 import { CatchModal } from '../components/CatchModal';
 import { LakeBackground } from '../components/LakeBackground';
+import { LakeCastOverlay } from '../components/LakeCastOverlay';
+import { triggerHaptic } from '../utils/haptics';
 import type { CatchResult } from '../types';
 
 export function LakePage() {
@@ -43,6 +45,7 @@ export function LakePage() {
 
   const handleStartFishing = (stakeAmount: number) => {
     if (!equippedRodId) return;
+    triggerHaptic('light');
     if (!ownedRods.includes(equippedRodId)) {
       buyRod(equippedRodId, stakeAmount);
     } else {
@@ -56,10 +59,22 @@ export function LakePage() {
     navigate('/fishing');
   };
 
+  // Determine if cast overlay should be active
+  const isCastActive = !!equippedRodId || (session?.status === 'running' || session?.status === 'ready');
+  const castKey = session?.startAt || session?.id || Date.now();
+
   return (
     <div className="relative h-full w-full">
       {/* Lake scene background */}
       <LakeBackground />
+
+      {/* Cast overlay */}
+      <LakeCastOverlay
+        rodId={equippedRodId as any}
+        active={isCastActive}
+        castKey={castKey}
+        target={{ x: 0.54, y: 0.56 }}
+      />
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
