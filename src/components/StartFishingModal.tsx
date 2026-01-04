@@ -115,7 +115,7 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
             onClick={handleStart}
             disabled={!canAfford && !isOwned}
           >
-            {isOwned ? 'Начать' : canAfford ? 'Купить и начать' : 'Недостаточно средств'}
+            {isOwned ? 'Закинуть' : canAfford ? 'Купить и закинуть' : 'Недостаточно средств'}
           </button>
           <button
             className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm"

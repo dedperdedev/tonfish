@@ -28,7 +28,7 @@ export function BottomPanel({ onStartClick, onOpenFishing }: BottomPanelProps) {
         ? `${equippedRod.minStake}–${equippedRod.maxStake} TON`
         : `${equippedRod.priceFish} FISH`
     }`;
-    buttonText = 'Начать рыбалку';
+    buttonText = 'Закинуть';
   } else if (session.status === 'running') {
     title = 'Рыбалка идёт';
     const remaining = session.endAt - Date.now();
