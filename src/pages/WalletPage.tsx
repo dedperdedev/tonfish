@@ -2,8 +2,11 @@ import { Header } from '../components/Header';
 import { VideoBackground } from '../components/VideoBackground';
 import { Copy, Check } from 'lucide-react';
 import { useState } from 'react';
+import { useGameStore } from '../store/gameStore';
+import { formatTon, formatFish } from '../utils/formatters';
 
 export function WalletPage() {
+  const balances = useGameStore((s) => s.balances);
   const [copied, setCopied] = useState(false);
 
   // Mock wallet address
@@ -28,6 +31,28 @@ export function WalletPage() {
 
         <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-24 -webkit-overflow-scrolling-touch">
           <div className="game-card mb-2.5">
+            <div className="font-black mb-2.5">Баланс кошелька</div>
+            <div className="grid gap-2.5">
+              <div className="flex items-center justify-between px-3 py-3 rounded-[18px] bg-white/55 border border-white/85">
+                <div className="flex items-center gap-2.5">
+                  <div>
+                    <div className="text-xs font-extrabold text-muted">TON</div>
+                    <div className="font-black text-lg">{formatTon(balances.ton)}</div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center justify-between px-3 py-3 rounded-[18px] bg-white/55 border border-white/85">
+                <div className="flex items-center gap-2.5">
+                  <div>
+                    <div className="text-xs font-extrabold text-muted">FISH</div>
+                    <div className="font-black text-lg">{formatFish(balances.fish)}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="game-card mb-2.5">
             <div className="font-black mb-2.5">Адрес кошелька</div>
             <div className="flex items-center gap-2.5">
               <div className="flex-1 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85 font-mono text-sm font-black text-ink break-all">
@@ -50,6 +75,15 @@ export function WalletPage() {
                 )}
               </button>
             </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2.5">
+            <button className="game-button text-sm py-3.5 px-3.5 min-h-[48px]">
+              Пополнить
+            </button>
+            <button className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm">
+              Вывести
+            </button>
           </div>
         </div>
       </div>
