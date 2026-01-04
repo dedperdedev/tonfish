@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useGameStore, rods } from '../store/gameStore';
-import { formatTon } from '../utils/formatters';
 import { getRarityColors } from '../utils/rarity';
 
 interface StartFishingModalProps {
