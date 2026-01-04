@@ -1,38 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/gameStore';
 import { formatTon, formatFish } from '../utils/formatters';
+import { Icon, catchEmojiFallbacks } from '../utils/icons';
+import { triggerHaptic } from '../utils/haptics';
 import type { CatchResult } from '../types';
 
 interface CatchModalProps {
   catchResult: CatchResult | null;
   onClose: () => void;
-}
-
-const emojiMap: Record<string, string> = {
-  Головастик: '🐸',
-  Лягушка: '🐸',
-  Бычок: '🐟',
-  Карась: '🐟',
-  Окунь: '🐟',
-  Щука: '🐟',
-  Судак: '🐟',
-  Карп: '🐟',
-  Амур: '🐟',
-  Акула: '🦈',
-  'Консервная банка': '🥫',
-  Сапог: '👢',
-  'Старая блесна': '🪝',
-  'Ржавая цепь': '⛓️',
-  Тина: '🪸',
-  Ил: '🟫',
-  Пакет: '🛍️',
-  'Якорь-брелок': '⚓',
-  Сундук: '🧰',
-  Кость: '🦴',
-};
-
-function getEmoji(name: string): string {
-  return emojiMap[name] || '🎁';
 }
 
 export function CatchModal({ catchResult, onClose }: CatchModalProps) {
@@ -41,6 +16,7 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
   if (!catchResult) return null;
 
   const handleSell = () => {
+    triggerHaptic('success');
     // Add directly to market.listed (bypass inventory)
     useGameStore.setState((state) => ({
       market: {
@@ -67,8 +43,13 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
         </div>
         <div className="mx-3.5 my-3.5 rounded-2xl bg-gradient-to-b from-aqua/28 to-sun/18 border border-white/90 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] h-[180px] min-h-[180px] grid place-items-center relative overflow-hidden flex-shrink-0">
           <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,.75),rgba(255,255,255,0)_60%)] rotate-[18deg]"></div>
-          <div className="text-[78px] drop-shadow-[0_14px_18px_rgba(0,0,0,.18)] z-[2] translate-y-1">
-            {getEmoji(catchResult.name)}
+          <div className="z-[2] translate-y-1 flex items-center justify-center">
+            <Icon
+              src={catchResult.iconPath}
+              fallback={catchEmojiFallbacks[catchResult.name] || '🎁'}
+              alt={catchResult.name}
+              size={120}
+            />
           </div>
         </div>
         <div className="px-4.5 pb-4.5 grid gap-2.5 overflow-y-auto flex-1 min-h-0">
@@ -87,7 +68,11 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
               </div>
             </div>
           </div>
-          <button className="game-button text-sm py-3.5 px-3.5 min-h-[48px] flex-shrink-0" onClick={handleSell}>
+          <button 
+            className="game-button text-sm py-3.5 px-3.5 min-h-[48px] flex-shrink-0" 
+            onClick={handleSell}
+            onMouseDown={() => triggerHaptic('light')}
+          >
             Продать
           </button>
         </div>

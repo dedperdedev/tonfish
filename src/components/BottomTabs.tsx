@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Waves, ShoppingBag, Store, CheckSquare, Users } from 'lucide-react';
+import { triggerHaptic } from '../utils/haptics';
 
 const tabs = [
   { id: 'lake', label: 'Озеро', Icon: Waves, path: '/lake' },
@@ -26,7 +27,10 @@ export function BottomTabs() {
                 ? 'bg-aqua/18 text-ink translate-y-[-1px]'
                 : 'text-[rgba(11,42,51,.70)]'
             }`}
-            onClick={() => navigate(tab.path)}
+            onClick={() => {
+              triggerHaptic('light');
+              navigate(tab.path);
+            }}
           >
             <span
               className={`w-[22px] h-[22px] grid place-items-center rounded-xl ${

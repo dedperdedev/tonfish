@@ -8,6 +8,7 @@ export interface Rod {
   priceFish?: number;
   dailyYieldPct: number;
   loot: string[];
+  iconPath?: string;
 }
 
 export interface LootTableEntry {
@@ -16,6 +17,7 @@ export interface LootTableEntry {
   type: 'fish' | 'junk';
   weight: number;
   payoutMulRange: [number, number];
+  iconPath?: string;
 }
 
 export interface FishingSession {
@@ -39,6 +41,7 @@ export interface CatchResult {
   createdAt: number;
   soldAt?: number;
   status?: 'in_modal' | 'in_inventory' | 'sold';
+  iconPath?: string;
 }
 
 export interface Task {
@@ -47,6 +50,7 @@ export interface Task {
   desc: string;
   reward: number;
   claimedAt: number;
+  iconPath?: string;
 }
 
 export interface ReferralLevel {

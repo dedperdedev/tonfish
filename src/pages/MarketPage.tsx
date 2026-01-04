@@ -1,35 +1,10 @@
 import { useState } from 'react';
 import { useGameStore } from '../store/gameStore';
 import { Header } from '../components/Header';
-import { VideoBackground } from '../components/VideoBackground';
+import { LakeBackground } from '../components/LakeBackground';
 import { formatTon, formatFish } from '../utils/formatters';
-
-const emojiMap: Record<string, string> = {
-  Головастик: '🐸',
-  Лягушка: '🐸',
-  Бычок: '🐟',
-  Карась: '🐟',
-  Окунь: '🐟',
-  Щука: '🐟',
-  Судак: '🐟',
-  Карп: '🐟',
-  Амур: '🐟',
-  Акула: '🦈',
-  'Консервная банка': '🥫',
-  Сапог: '👢',
-  'Старая блесна': '🪝',
-  'Ржавая цепь': '⛓️',
-  Тина: '🪸',
-  Ил: '🟫',
-  Пакет: '🛍️',
-  'Якорь-брелок': '⚓',
-  Сундук: '🧰',
-  Кость: '🦴',
-};
-
-function getEmoji(name: string): string {
-  return emojiMap[name] || '🎁';
-}
+import { Icon, catchEmojiFallbacks } from '../utils/icons';
+import { triggerHaptic } from '../utils/haptics';
 
 export function MarketPage() {
   const [tab, setTab] = useState<'sell' | 'hist'>('sell');
@@ -40,7 +15,7 @@ export function MarketPage() {
   return (
     <div className="relative h-full w-full">
       {/* Background video */}
-      <VideoBackground opacity={0.18} />
+      <LakeBackground opacity={0.18} />
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
@@ -87,7 +62,12 @@ export function MarketPage() {
                     <div className="flex justify-between items-center gap-2.5">
                       <div className="flex gap-2.5 items-center min-w-0">
                         <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
-                          {getEmoji(item.name)}
+                          <Icon
+                            src={item.iconPath}
+                            fallback={catchEmojiFallbacks[item.name] || '🎁'}
+                            alt={item.name}
+                            size={32}
+                          />
                         </div>
                         <div className="min-w-0">
                           <div className="font-black">{item.name}</div>
@@ -101,7 +81,11 @@ export function MarketPage() {
                       </div>
                       <button
                         className="game-button w-auto min-w-[120px] px-3.5 py-3 text-sm"
-                        onClick={() => sellItem(item.id)}
+                        onClick={() => {
+                          triggerHaptic('success');
+                          sellItem(item.id);
+                        }}
+                        onMouseDown={() => triggerHaptic('light')}
                       >
                         Продать
                       </button>
@@ -127,7 +111,12 @@ export function MarketPage() {
                       <div className="flex justify-between items-center gap-2.5">
                         <div className="flex gap-2.5 items-center min-w-0">
                           <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
-                            {getEmoji(item.name)}
+                            <Icon
+                            src={item.iconPath}
+                            fallback={catchEmojiFallbacks[item.name] || '🎁'}
+                            alt={item.name}
+                            size={32}
+                          />
                           </div>
                           <div className="min-w-0">
                             <div className="font-black">{item.name}</div>

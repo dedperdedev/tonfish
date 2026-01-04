@@ -1,6 +1,6 @@
 import { useGameStore } from '../store/gameStore';
 import { Header } from '../components/Header';
-import { VideoBackground } from '../components/VideoBackground';
+import { LakeBackground } from '../components/LakeBackground';
 import { Copy, Users } from 'lucide-react';
 import { useState } from 'react';
 
@@ -32,7 +32,7 @@ export function FriendsPage() {
   return (
     <div className="relative h-full w-full">
       {/* Background video */}
-      <VideoBackground opacity={0.18} />
+      <LakeBackground opacity={0.18} />
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">

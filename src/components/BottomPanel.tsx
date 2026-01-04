@@ -1,6 +1,7 @@
 import { useGameStore } from '../store/gameStore';
 import { formatTime } from '../utils/session';
 import { rods } from '../store/gameStore';
+import { triggerHaptic } from '../utils/haptics';
 
 interface BottomPanelProps {
   onStartClick: () => void;
@@ -42,6 +43,7 @@ export function BottomPanel({ onStartClick, onOpenFishing }: BottomPanelProps) {
   }
 
   const handleClick = () => {
+    triggerHaptic('medium');
     if (!equippedRod) {
       onStartClick();
     } else if (!session) {
@@ -75,6 +77,7 @@ export function BottomPanel({ onStartClick, onOpenFishing }: BottomPanelProps) {
         <button
           className={`game-button ${pulse ? 'pulse' : ''}`}
           onClick={handleClick}
+          onMouseDown={() => triggerHaptic('light')}
         >
           {buttonText}
         </button>

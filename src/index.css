@@ -34,11 +34,29 @@ body {
 
 /* Animations */
 @keyframes shimmer {
-  0% {
+  0%, 100% {
     background-position: -200% 0;
   }
-  100% {
+  50% {
     background-position: 200% 0;
+  }
+}
+
+@keyframes caustics {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 0% 0%;
   }
 }
 
@@ -128,14 +146,30 @@ body {
 }
 
 .game-button {
-  @apply w-full px-4 py-3.5 rounded-[22px] font-black text-base cursor-pointer transition-all duration-75;
+  @apply w-full px-4 py-3.5 rounded-[22px] font-black text-base cursor-pointer transition-all duration-150;
   background: linear-gradient(135deg, theme('colors.sun'), theme('colors.sun2'));
   color: #281600;
   box-shadow: 0 14px 34px rgba(255, 156, 30, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
 .game-button:active {
-  transform: scale(0.985);
+  transform: scale(0.97);
+  box-shadow: 0 8px 20px rgba(255, 156, 30, 0.45);
+}
+
+.game-button:active::before {
+  opacity: 1;
 }
 
 .game-button.pulse {

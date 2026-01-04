@@ -1,22 +1,14 @@
 import { useState } from 'react';
 import { useGameStore, rods } from '../store/gameStore';
 import { getRarityColors } from '../utils/rarity';
+import { Icon, rodEmojiFallbacks } from '../utils/icons';
+import { triggerHaptic } from '../utils/haptics';
 
 interface StartFishingModalProps {
   rodId: string;
   onStart: (stakeAmount: number) => void;
   onClose: () => void;
 }
-
-const rodIcons: Record<string, string> = {
-  stick: '🪵',
-  reed: '🌾',
-  bamboo: '🎋',
-  telescopic: '📏',
-  spinning: '🎣',
-  feeder: '🧺',
-  boom: '💥',
-};
 
 export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModalProps) {
   const rod = rods.find((r) => r.id === rodId);
@@ -36,7 +28,11 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
       : balances.fish >= (rod.priceFish || rod.minStake);
 
   const handleStart = () => {
-    if (!canAfford && !isOwned) return;
+    if (!canAfford && !isOwned) {
+      triggerHaptic('error');
+      return;
+    }
+    triggerHaptic('success');
     onStart(rod.currency === 'TON' ? currentStake : (rod.priceFish || rod.minStake));
   };
 
@@ -60,7 +56,13 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
             <div className="flex gap-2.5 items-start">
               <div className="w-[54px] h-[54px] rounded-[18px] bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center relative overflow-hidden">
                 <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,.65),rgba(255,255,255,0)_55%)] rotate-[18deg]"></div>
-                <span className="text-2xl z-[2]">{rodIcons[rod.id] || '🎣'}</span>
+                <Icon
+                  src={rod.iconPath}
+                  fallback={rodEmojiFallbacks[rod.id] || '🎣'}
+                  alt={rod.name}
+                  size={32}
+                  className="z-[2]"
+                />
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="m-0 text-base font-black tracking-wide break-words">{rod.name}</h3>
@@ -118,13 +120,15 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
           <button
             className={`game-button ${!canAfford && !isOwned ? 'opacity-50' : ''} flex-shrink-0`}
             onClick={handleStart}
+            onMouseDown={() => triggerHaptic('light')}
             disabled={!canAfford && !isOwned}
           >
             {isOwned ? 'Закинуть' : canAfford ? 'Купить и закинуть' : 'Недостаточно средств'}
           </button>
           <button
-            className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm flex-shrink-0"
+            className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm flex-shrink-0 transition-transform active:scale-95"
             onClick={onClose}
+            onMouseDown={() => triggerHaptic('light')}
           >
             Отмена
           </button>

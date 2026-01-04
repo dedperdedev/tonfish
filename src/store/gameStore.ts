@@ -190,6 +190,7 @@ export const useGameStore = create<GameStore>()(
           payoutFish,
           createdAt: Date.now(),
           status: 'in_modal',
+          iconPath: picked.iconPath,
         };
 
         set({

@@ -1,14 +1,9 @@
 import { useGameStore } from '../store/gameStore';
 import { Header } from '../components/Header';
-import { VideoBackground } from '../components/VideoBackground';
+import { LakeBackground } from '../components/LakeBackground';
 import { formatFish } from '../utils/formatters';
-
-const taskEmojis: Record<string, string> = {
-  daily: '📅',
-  sub: '📣',
-  invite: '👥',
-  firstbuy: '🛍️',
-};
+import { Icon, taskEmojiFallbacks } from '../utils/icons';
+import { triggerHaptic } from '../utils/haptics';
 
 export function TasksPage() {
   const tasks = useGameStore((s) => s.tasks);
@@ -17,7 +12,7 @@ export function TasksPage() {
   return (
     <div className="relative h-full w-full">
       {/* Background video */}
-      <VideoBackground opacity={0.18} />
+      <LakeBackground opacity={0.18} />
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
@@ -39,7 +34,12 @@ export function TasksPage() {
                   <div className="flex justify-between items-center gap-2.5">
                     <div className="flex gap-2.5 items-center min-w-0">
                       <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
-                        {taskEmojis[task.id] || '✅'}
+                        <Icon
+                          src={task.iconPath}
+                          fallback={taskEmojiFallbacks[task.id] || '✅'}
+                          alt={task.title}
+                          size={32}
+                        />
                       </div>
                       <div className="min-w-0">
                         <div className="font-black">{task.title}</div>
@@ -54,7 +54,11 @@ export function TasksPage() {
                       </span>
                       <button
                         className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer disabled:opacity-50"
-                        onClick={() => claimTask(task.id)}
+                        onClick={() => {
+                          triggerHaptic('success');
+                          claimTask(task.id);
+                        }}
+                        onMouseDown={() => triggerHaptic('light')}
                         disabled={claimed}
                       >
                         {claimed ? 'Получено' : 'Забрать'}

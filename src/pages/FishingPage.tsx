@@ -4,7 +4,8 @@ import { useGameStore, rods } from '../store/gameStore';
 import { Header } from '../components/Header';
 import { FloatBobber } from '../components/FloatBobber';
 import { CatchModal } from '../components/CatchModal';
-import { VideoBackground } from '../components/VideoBackground';
+import { LakeBackground } from '../components/LakeBackground';
+import { triggerHaptic } from '../utils/haptics';
 import { formatTime, getProgress } from '../utils/session';
 import { formatTon, formatFish } from '../utils/formatters';
 
@@ -42,7 +43,7 @@ export function FishingPage() {
   if (!session) {
     return (
       <div className="relative h-full w-full">
-        <VideoBackground />
+        <LakeBackground />
         <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
           <Header />
           <div className="flex-1 flex items-center justify-center">
@@ -50,7 +51,10 @@ export function FishingPage() {
               <p className="font-black text-lg">Сессия не запущена</p>
               <button
                 className="game-button mt-4"
-                onClick={() => navigate('/lake')}
+                onClick={() => {
+                triggerHaptic('light');
+                navigate('/lake');
+              }}
               >
                 На озеро
               </button>
@@ -65,6 +69,7 @@ export function FishingPage() {
   const strokeDashoffset = CIRCUMFERENCE * (1 - progress);
 
   const handleClaim = () => {
+    triggerHaptic('medium');
     if (session.status === 'ready') {
       const result = claimCatch();
       if (result) {
@@ -78,8 +83,8 @@ export function FishingPage() {
 
   return (
     <div className="relative h-full w-full">
-      {/* Background video */}
-      <VideoBackground />
+      {/* Lake scene background */}
+      <LakeBackground />
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
@@ -91,6 +96,7 @@ export function FishingPage() {
               <button
                 className="w-full h-full rounded-full grid place-items-center cursor-pointer hover:opacity-90 transition-opacity z-[2] relative"
                 onClick={handleClaim}
+                onMouseDown={() => triggerHaptic('light')}
               >
                 <div className="text-center">
                   <h2 className="m-0 text-[34px] font-black tracking-wide font-heading pulse">

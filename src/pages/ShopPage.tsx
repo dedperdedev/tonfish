@@ -1,46 +1,11 @@
 import { useState } from 'react';
 import { useGameStore, rods } from '../store/gameStore';
 import { Header } from '../components/Header';
-import { VideoBackground } from '../components/VideoBackground';
+import { LakeBackground } from '../components/LakeBackground';
 import { formatTon, formatFish } from '../utils/formatters';
 import { getRarityColors } from '../utils/rarity';
-
-const rodIcons: Record<string, string> = {
-  stick: '🪵',
-  reed: '🌾',
-  bamboo: '🎋',
-  telescopic: '📏',
-  spinning: '🎣',
-  feeder: '🧺',
-  boom: '💥',
-};
-
-const emojiMap: Record<string, string> = {
-  Головастик: '🐸',
-  Лягушка: '🐸',
-  Бычок: '🐟',
-  Карась: '🐟',
-  Окунь: '🐟',
-  Щука: '🐟',
-  Судак: '🐟',
-  Карп: '🐟',
-  Амур: '🐟',
-  Акула: '🦈',
-  'Консервная банка': '🥫',
-  Сапог: '👢',
-  'Старая блесна': '🪝',
-  'Ржавая цепь': '⛓️',
-  Тина: '🪸',
-  Ил: '🟫',
-  Пакет: '🛍️',
-  'Якорь-брелок': '⚓',
-  Сундук: '🧰',
-  Кость: '🦴',
-};
-
-function getEmoji(name: string): string {
-  return emojiMap[name] || '🎁';
-}
+import { Icon, rodEmojiFallbacks, catchEmojiFallbacks } from '../utils/icons';
+import { triggerHaptic } from '../utils/haptics';
 
 export function ShopPage() {
   const [tab, setTab] = useState<'shop' | 'inv'>('shop');
@@ -70,7 +35,7 @@ export function ShopPage() {
   return (
     <div className="relative h-full w-full">
       {/* Background video */}
-      <VideoBackground opacity={0.25} />
+      <LakeBackground opacity={0.25} />
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
@@ -112,7 +77,13 @@ export function ShopPage() {
                     <div className="grid grid-cols-[54px_1fr] gap-2.5 items-start">
                       <div className="w-[54px] h-[54px] rounded-[18px] bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center relative overflow-hidden">
                         <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,.65),rgba(255,255,255,0)_55%)] rotate-[18deg]"></div>
-                        <span className="text-2xl z-[2]">{rodIcons[rod.id] || '🎣'}</span>
+                        <Icon
+                          src={rod.iconPath}
+                          fallback={rodEmojiFallbacks[rod.id] || '🎣'}
+                          alt={rod.name}
+                          size={32}
+                          className="z-[2]"
+                        />
                       </div>
                       <div className="min-w-0">
                         <h3 className="m-0 text-base font-black tracking-wide">{rod.name}</h3>
@@ -177,14 +148,22 @@ export function ShopPage() {
                           {owned && (
                             <button
                               className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
-                              onClick={() => equipRod(rod.id)}
+                              onClick={() => {
+                                triggerHaptic('light');
+                                equipRod(rod.id);
+                              }}
+                              onMouseDown={() => triggerHaptic('light')}
                             >
                               {equipped ? 'Активна' : 'Экипировать'}
                             </button>
                           )}
                           <button
                             className="game-button w-auto min-w-[140px] px-3.5 py-3 text-sm"
-                            onClick={() => handleBuy(rod.id)}
+                            onClick={() => {
+                              triggerHaptic('medium');
+                              handleBuy(rod.id);
+                            }}
+                            onMouseDown={() => triggerHaptic('light')}
                           >
                             {owned ? 'Купить ещё' : 'Купить'}
                           </button>
@@ -212,7 +191,12 @@ export function ShopPage() {
                       <div className="flex justify-between items-center gap-2.5">
                         <div className="flex gap-2.5 items-center min-w-0">
                           <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
-                            {rodIcons[rod.id] || '🎣'}
+                            <Icon
+                              src={rod.iconPath}
+                              fallback={rodEmojiFallbacks[rod.id] || '🎣'}
+                              alt={rod.name}
+                              size={32}
+                            />
                           </div>
                           <div className="min-w-0">
                             <div className="font-black">{rod.name}</div>
@@ -233,7 +217,11 @@ export function ShopPage() {
                         </div>
                         <button
                           className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
-                          onClick={() => equipRod(rodId)}
+                          onClick={() => {
+                            triggerHaptic('light');
+                            equipRod(rodId);
+                          }}
+                          onMouseDown={() => triggerHaptic('light')}
                         >
                           {equippedRodId === rodId ? 'Активна' : 'Экипировать'}
                         </button>
@@ -255,7 +243,12 @@ export function ShopPage() {
                     <div className="flex justify-between items-center gap-2.5">
                       <div className="flex gap-2.5 items-center min-w-0">
                         <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
-                          {getEmoji(item.name)}
+                          <Icon
+                            src={item.iconPath}
+                            fallback={catchEmojiFallbacks[item.name] || '🎁'}
+                            alt={item.name}
+                            size={32}
+                          />
                         </div>
                         <div className="min-w-0">
                           <div className="font-black">{item.name}</div>
@@ -269,7 +262,11 @@ export function ShopPage() {
                       </div>
                       <button
                         className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
-                        onClick={() => listItem(item.id)}
+                        onClick={() => {
+                          triggerHaptic('light');
+                          listItem(item.id);
+                        }}
+                        onMouseDown={() => triggerHaptic('light')}
                       >
                         На рынок
                       </button>

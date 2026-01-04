@@ -1,5 +1,5 @@
 import { Header } from '../components/Header';
-import { VideoBackground } from '../components/VideoBackground';
+import { LakeBackground } from '../components/LakeBackground';
 import { Copy, Check, ArrowDownCircle, ArrowUpCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useGameStore } from '../store/gameStore';
@@ -85,7 +85,7 @@ export function WalletPage() {
 
   return (
     <div className="relative h-full w-full">
-      <VideoBackground opacity={0.18} />
+      <LakeBackground opacity={0.18} />
 
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
         <Header />
