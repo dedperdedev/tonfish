@@ -9,9 +9,7 @@ import { triggerHaptic } from '../utils/haptics';
 export function ShopPage() {
   const [tab, setTab] = useState<'shop' | 'inv'>('shop');
   const ownedRods = useGameStore((s) => s.ownedRods);
-  const equippedRodId = useGameStore((s) => s.equippedRodId);
   const inventory = useGameStore((s) => s.inventory);
-  const equipRod = useGameStore((s) => s.equipRod);
   const buyRod = useGameStore((s) => s.buyRod);
   const listItem = useGameStore((s) => s.listItem);
 
