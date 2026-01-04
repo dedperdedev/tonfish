@@ -296,6 +296,38 @@ export const useGameStore = create<GameStore>()(
     }),
     {
       name: STORAGE_KEY,
+      migrate: (persistedState: any) => {
+        // Migrate old friends structure to new 3-level structure
+        if (persistedState && persistedState.friends) {
+          const oldFriends = persistedState.friends;
+          // Check if it's old format (has invited, active, earnedFish directly)
+          if (oldFriends.invited !== undefined && !oldFriends.level1) {
+            // Migrate to new format
+            persistedState.friends = {
+              code: oldFriends.code || generateReferralCode(),
+              level1: {
+                invited: oldFriends.invited || 0,
+                active: oldFriends.active || 0,
+                earnedFish: oldFriends.earnedFish || 0,
+              },
+              level2: {
+                invited: 0,
+                active: 0,
+                earnedFish: 0,
+              },
+              level3: {
+                invited: 0,
+                active: 0,
+                earnedFish: 0,
+              },
+              totalEarnedFish: oldFriends.earnedFish || 0,
+              leaderboard: oldFriends.leaderboard || [],
+            };
+          }
+        }
+        return persistedState as UserState;
+      },
+      version: 1,
     }
   )
 );
