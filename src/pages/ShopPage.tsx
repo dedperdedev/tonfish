@@ -3,6 +3,7 @@ import { useGameStore, rods } from '../store/gameStore';
 import { Hud } from '../components/Hud';
 import { VideoBackground } from '../components/VideoBackground';
 import { formatTon, formatFish } from '../utils/formatters';
+import { getRarityColors } from '../utils/rarity';
 
 const rodIcons: Record<string, string> = {
   stick: '🪵',
@@ -124,7 +125,9 @@ export function ShopPage() {
                       <div className="min-w-0">
                         <h3 className="m-0 text-base font-black tracking-wide">{rod.name}</h3>
                         <div className="mt-0.5 flex gap-2 flex-wrap items-center">
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-gradient-to-br from-sun/55 to-sun2/42 text-[#281600] border border-white/88 text-xs font-black">
+                          <span
+                            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border text-xs font-black ${getRarityColors(rod.rarity).bg} ${getRarityColors(rod.rarity).text} ${getRarityColors(rod.rarity).border}`}
+                          >
                             {rod.rarity}
                           </span>
                           <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
@@ -173,16 +176,14 @@ export function ShopPage() {
                         )}
 
                         <div className="flex gap-2.5 items-center justify-between mt-3">
-                          <button
-                            className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
-                            onClick={() => {
-                              if (!owned) return;
-                              equipRod(rod.id);
-                            }}
-                            disabled={!owned}
-                          >
-                            {equipped ? 'Активна' : owned ? 'Экипировать' : 'Сначала купить'}
-                          </button>
+                          {owned && (
+                            <button
+                              className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
+                              onClick={() => equipRod(rod.id)}
+                            >
+                              {equipped ? 'Активна' : 'Экипировать'}
+                            </button>
+                          )}
                           <button
                             className="game-button w-auto min-w-[140px] px-3.5 py-3 text-sm"
                             onClick={() => handleBuy(rod.id)}
@@ -217,11 +218,18 @@ export function ShopPage() {
                           </div>
                           <div className="min-w-0">
                             <div className="font-black">{rod.name}</div>
-                            <div className="text-xs font-extrabold text-muted leading-[1.35] mt-0.5">
-                              {rod.rarity} •{' '}
-                              {rod.currency === 'TON'
-                                ? `${rod.minStake}–${rod.maxStake} TON`
-                                : `${rod.priceFish} FISH`}
+                            <div className="text-xs font-extrabold text-muted leading-[1.35] mt-0.5 flex items-center gap-1.5">
+                              <span
+                                className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full border text-[10px] font-black ${getRarityColors(rod.rarity).bg} ${getRarityColors(rod.rarity).text} ${getRarityColors(rod.rarity).border}`}
+                              >
+                                {rod.rarity}
+                              </span>
+                              <span>•</span>
+                              <span>
+                                {rod.currency === 'TON'
+                                  ? `${rod.minStake}–${rod.maxStake} TON`
+                                  : `${rod.priceFish} FISH`}
+                              </span>
                             </div>
                           </div>
                         </div>

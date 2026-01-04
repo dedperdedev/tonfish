@@ -1,11 +1,12 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Waves, ShoppingBag, Store, CheckSquare, Users } from 'lucide-react';
 
 const tabs = [
-  { id: 'lake', label: 'Озеро', icon: '🏞️', path: '/lake' },
-  { id: 'shop', label: 'Магазин', icon: '🛍️', path: '/shop' },
-  { id: 'market', label: 'Рынок', icon: '🏪', path: '/market' },
-  { id: 'tasks', label: 'Таски', icon: '✅', path: '/tasks' },
-  { id: 'friends', label: 'Друзья', icon: '👥', path: '/friends' },
+  { id: 'lake', label: 'Озеро', Icon: Waves, path: '/lake' },
+  { id: 'shop', label: 'Магазин', Icon: ShoppingBag, path: '/shop' },
+  { id: 'market', label: 'Рынок', Icon: Store, path: '/market' },
+  { id: 'tasks', label: 'Таски', Icon: CheckSquare, path: '/tasks' },
+  { id: 'friends', label: 'Друзья', Icon: Users, path: '/friends' },
 ];
 
 export function BottomTabs() {
@@ -16,6 +17,7 @@ export function BottomTabs() {
     <nav className="absolute left-3.5 right-3.5 bottom-[calc(var(--safe-bottom)+12px)] z-[6] h-16 rounded-[26px] grid grid-cols-5 gap-1.5 p-2 glass-card shadow-game">
       {tabs.map((tab) => {
         const isActive = location.pathname === tab.path || (tab.path === '/lake' && location.pathname === '/');
+        const Icon = tab.Icon;
         return (
           <button
             key={tab.id}
@@ -33,7 +35,7 @@ export function BottomTabs() {
                   : ''
               }`}
             >
-              {tab.icon}
+              <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
             </span>
             <span className="font-black text-[11px]">{tab.label}</span>
           </button>
