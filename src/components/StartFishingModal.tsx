@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useGameStore, rods } from '../store/gameStore';
 import { formatTon } from '../utils/formatters';
+import { getRarityColors } from '../utils/rarity';
 
 interface StartFishingModalProps {
   rodId: string;
@@ -68,7 +69,9 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
               <div className="flex-1 min-w-0">
                 <h3 className="m-0 text-base font-black tracking-wide">{rod.name}</h3>
                 <div className="mt-0.5 flex gap-2 flex-wrap items-center">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-gradient-to-br from-sun/55 to-sun2/42 text-[#281600] border border-white/88 text-xs font-black">
+                  <span
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border text-xs font-black ${getRarityColors(rod.rarity).bg} ${getRarityColors(rod.rarity).text} ${getRarityColors(rod.rarity).border}`}
+                  >
                     {rod.rarity}
                   </span>
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">

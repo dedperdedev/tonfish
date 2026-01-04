@@ -38,18 +38,23 @@ function getEmoji(name: string): string {
 export function CatchModal({ catchResult, onClose }: CatchModalProps) {
   const navigate = useNavigate();
   const addToInventory = useGameStore((s) => s.addToInventory);
-  const listItem = useGameStore((s) => s.listItem);
 
   if (!catchResult) return null;
 
   const handleSell = () => {
-    addToInventory(catchResult);
-    listItem(catchResult.id);
+    // Add directly to market.listed (bypass inventory)
+    useGameStore.setState((state) => ({
+      market: {
+        ...state.market,
+        listed: [...state.market.listed, { ...catchResult, status: 'in_inventory' as const }],
+      },
+    }));
     navigate('/market');
     onClose();
   };
 
   const handleKeep = () => {
+    // Just add to inventory
     addToInventory(catchResult);
     navigate('/shop');
     onClose();
