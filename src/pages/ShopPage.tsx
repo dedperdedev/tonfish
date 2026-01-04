@@ -96,14 +96,14 @@ export function ShopPage() {
                 return (
                   <div 
                     key={rod.id} 
-                    className="game-card relative overflow-visible"
+                    className="game-card relative overflow-hidden"
                     style={{
                       background: `linear-gradient(to right, ${rarityTint} 0%, transparent 8%)`,
                     }}
                   >
                     {/* Rarity accent line */}
                     <div
-                      className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl"
+                      className="absolute left-0 top-0 bottom-0 w-1"
                       style={{
                         background: rarityLineColor,
                       }}
