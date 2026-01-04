@@ -5,24 +5,11 @@ import { useState, useEffect } from 'react';
 export function Hud() {
   const balances = useGameStore((s) => s.balances);
   const devAddResources = useGameStore((s) => s.devAddResources);
-  const [time, setTime] = useState('');
   const [weather] = useState(() => {
     const weathers = ['☀️', '🌤️', '⛅', '🌦️'];
     return weathers[Math.floor(Math.random() * weathers.length)];
   });
   const [tapCount, setTapCount] = useState(0);
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      setTime(`${hours}:${minutes}`);
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleBalanceClick = () => {
     const newCount = tapCount + 1;
@@ -53,14 +40,8 @@ export function Hud() {
           <b className="font-black tracking-wide">{formatFish(balances.fish)}</b>
         </div>
       </div>
-      <div className="glass-card rounded-xl shadow-game p-3 max-w-[230px] grid gap-1.5">
-        <div className="flex justify-between items-center font-black tracking-wide text-sm">
-          <span>{time}</span>
-          <span>{weather}</span>
-        </div>
-        <div className="text-muted font-extrabold text-[13px] leading-tight">
-          Сцена озера. Всё остальное неважно.
-        </div>
+      <div className="glass-card rounded-xl shadow-game p-3 w-[54px] h-[54px] grid place-items-center">
+        <span className="text-2xl">{weather}</span>
       </div>
     </div>
   );
