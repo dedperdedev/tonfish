@@ -21,11 +21,11 @@ export function MarketPage() {
         <Header />
         
         <div className="relative z-[3] flex justify-center mb-2.5">
-          <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white/62 border border-white/86 shadow-game-sm backdrop-blur-[12px]">
+          <div className="inline-flex gap-1.5 p-1.5 rounded-2xl glass-card">
             <button
-              className={`border-0 rounded-full px-3 py-2.5 font-black bg-transparent cursor-pointer transition-all ${
+              className={`border-0 rounded-2xl px-3 py-2.5 font-bold bg-transparent cursor-pointer transition-all ${
                 tab === 'sell'
-                  ? 'bg-gradient-to-br from-sun/55 to-sun2/45 text-[#281600] shadow-[0_10px_22px_rgba(255,156,30,.22)]'
+                  ? 'bg-white/40 text-ink'
                   : 'text-muted'
               }`}
               onClick={() => setTab('sell')}
@@ -33,9 +33,9 @@ export function MarketPage() {
               Продать
             </button>
             <button
-              className={`border-0 rounded-full px-3 py-2.5 font-black bg-transparent cursor-pointer transition-all ${
+              className={`border-0 rounded-2xl px-3 py-2.5 font-bold bg-transparent cursor-pointer transition-all ${
                 tab === 'hist'
-                  ? 'bg-gradient-to-br from-sun/55 to-sun2/45 text-[#281600] shadow-[0_10px_22px_rgba(255,156,30,.22)]'
+                  ? 'bg-white/40 text-ink'
                   : 'text-muted'
               }`}
               onClick={() => setTab('hist')}
@@ -125,7 +125,7 @@ export function MarketPage() {
                             </div>
                           </div>
                         </div>
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full glass-surface text-xs font-bold text-muted">
                           продано
                         </span>
                       </div>

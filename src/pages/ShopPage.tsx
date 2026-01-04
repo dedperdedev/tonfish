@@ -40,11 +40,11 @@ export function ShopPage() {
 
         <div className="relative z-[2] flex-1 overflow-auto pb-24 -webkit-overflow-scrolling-touch">
           <div className="flex justify-center mb-2.5">
-            <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white/62 border border-white/86 shadow-game-sm backdrop-blur-[12px]">
+            <div className="inline-flex gap-1.5 p-1.5 rounded-2xl glass-card">
               <button
-                className={`border-0 rounded-full px-3 py-2.5 font-black bg-transparent cursor-pointer transition-all ${
+                className={`border-0 rounded-2xl px-3 py-2.5 font-bold bg-transparent cursor-pointer transition-all ${
                   tab === 'shop'
-                    ? 'bg-gradient-to-br from-sun/55 to-sun2/45 text-[#281600] shadow-[0_10px_22px_rgba(255,156,30,.22)]'
+                    ? 'bg-white/40 text-ink'
                     : 'text-muted'
                 }`}
                 onClick={() => setTab('shop')}
@@ -52,9 +52,9 @@ export function ShopPage() {
                 Магазин
               </button>
               <button
-                className={`border-0 rounded-full px-3 py-2.5 font-black bg-transparent cursor-pointer transition-all ${
+                className={`border-0 rounded-2xl px-3 py-2.5 font-bold bg-transparent cursor-pointer transition-all ${
                   tab === 'inv'
-                    ? 'bg-gradient-to-br from-sun/55 to-sun2/45 text-[#281600] shadow-[0_10px_22px_rgba(255,156,30,.22)]'
+                    ? 'bg-white/40 text-ink'
                     : 'text-muted'
                 }`}
                 onClick={() => setTab('inv')}
