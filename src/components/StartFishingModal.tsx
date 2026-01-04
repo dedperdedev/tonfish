@@ -26,21 +26,18 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
   if (!rod) return null;
 
   const isOwned = ownedRods.includes(rodId);
-  const defaultStake =
-    rod.currency === 'TON'
-      ? Math.max(rod.minStake, Math.min(rod.maxStake, rod.minStake + (rod.maxStake - rod.minStake) * 0.55))
-      : rod.priceFish || rod.minStake;
 
-  const [stakeAmount, setStakeAmount] = useState(defaultStake);
+  const [stakeAmount, setStakeAmount] = useState<number | ''>('');
 
+  const currentStake = stakeAmount === '' ? rod.minStake : stakeAmount;
   const canAfford =
     rod.currency === 'TON'
-      ? balances.ton >= stakeAmount
+      ? balances.ton >= currentStake
       : balances.fish >= (rod.priceFish || rod.minStake);
 
   const handleStart = () => {
     if (!canAfford && !isOwned) return;
-    onStart(rod.currency === 'TON' ? stakeAmount : (rod.priceFish || rod.minStake));
+    onStart(rod.currency === 'TON' ? currentStake : (rod.priceFish || rod.minStake));
   };
 
   return (
@@ -90,7 +87,7 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
                 {rod.currency === 'TON' && (
                   <div className="mt-2.5 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85">
                     <div className="flex justify-between items-center font-black text-xs text-muted mb-2.5">
-                      <span>Сумма</span>
+                      <span>Введи сумму покупки</span>
                       <span className="text-xs text-muted">
                         {rod.minStake}–{rod.maxStake} TON
                       </span>
@@ -102,12 +99,16 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
                       step={rod.minStake < 1 ? 0.1 : 1}
                       value={stakeAmount}
                       onChange={(e) => {
-                        const value = parseFloat(e.target.value) || rod.minStake;
-                        const clamped = Math.max(rod.minStake, Math.min(rod.maxStake, value));
-                        setStakeAmount(clamped);
+                        const value = e.target.value === '' ? '' : parseFloat(e.target.value);
+                        if (value !== '') {
+                          const clamped = Math.max(rod.minStake, Math.min(rod.maxStake, value));
+                          setStakeAmount(clamped);
+                        } else {
+                          setStakeAmount('');
+                        }
                       }}
-                      className="w-full px-3 py-2.5 rounded-[14px] bg-white/80 border border-white/90 font-black text-ink text-base focus:outline-none focus:ring-2 focus:ring-sun/50"
-                      placeholder="Введи сумму покупки"
+                      className="w-full px-3 py-2.5 rounded-[14px] bg-white/80 border border-white/90 font-black text-ink text-base focus:outline-none focus:ring-2 focus:ring-sun/50 placeholder:text-muted"
+                      placeholder={`${rod.minStake}–${rod.maxStake} TON`}
                     />
                   </div>
                 )}

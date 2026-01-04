@@ -59,8 +59,7 @@ export function ShopPage() {
 
     const stake =
       rod.currency === 'TON'
-        ? stakeAmounts[rodId] ||
-          Math.max(rod.minStake, Math.min(rod.maxStake, rod.minStake + (rod.maxStake - rod.minStake) * 0.55))
+        ? stakeAmounts[rodId] || rod.minStake
         : rod.priceFish || rod.minStake;
 
     if (buyRod(rodId, stake)) {
@@ -108,11 +107,6 @@ export function ShopPage() {
               {rods.map((rod) => {
                 const owned = ownedRods.includes(rod.id);
                 const equipped = equippedRodId === rod.id;
-                const stake =
-                  stakeAmounts[rod.id] ||
-                  (rod.currency === 'TON'
-                    ? Math.max(rod.minStake, Math.min(rod.maxStake, rod.minStake + (rod.maxStake - rod.minStake) * 0.55))
-                    : rod.priceFish || rod.minStake);
 
                 return (
                   <div key={rod.id} className="game-card">
@@ -145,7 +139,7 @@ export function ShopPage() {
                         {rod.currency === 'TON' ? (
                           <div className="mt-2.5 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85">
                             <div className="flex justify-between items-center font-black text-xs text-muted mb-2.5">
-                              <span>Сумма</span>
+                              <span>Введи сумму покупки</span>
                               <span className="text-xs text-muted">
                                 {rod.minStake}–{rod.maxStake} TON
                               </span>
@@ -155,14 +149,20 @@ export function ShopPage() {
                               min={rod.minStake}
                               max={rod.maxStake}
                               step={rod.minStake < 1 ? 0.1 : 1}
-                              value={stake}
+                              value={stakeAmounts[rod.id] || ''}
                               onChange={(e) => {
-                                const value = parseFloat(e.target.value) || rod.minStake;
-                                const clamped = Math.max(rod.minStake, Math.min(rod.maxStake, value));
-                                setStakeAmounts({ ...stakeAmounts, [rod.id]: clamped });
+                                const value = e.target.value === '' ? undefined : parseFloat(e.target.value);
+                                if (value !== undefined) {
+                                  const clamped = Math.max(rod.minStake, Math.min(rod.maxStake, value));
+                                  setStakeAmounts({ ...stakeAmounts, [rod.id]: clamped });
+                                } else {
+                                  const newAmounts = { ...stakeAmounts };
+                                  delete newAmounts[rod.id];
+                                  setStakeAmounts(newAmounts);
+                                }
                               }}
-                              className="w-full px-3 py-2.5 rounded-[14px] bg-white/80 border border-white/90 font-black text-ink text-base focus:outline-none focus:ring-2 focus:ring-sun/50"
-                              placeholder="Введи сумму покупки"
+                              className="w-full px-3 py-2.5 rounded-[14px] bg-white/80 border border-white/90 font-black text-ink text-base focus:outline-none focus:ring-2 focus:ring-sun/50 placeholder:text-muted"
+                              placeholder={`${rod.minStake}–${rod.maxStake} TON`}
                             />
                           </div>
                         ) : (
