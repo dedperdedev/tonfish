@@ -1,6 +1,6 @@
-# Rybalka — Telegram Mini App
+# Ton Fish — Fishing Game
 
-Современная игра-рыбалка для Telegram Mini Apps с полным игровым циклом.
+Современная игра-рыбалка для Telegram Mini Apps с полным игровым циклом. Зарабатывайте TON и FISH, ловите рыбу и развивайте свою коллекцию удочек!
 
 ## Технологии
 
