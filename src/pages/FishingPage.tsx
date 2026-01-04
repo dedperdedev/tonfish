@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGameStore, rods } from '../store/gameStore';
 import { Header } from '../components/Header';
 import { FloatBobber } from '../components/FloatBobber';
+import { CatchModal } from '../components/CatchModal';
 import { VideoBackground } from '../components/VideoBackground';
 import { formatTime, getProgress } from '../utils/session';
 import { formatTon, formatFish } from '../utils/formatters';
@@ -16,6 +17,8 @@ export function FishingPage() {
   const fastForwardSession = useGameStore((s) => s.fastForwardSession);
   const [timeRemaining, setTimeRemaining] = useState('--:--:--');
   const [progress, setProgress] = useState(0);
+  const [showCatchModal, setShowCatchModal] = useState(false);
+  const [catchResult, setCatchResult] = useState<any>(null);
 
   useEffect(() => {
     if (!session) return;
@@ -65,7 +68,8 @@ export function FishingPage() {
     if (session.status === 'ready') {
       const result = claimCatch();
       if (result) {
-        navigate('/lake');
+        setCatchResult(result);
+        setShowCatchModal(true);
       }
     } else {
       navigate('/lake');
@@ -171,6 +175,14 @@ export function FishingPage() {
           </div>
         </div>
       </div>
+
+      {/* Catch Modal */}
+      {showCatchModal && (
+        <CatchModal catchResult={catchResult} onClose={() => {
+          setShowCatchModal(false);
+          navigate('/lake');
+        }} />
+      )}
     </div>
   );
 }
