@@ -232,13 +232,15 @@ export function ShopPage() {
                 })}
               </div>
 
-              <div className="game-card mt-2.5">
-                <div className="font-black">Мои предметы</div>
-                <div className="text-xs font-extrabold text-muted leading-[1.35] mt-2">
-                  {inventory.length === 0 ? 'Пока пусто.' : ''}
+              {inventory.length === 0 ? (
+                <div className="game-card mt-2.5">
+                  <div className="font-black">Мои предметы</div>
+                  <div className="text-xs font-extrabold text-muted leading-[1.35] mt-2">
+                    Пока пусто.
+                  </div>
                 </div>
-              </div>
-              <div className="grid gap-2.5 mt-2.5">
+              ) : (
+                <div className="grid gap-2.5 mt-2.5">
                 {inventory.map((item) => (
                   <div key={item.id} className="game-card">
                     <div className="flex justify-between items-center gap-2.5">
