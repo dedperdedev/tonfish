@@ -69,7 +69,6 @@ export function ShopPage() {
             <div className="grid gap-2.5">
               {rods.map((rod) => {
                 const owned = ownedRods.includes(rod.id);
-                const equipped = equippedRodId === rod.id;
 
                 const rarityColors = getRarityColors(rod.rarity);
                 // Get rarity tint color for background (5-8% opacity)
@@ -177,19 +176,7 @@ export function ShopPage() {
                           </div>
                         )}
 
-                        <div className="flex gap-2.5 items-center justify-between">
-                          {owned && (
-                            <button
-                              className="px-3.5 py-2.5 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-semibold cursor-pointer text-sm transition-transform hover:scale-[1.02] active:scale-[0.98]"
-                              onClick={() => {
-                                triggerHaptic('light');
-                                equipRod(rod.id);
-                              }}
-                              onMouseDown={() => triggerHaptic('light')}
-                            >
-                              {equipped ? 'Активна' : 'Экипировать'}
-                            </button>
-                          )}
+                        <div className="flex gap-2.5 items-center justify-end">
                           <button
                             className="game-button w-auto min-w-[160px] px-3.5 py-2.5 text-sm font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]"
                             onClick={() => {
