@@ -55,9 +55,12 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
             <div className="flex gap-3 items-start">
               <div className="w-[54px] h-[54px] rounded-2xl glass-surface grid place-items-center relative overflow-hidden flex-shrink-0">
                 <img
-                  src={rod.icon}
+                  src={import.meta.env.DEV ? rod.icon : `${import.meta.env.BASE_URL}${rod.icon.replace(/^\//, '')}`}
                   alt={rod.name}
                   style={{ width: 32, height: 32, objectFit: 'contain' }}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
                 />
               </div>
               <div className="flex-1 min-w-0">

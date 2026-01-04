@@ -43,9 +43,12 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
         <div className="mx-4 my-4 rounded-2xl glass-surface h-[180px] min-h-[180px] grid place-items-center relative overflow-hidden flex-shrink-0">
           <div className="z-[2] flex items-center justify-center w-full h-full">
             <img
-              src={catchResult.icon}
+              src={import.meta.env.DEV ? catchResult.icon : `${import.meta.env.BASE_URL}${catchResult.icon.replace(/^\//, '')}`}
               alt={catchResult.name}
               style={{ width: 160, height: 160, objectFit: 'contain' }}
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
             />
           </div>
         </div>

@@ -62,9 +62,12 @@ export function MarketPage() {
                       <div className="flex gap-2.5 items-center min-w-0">
                         <div className="w-[46px] h-[46px] rounded-2xl glass-surface grid place-items-center">
                           <img
-                            src={item.icon}
+                            src={import.meta.env.DEV ? item.icon : `${import.meta.env.BASE_URL}${item.icon.replace(/^\//, '')}`}
                             alt={item.name}
                             style={{ width: 32, height: 32, objectFit: 'contain' }}
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).style.display = 'none';
+                            }}
                           />
                         </div>
                         <div className="min-w-0">
