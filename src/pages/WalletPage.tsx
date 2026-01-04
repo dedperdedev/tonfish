@@ -102,8 +102,11 @@ export function WalletPage() {
             </div>
           </div>
 
+          <button className="game-button text-sm py-3.5 px-3.5 min-h-[48px] mb-2.5">
+            Подключение кошелька
+          </button>
+
           <div className="game-card mb-2.5">
-            <div className="font-black mb-2.5">Адрес кошелька</div>
             <div className="flex items-center gap-2.5">
               <div className="flex-1 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85 font-mono text-sm font-black text-ink break-all">
                 {walletAddress}
