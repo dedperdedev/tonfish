@@ -72,7 +72,7 @@ export function ShopPage() {
       <div
         className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-25"
         style={{
-          backgroundImage: 'url(/lake_bg.jpg)',
+          backgroundImage: `url(${import.meta.env.BASE_URL}lake_bg.jpg)`,
           filter: 'saturate(1.02) contrast(1)',
         }}
       />

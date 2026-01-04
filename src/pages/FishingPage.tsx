@@ -40,7 +40,7 @@ export function FishingPage() {
       <div className="relative h-full w-full">
         <div
           className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/lake_bg.jpg)' }}
+          style={{ backgroundImage: `url(${import.meta.env.BASE_URL}lake_bg.jpg)` }}
         />
         <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
           <Hud />
@@ -80,7 +80,7 @@ export function FishingPage() {
       <div
         className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url(/lake_bg.jpg)',
+          backgroundImage: `url(${import.meta.env.BASE_URL}lake_bg.jpg)`,
           transform: 'scale(1.02)',
           filter: 'saturate(1.04) contrast(1.02)',
         }}
