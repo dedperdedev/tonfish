@@ -82,30 +82,30 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
           </div>
         </div>
         <div className="px-4.5 pb-4.5 grid gap-2.5 overflow-y-auto flex-1 min-h-0">
-          <div className="flex items-baseline justify-between gap-2.5 px-3.5 py-3 rounded-[18px] glass-card flex-shrink-0">
+          <div className="flex items-start justify-between gap-3 px-3.5 py-3 rounded-[18px] glass-card flex-shrink-0">
             <div className="min-w-0 flex-1">
-              <div className="text-lg font-black break-words">{catchResult.name}</div>
-              <div className="text-xs font-black text-muted mt-0.5">
+              <div className="text-lg font-black break-words leading-tight">{catchResult.name}</div>
+              <div className="text-xs font-black text-muted mt-1">
                 {catchResult.type === 'fish' ? 'Рыба' : 'Барахло'}
               </div>
             </div>
-            <div className="text-right flex-shrink-0">
-              <div className="text-lg font-black whitespace-nowrap">
-                {catchResult.payoutTon > 0
-                  ? `${formatTon(catchResult.payoutTon)} TON`
-                  : '—'}
-              </div>
-              <div className="text-xs font-black text-muted whitespace-nowrap">
+            <div className="text-right flex-shrink-0 ml-2">
+              {catchResult.payoutTon > 0 && (
+                <div className="text-lg font-black whitespace-nowrap mb-1">
+                  {formatTon(catchResult.payoutTon)} TON
+                </div>
+              )}
+              <div className="text-sm font-black text-muted whitespace-nowrap">
                 ≈ {formatFish(catchResult.payoutFish)} FISH
               </div>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-2.5 flex-shrink-0">
-            <button className="game-button text-sm py-3.5 px-3.5" onClick={handleSell}>
+            <button className="game-button text-sm py-3.5 px-3.5 min-h-[48px]" onClick={handleSell}>
               Продать
             </button>
             <button
-              className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm"
+              className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm min-h-[48px]"
               onClick={handleKeep}
             >
               Оставить
