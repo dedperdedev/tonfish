@@ -263,7 +263,7 @@ export function ShopPage() {
                         </div>
                       </div>
                       <button
-                        className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
+                        className="glass-button px-4 py-2.5 rounded-2xl font-bold cursor-pointer text-sm"
                         onClick={() => {
                           triggerHaptic('light');
                           listItem(item.id);
@@ -275,7 +275,8 @@ export function ShopPage() {
                     </div>
                   </div>
                 ))}
-              </div>
+                </div>
+              )}
             </>
           )}
         </div>
