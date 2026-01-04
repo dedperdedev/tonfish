@@ -43,28 +43,6 @@ export const rodEmojiFallbacks: Record<string, string> = {
   boom: '💥',
 };
 
-export const catchEmojiFallbacks: Record<string, string> = {
-  Головастик: '🐸',
-  Лягушка: '🐸',
-  Бычок: '🐟',
-  Карась: '🐟',
-  Окунь: '🐟',
-  Щука: '🐟',
-  Судак: '🐟',
-  Карп: '🐟',
-  Амур: '🐟',
-  Акула: '🦈',
-  'Консервная банка': '🥫',
-  Сапог: '👢',
-  'Старая блесна': '🪝',
-  'Ржавая цепь': '⛓️',
-  Тина: '🪸',
-  Ил: '🟫',
-  Пакет: '🛍️',
-  'Якорь-брелок': '⚓',
-  Сундук: '🧰',
-  Кость: '🦴',
-};
 
 export const taskEmojiFallbacks: Record<string, string> = {
   daily: '📅',

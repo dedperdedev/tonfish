@@ -17,7 +17,7 @@ export interface LootTableEntry {
   type: 'fish' | 'junk';
   weight: number;
   payoutMulRange: [number, number];
-  iconPath?: string;
+  icon: string;
 }
 
 export interface FishingSession {
@@ -41,7 +41,7 @@ export interface CatchResult {
   createdAt: number;
   soldAt?: number;
   status?: 'in_modal' | 'in_inventory' | 'sold';
-  iconPath?: string;
+  icon: string;
 }
 
 export interface Task {

@@ -1,37 +1,37 @@
 {
   "stick": [
-    { "itemId": "tadpole", "name": "Головастик", "type": "fish", "weight": 75, "payoutMulRange": [0.8, 1.2] },
-    { "itemId": "mud", "name": "Ил", "type": "junk", "weight": 25, "payoutMulRange": [0.2, 0.6] }
+    { "itemId": "tadpole", "name": "Головастик", "type": "fish", "weight": 75, "payoutMulRange": [0.8, 1.2], "icon": "/icons/01_golovastik.png" },
+    { "itemId": "mud", "name": "Ил", "type": "junk", "weight": 25, "payoutMulRange": [0.2, 0.6], "icon": "/icons/01_golovastik.png" }
   ],
   "reed": [
-    { "itemId": "frog", "name": "Лягушка", "type": "fish", "weight": 55, "payoutMulRange": [0.9, 1.25] },
-    { "itemId": "goby", "name": "Бычок", "type": "fish", "weight": 35, "payoutMulRange": [0.95, 1.3] },
-    { "itemId": "algae", "name": "Тина", "type": "junk", "weight": 10, "payoutMulRange": [0.2, 0.6] }
+    { "itemId": "frog", "name": "Лягушка", "type": "fish", "weight": 55, "payoutMulRange": [0.9, 1.25], "icon": "/icons/02_lyagushka.png" },
+    { "itemId": "goby", "name": "Бычок", "type": "fish", "weight": 35, "payoutMulRange": [0.95, 1.3], "icon": "/icons/03_bychok.png" },
+    { "itemId": "algae", "name": "Тина", "type": "junk", "weight": 10, "payoutMulRange": [0.2, 0.6], "icon": "/icons/01_golovastik.png" }
   ],
   "bamboo": [
-    { "itemId": "crucian", "name": "Карась", "type": "fish", "weight": 55, "payoutMulRange": [0.9, 1.25] },
-    { "itemId": "can", "name": "Консервная банка", "type": "junk", "weight": 30, "payoutMulRange": [0.25, 0.75] },
-    { "itemId": "bag", "name": "Пакет", "type": "junk", "weight": 15, "payoutMulRange": [0.2, 0.7] }
+    { "itemId": "crucian", "name": "Карась", "type": "fish", "weight": 55, "payoutMulRange": [0.9, 1.25], "icon": "/icons/05_karas.png" },
+    { "itemId": "can", "name": "Консервная банка", "type": "junk", "weight": 30, "payoutMulRange": [0.25, 0.75], "icon": "/icons/04_banka.png" },
+    { "itemId": "bag", "name": "Пакет", "type": "junk", "weight": 15, "payoutMulRange": [0.2, 0.7], "icon": "/icons/04_banka.png" }
   ],
   "telescopic": [
-    { "itemId": "perch", "name": "Окунь", "type": "fish", "weight": 60, "payoutMulRange": [0.95, 1.3] },
-    { "itemId": "boot", "name": "Сапог", "type": "junk", "weight": 30, "payoutMulRange": [0.25, 0.8] },
-    { "itemId": "lure", "name": "Старая блесна", "type": "junk", "weight": 10, "payoutMulRange": [0.35, 0.95] }
+    { "itemId": "perch", "name": "Окунь", "type": "fish", "weight": 60, "payoutMulRange": [0.95, 1.3], "icon": "/icons/07_okun.png" },
+    { "itemId": "boot", "name": "Сапог", "type": "junk", "weight": 30, "payoutMulRange": [0.25, 0.8], "icon": "/icons/06_sapog.png" },
+    { "itemId": "lure", "name": "Старая блесна", "type": "junk", "weight": 10, "payoutMulRange": [0.35, 0.95], "icon": "/icons/04_banka.png" }
   ],
   "spinning": [
-    { "itemId": "pike", "name": "Щука", "type": "fish", "weight": 55, "payoutMulRange": [1.0, 1.35] },
-    { "itemId": "zander", "name": "Судак", "type": "fish", "weight": 35, "payoutMulRange": [1.0, 1.4] },
-    { "itemId": "chain", "name": "Ржавая цепь", "type": "junk", "weight": 10, "payoutMulRange": [0.35, 0.95] }
+    { "itemId": "pike", "name": "Щука", "type": "fish", "weight": 55, "payoutMulRange": [1.0, 1.35], "icon": "/icons/09_shchuka.png" },
+    { "itemId": "zander", "name": "Судак", "type": "fish", "weight": 35, "payoutMulRange": [1.0, 1.4], "icon": "/icons/07_okun.png" },
+    { "itemId": "chain", "name": "Ржавая цепь", "type": "junk", "weight": 10, "payoutMulRange": [0.35, 0.95], "icon": "/icons/04_banka.png" }
   ],
   "feeder": [
-    { "itemId": "carp", "name": "Карп", "type": "fish", "weight": 55, "payoutMulRange": [1.0, 1.4] },
-    { "itemId": "amur", "name": "Амур", "type": "fish", "weight": 35, "payoutMulRange": [1.0, 1.45] },
-    { "itemId": "anchor", "name": "Якорь-брелок", "type": "junk", "weight": 10, "payoutMulRange": [0.45, 1.05] }
+    { "itemId": "carp", "name": "Карп", "type": "fish", "weight": 55, "payoutMulRange": [1.0, 1.4], "icon": "/icons/08_karp.png" },
+    { "itemId": "amur", "name": "Амур", "type": "fish", "weight": 35, "payoutMulRange": [1.0, 1.45], "icon": "/icons/10_amur.png" },
+    { "itemId": "anchor", "name": "Якорь-брелок", "type": "junk", "weight": 10, "payoutMulRange": [0.45, 1.05], "icon": "/icons/04_banka.png" }
   ],
   "boom": [
-    { "itemId": "shark", "name": "Акула", "type": "fish", "weight": 75, "payoutMulRange": [1.0, 1.55] },
-    { "itemId": "chest", "name": "Сундук", "type": "junk", "weight": 20, "payoutMulRange": [0.8, 1.2] },
-    { "itemId": "bone", "name": "Кость", "type": "junk", "weight": 5, "payoutMulRange": [0.5, 1.1] }
+    { "itemId": "shark", "name": "Акула", "type": "fish", "weight": 75, "payoutMulRange": [1.0, 1.55], "icon": "/icons/12_akula.png" },
+    { "itemId": "chest", "name": "Сундук", "type": "junk", "weight": 20, "payoutMulRange": [0.8, 1.2], "icon": "/icons/04_banka.png" },
+    { "itemId": "bone", "name": "Кость", "type": "junk", "weight": 5, "payoutMulRange": [0.5, 1.1], "icon": "/icons/04_banka.png" }
   ]
 }
 

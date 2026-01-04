@@ -3,7 +3,6 @@ import { useGameStore } from '../store/gameStore';
 import { Header } from '../components/Header';
 import { LakeBackground } from '../components/LakeBackground';
 import { formatTon, formatFish } from '../utils/formatters';
-import { Icon, catchEmojiFallbacks } from '../utils/icons';
 import { triggerHaptic } from '../utils/haptics';
 
 export function MarketPage() {
@@ -62,11 +61,10 @@ export function MarketPage() {
                     <div className="flex justify-between items-center gap-2.5">
                       <div className="flex gap-2.5 items-center min-w-0">
                         <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
-                          <Icon
-                            src={item.iconPath}
-                            fallback={catchEmojiFallbacks[item.name] || '🎁'}
+                          <img
+                            src={item.icon}
                             alt={item.name}
-                            size={32}
+                            style={{ width: 32, height: 32, objectFit: 'contain' }}
                           />
                         </div>
                         <div className="min-w-0">
@@ -111,12 +109,11 @@ export function MarketPage() {
                       <div className="flex justify-between items-center gap-2.5">
                         <div className="flex gap-2.5 items-center min-w-0">
                           <div className="w-[46px] h-[46px] rounded-2xl bg-gradient-to-br from-aqua/30 to-aqua2/20 border border-white/84 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] grid place-items-center">
-                            <Icon
-                            src={item.iconPath}
-                            fallback={catchEmojiFallbacks[item.name] || '🎁'}
-                            alt={item.name}
-                            size={32}
-                          />
+                            <img
+                              src={item.icon}
+                              alt={item.name}
+                              style={{ width: 32, height: 32, objectFit: 'contain' }}
+                            />
                           </div>
                           <div className="min-w-0">
                             <div className="font-black">{item.name}</div>
