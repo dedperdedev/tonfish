@@ -66,41 +66,41 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
       onClick={onClose}
     >
       <div
-        className="w-full max-w-[420px] rounded-[32px] glass-card shadow-[0_28px_80px_rgba(0,30,45,.35)] overflow-hidden animate-pop-in"
+        className="w-full max-w-[420px] max-h-[90vh] rounded-[32px] glass-card shadow-[0_28px_80px_rgba(0,30,45,.35)] overflow-hidden animate-pop-in flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-4.5 pb-0">
+        <div className="p-4.5 pb-0 flex-shrink-0">
           <h2 className="m-0 text-lg font-black font-heading">Улов!</h2>
           <p className="mt-1.5 mb-0 text-muted font-extrabold text-xs">
             Продать или оставить?
           </p>
         </div>
-        <div className="mx-3.5 my-3.5 rounded-2xl bg-gradient-to-b from-aqua/28 to-sun/18 border border-white/90 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] h-[180px] grid place-items-center relative overflow-hidden">
+        <div className="mx-3.5 my-3.5 rounded-2xl bg-gradient-to-b from-aqua/28 to-sun/18 border border-white/90 shadow-[inset_0_0_0_2px_rgba(255,255,255,.55)] h-[180px] min-h-[180px] grid place-items-center relative overflow-hidden flex-shrink-0">
           <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,.75),rgba(255,255,255,0)_60%)] rotate-[18deg]"></div>
           <div className="text-[78px] drop-shadow-[0_14px_18px_rgba(0,0,0,.18)] z-[2] translate-y-1">
             {getEmoji(catchResult.name)}
           </div>
         </div>
-        <div className="px-4.5 pb-4.5 grid gap-2.5">
-          <div className="flex items-baseline justify-between px-3.5 py-3 rounded-[18px] glass-card">
-            <div>
-              <div className="text-lg font-black">{catchResult.name}</div>
-              <div className="text-xs font-black text-muted">
+        <div className="px-4.5 pb-4.5 grid gap-2.5 overflow-y-auto flex-1 min-h-0">
+          <div className="flex items-baseline justify-between gap-2.5 px-3.5 py-3 rounded-[18px] glass-card flex-shrink-0">
+            <div className="min-w-0 flex-1">
+              <div className="text-lg font-black break-words">{catchResult.name}</div>
+              <div className="text-xs font-black text-muted mt-0.5">
                 {catchResult.type === 'fish' ? 'Рыба' : 'Барахло'}
               </div>
             </div>
-            <div className="text-right">
-              <div className="text-lg font-black">
+            <div className="text-right flex-shrink-0">
+              <div className="text-lg font-black whitespace-nowrap">
                 {catchResult.payoutTon > 0
                   ? `${formatTon(catchResult.payoutTon)} TON`
                   : '—'}
               </div>
-              <div className="text-xs font-black text-muted">
+              <div className="text-xs font-black text-muted whitespace-nowrap">
                 ≈ {formatFish(catchResult.payoutFish)} FISH
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-2 gap-2.5 flex-shrink-0">
             <button className="game-button text-sm py-3.5 px-3.5" onClick={handleSell}>
               Продать
             </button>
@@ -112,7 +112,7 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
             </button>
           </div>
           <button
-            className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm"
+            className="w-full px-3.5 py-3.5 rounded-[18px] border border-white/92 bg-white/62 font-black cursor-pointer shadow-game-sm flex-shrink-0"
             onClick={onClose}
           >
             Закрыть
