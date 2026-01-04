@@ -14,15 +14,6 @@ export function TasksPage() {
   const tasks = useGameStore((s) => s.tasks);
   const claimTask = useGameStore((s) => s.claimTask);
 
-  const handleReset = () => {
-    Object.keys(tasks).forEach((key) => {
-      const task = tasks[key];
-      if (task) {
-        task.claimedAt = 0;
-      }
-    });
-  };
-
   return (
     <div className="relative h-full w-full">
       {/* Background video */}
@@ -30,16 +21,7 @@ export function TasksPage() {
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
-        <Header
-          rightContent={
-            <button
-              className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
-              onClick={handleReset}
-            >
-              ↻
-            </button>
-          }
-        />
+        <Header />
 
         <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-24 -webkit-overflow-scrolling-touch">
           <div className="grid gap-2.5">
