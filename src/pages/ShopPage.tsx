@@ -38,7 +38,7 @@ export function ShopPage() {
       <LakeBackground opacity={0.25} />
 
       {/* Screen content */}
-      <div className="absolute inset-0 flex flex-col pr-2 pb-[calc(var(--safe-bottom)+98px)] pl-2 overflow-hidden" style={{ margin: 0, border: 0, paddingTop: '5px' }}>
+      <div className="absolute inset-0 flex flex-col pr-2 pb-[calc(var(--safe-bottom)+0px)] pl-2 overflow-hidden" style={{ margin: 0, border: 0, paddingTop: '5px' }}>
         <Header />
 
         <div className="relative z-[2] flex-1 overflow-auto pb-24 -webkit-overflow-scrolling-touch">
