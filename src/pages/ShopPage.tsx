@@ -232,16 +232,6 @@ export function ShopPage() {
                             </div>
                           </div>
                         </div>
-                        <button
-                          className="px-3.5 py-3 rounded-[18px] border border-white/85 bg-white/58 backdrop-blur-[10px] shadow-game-sm font-black cursor-pointer"
-                          onClick={() => {
-                            triggerHaptic('light');
-                            equipRod(rodId);
-                          }}
-                          onMouseDown={() => triggerHaptic('light')}
-                        >
-                          {equippedRodId === rodId ? 'Активна' : 'Экипировать'}
-                        </button>
                       </div>
                     </div>
                   );
