@@ -1,4 +1,4 @@
-import { useGameStore, rods } from '../store/gameStore';
+import { useGameStore } from '../store/gameStore';
 import { triggerHaptic } from '../utils/haptics';
 
 interface BottomPanelProps {
@@ -6,10 +6,7 @@ interface BottomPanelProps {
 }
 
 export function BottomPanel({ onStartClick }: BottomPanelProps) {
-  const equippedRodId = useGameStore((s) => s.equippedRodId);
   const session = useGameStore((s) => s.getNormalizedSession());
-
-  const equippedRod = equippedRodId ? rods.find((r) => r.id === equippedRodId) : null;
 
   // Кнопка "Закинуть" показывается только когда нет активной сессии
   // Когда сессия активна, кнопка скрыта (таймер показывается в центре)
@@ -28,7 +25,7 @@ export function BottomPanel({ onStartClick }: BottomPanelProps) {
   return (
     <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+84px)] z-[4] transform -translate-x-1/2">
       <button
-        className={`w-[200px] h-[200px] rounded-full glass-card shadow-game grid place-items-center cursor-pointer hover:opacity-90 transition-opacity ${pulse ? 'pulse' : ''}`}
+        className="w-[200px] h-[200px] rounded-full glass-card shadow-game grid place-items-center cursor-pointer hover:opacity-90 transition-opacity"
         onClick={handleClick}
         onMouseDown={() => triggerHaptic('light')}
       >

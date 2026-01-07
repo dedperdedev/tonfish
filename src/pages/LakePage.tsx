@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useGameStore, rods } from '../store/gameStore';
 import { Header } from '../components/Header';
 import { BottomPanel } from '../components/BottomPanel';
