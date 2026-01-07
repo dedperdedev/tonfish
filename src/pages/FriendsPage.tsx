@@ -89,21 +89,21 @@ export function FriendsPage() {
             {/* Уровень 1 */}
             <div className="relative w-full rounded-2xl glass-card overflow-hidden" style={{ background: 'rgba(255, 215, 0, 0.15)' }}>
               <button
-                className="w-full px-5 py-5 flex items-center justify-between cursor-pointer"
+                className="w-full px-6 py-6 flex items-center justify-between cursor-pointer"
                 onClick={() => setExpandedLevel(expandedLevel === 1 ? null : 1)}
               >
-                <div className="flex items-center gap-4 flex-1">
-                  <div className="text-sm font-black text-ink uppercase tracking-wider">1 уровень</div>
-                  <div className="text-[40px] font-black text-ink leading-none">
+                <div className="flex flex-col gap-2 flex-1">
+                  <div className="text-base font-black text-ink uppercase tracking-wider">1 уровень</div>
+                  <div className="text-[48px] font-black text-ink leading-none">
                     {friends.level1.invited}
                   </div>
-                  <div className="text-base font-black text-ink">
+                  <div className="text-lg font-black text-ink">
                     {friends.level1.percentage?.toFixed(2) || '5.00'}%
                   </div>
                 </div>
                 <ChevronDown 
-                  size={24} 
-                  className={`text-ink transition-transform duration-200 ${expandedLevel === 1 ? 'rotate-180' : ''}`}
+                  size={28} 
+                  className={`text-ink transition-transform duration-200 flex-shrink-0 ${expandedLevel === 1 ? 'rotate-180' : ''}`}
                 />
               </button>
               {/* Выплывающий список рефералов */}
@@ -136,21 +136,21 @@ export function FriendsPage() {
             {/* Уровень 2 */}
             <div className="relative w-full rounded-2xl glass-card overflow-hidden" style={{ background: 'rgba(100, 200, 255, 0.15)' }}>
               <button
-                className="w-full px-5 py-5 flex items-center justify-between cursor-pointer"
+                className="w-full px-6 py-6 flex items-center justify-between cursor-pointer"
                 onClick={() => setExpandedLevel(expandedLevel === 2 ? null : 2)}
               >
-                <div className="flex items-center gap-4 flex-1">
-                  <div className="text-sm font-black text-ink uppercase tracking-wider">2 уровень</div>
-                  <div className="text-[40px] font-black text-ink leading-none">
+                <div className="flex flex-col gap-2 flex-1">
+                  <div className="text-base font-black text-ink uppercase tracking-wider">2 уровень</div>
+                  <div className="text-[48px] font-black text-ink leading-none">
                     {friends.level2.invited}
                   </div>
-                  <div className="text-base font-black text-ink">
+                  <div className="text-lg font-black text-ink">
                     {friends.level2.percentage?.toFixed(2) || '3.00'}%
                   </div>
                 </div>
                 <ChevronDown 
-                  size={24} 
-                  className={`text-ink transition-transform duration-200 ${expandedLevel === 2 ? 'rotate-180' : ''}`}
+                  size={28} 
+                  className={`text-ink transition-transform duration-200 flex-shrink-0 ${expandedLevel === 2 ? 'rotate-180' : ''}`}
                 />
               </button>
               {/* Выплывающий список рефералов */}
@@ -183,21 +183,21 @@ export function FriendsPage() {
             {/* Уровень 3 */}
             <div className="relative w-full rounded-2xl glass-card overflow-hidden" style={{ background: 'rgba(200, 150, 255, 0.15)' }}>
               <button
-                className="w-full px-5 py-5 flex items-center justify-between cursor-pointer"
+                className="w-full px-6 py-6 flex items-center justify-between cursor-pointer"
                 onClick={() => setExpandedLevel(expandedLevel === 3 ? null : 3)}
               >
-                <div className="flex items-center gap-4 flex-1">
-                  <div className="text-sm font-black text-ink uppercase tracking-wider">3 уровень</div>
-                  <div className="text-[40px] font-black text-ink leading-none">
+                <div className="flex flex-col gap-2 flex-1">
+                  <div className="text-base font-black text-ink uppercase tracking-wider">3 уровень</div>
+                  <div className="text-[48px] font-black text-ink leading-none">
                     {friends.level3.invited}
                   </div>
-                  <div className="text-base font-black text-ink">
+                  <div className="text-lg font-black text-ink">
                     {friends.level3.percentage?.toFixed(2) || '2.00'}%
                   </div>
                 </div>
                 <ChevronDown 
-                  size={24} 
-                  className={`text-ink transition-transform duration-200 ${expandedLevel === 3 ? 'rotate-180' : ''}`}
+                  size={28} 
+                  className={`text-ink transition-transform duration-200 flex-shrink-0 ${expandedLevel === 3 ? 'rotate-180' : ''}`}
                 />
               </button>
               {/* Выплывающий список рефералов */}
