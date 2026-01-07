@@ -200,6 +200,7 @@ export function LakePage() {
                   </div>
                 </>
               )}
+              </div>
             </div>
           </div>
         )}
