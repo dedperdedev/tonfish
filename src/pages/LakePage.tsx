@@ -89,8 +89,8 @@ export function LakePage() {
       return;
     }
 
-    // Если сессия в другом статусе - показываем модальное окно для начала новой рыбалки
-    console.log('LakePage: Session in unexpected status, showing StartFishingModal');
+    // Если сессия завершена (claimed) или в статусе idle - показываем модальное окно для начала новой рыбалки
+    console.log('LakePage: Session in status:', session.status, '- showing StartFishingModal');
     setShowStartModal(true);
   };
 
