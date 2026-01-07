@@ -79,6 +79,8 @@ export function LakePage() {
     triggerHaptic('light');
     if (!ownedRods.includes(equippedRodId)) {
       buyRod(equippedRodId, stakeAmount);
+      // После покупки запускаем рыбалку
+      startFishing(equippedRodId, stakeAmount);
     } else {
       startFishing(equippedRodId, stakeAmount);
     }

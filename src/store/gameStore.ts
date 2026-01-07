@@ -128,9 +128,6 @@ export const useGameStore = create<GameStore>()(
           };
         });
 
-        // Start session immediately
-        get().startFishing(rodId, stakeAmount);
-
         // Check firstbuy task
         const tasks = get().tasks;
         if (tasks.firstbuy.claimedAt === 0) {
