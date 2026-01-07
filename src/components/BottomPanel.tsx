@@ -3,42 +3,27 @@ import { triggerHaptic } from '../utils/haptics';
 
 interface BottomPanelProps {
   onStartClick: () => void;
-  onOpenFishing: () => void;
 }
 
-export function BottomPanel({ onStartClick, onOpenFishing }: BottomPanelProps) {
+export function BottomPanel({ onStartClick }: BottomPanelProps) {
   const equippedRodId = useGameStore((s) => s.equippedRodId);
   const session = useGameStore((s) => s.getNormalizedSession());
 
   const equippedRod = equippedRodId ? rods.find((r) => r.id === equippedRodId) : null;
 
-  let buttonText = '';
-  let pulse = false;
-
-  if (!equippedRod) {
-    buttonText = 'Выбрать удочку';
-  } else if (!session) {
-    buttonText = 'Закинуть';
-  } else if (session.status === 'running') {
-    buttonText = 'Открыть рыбалку';
-  } else if (session.status === 'ready') {
-    buttonText = 'Забрать улов';
-    pulse = true;
-  }
+  // Кнопка "Закинуть" показывается только когда нет активной сессии
+  // Когда сессия активна, кнопка скрыта (таймер показывается в центре)
+  const showButton = !session || session.status === 'idle';
+  const buttonText = 'Закинуть';
 
   const handleClick = () => {
     triggerHaptic('medium');
-    if (!equippedRod) {
-      onStartClick();
-    } else if (!session) {
-      onStartClick();
-    } else if (session.status === 'running') {
-      onOpenFishing();
-    } else if (session.status === 'ready') {
-      // Will be handled by parent
-      onStartClick();
-    }
+    onStartClick();
   };
+
+  if (!showButton) {
+    return null; // Скрываем кнопку когда сессия активна
+  }
 
   return (
     <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+84px)] z-[4] transform -translate-x-1/2">

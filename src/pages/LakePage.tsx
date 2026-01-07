@@ -5,6 +5,7 @@ import { Header } from '../components/Header';
 import { BottomPanel } from '../components/BottomPanel';
 import { StartFishingModal } from '../components/StartFishingModal';
 import { CatchModal } from '../components/CatchModal';
+import { NoRodModal } from '../components/NoRodModal';
 import { LakeBackground } from '../components/LakeBackground';
 import { LakeCastOverlay } from '../components/LakeCastOverlay';
 import { triggerHaptic } from '../utils/haptics';
@@ -24,6 +25,7 @@ export function LakePage() {
 
   const [showStartModal, setShowStartModal] = useState(false);
   const [showCatchModal, setShowCatchModal] = useState(false);
+  const [showNoRodModal, setShowNoRodModal] = useState(false);
   const [catchResult, setCatchResult] = useState<CatchResult | null>(null);
   const [timeRemaining, setTimeRemaining] = useState('--:--:--');
   const [progress, setProgress] = useState(0);
@@ -52,16 +54,19 @@ export function LakePage() {
   }, [session]);
 
   const handleStartClick = () => {
+    // Если нет удочки - показываем модальное окно
     if (!equippedRodId) {
-      navigate('/shop');
+      setShowNoRodModal(true);
       return;
     }
 
+    // Если нет сессии - показываем модальное окно для начала рыбалки
     if (!session) {
       setShowStartModal(true);
       return;
     }
 
+    // Если сессия готова - забираем улов
     if (session.status === 'ready') {
       const result = claimCatch();
       if (result) {
@@ -80,11 +85,7 @@ export function LakePage() {
       startFishing(equippedRodId, stakeAmount);
     }
     setShowStartModal(false);
-    navigate('/fishing');
-  };
-
-  const handleOpenFishing = () => {
-    navigate('/fishing');
+    // Не переходим на /fishing, остаемся на /lake
   };
 
   // Determine if cast overlay should be active
@@ -193,10 +194,13 @@ export function LakePage() {
           </div>
         )}
         
-        <BottomPanel onStartClick={handleStartClick} onOpenFishing={handleOpenFishing} />
+        <BottomPanel onStartClick={handleStartClick} />
       </div>
 
       {/* Modals */}
+      {showNoRodModal && (
+        <NoRodModal onClose={() => setShowNoRodModal(false)} />
+      )}
       {showStartModal && equippedRodId && (
         <StartFishingModal
           rodId={equippedRodId}
