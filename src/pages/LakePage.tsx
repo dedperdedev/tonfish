@@ -135,7 +135,7 @@ export function LakePage() {
         
         {/* Timer circle - show when session is active */}
         {session && (session.status === 'running' || session.status === 'ready') && (
-          <div className="relative z-[4] flex-1 flex items-center justify-center pt-4.5">
+          <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+70px)] z-[4] transform -translate-x-1/2">
             <div className="w-[240px] h-[240px] rounded-full glass-card shadow-game grid place-items-center relative overflow-hidden">
               {session.status === 'ready' ? (
                 <button
