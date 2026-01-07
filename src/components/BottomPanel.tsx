@@ -1,6 +1,4 @@
-import { useGameStore } from '../store/gameStore';
-import { formatTime } from '../utils/session';
-import { rods } from '../store/gameStore';
+import { useGameStore, rods } from '../store/gameStore';
 import { triggerHaptic } from '../utils/haptics';
 
 interface BottomPanelProps {
@@ -11,7 +9,6 @@ interface BottomPanelProps {
 export function BottomPanel({ onStartClick, onOpenFishing }: BottomPanelProps) {
   const equippedRodId = useGameStore((s) => s.equippedRodId);
   const session = useGameStore((s) => s.getNormalizedSession());
-  const fastForwardSession = useGameStore((s) => s.fastForwardSession);
 
   const equippedRod = equippedRodId ? rods.find((r) => r.id === equippedRodId) : null;
 
