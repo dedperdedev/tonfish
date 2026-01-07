@@ -114,7 +114,7 @@ export function LakePage() {
   };
 
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-full w-full" style={{ position: 'relative', zIndex: 1 }}>
       {/* Lake scene background */}
       <LakeBackground />
 
