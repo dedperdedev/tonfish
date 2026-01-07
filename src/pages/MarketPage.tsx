@@ -4,6 +4,7 @@ import { Header } from '../components/Header';
 import { LakeBackground } from '../components/LakeBackground';
 import { formatTon, formatFish } from '../utils/formatters';
 import { triggerHaptic } from '../utils/haptics';
+import { DollarSign } from 'lucide-react';
 
 export function MarketPage() {
   const [tab, setTab] = useState<'sell' | 'hist'>('sell');
@@ -81,14 +82,15 @@ export function MarketPage() {
                         </div>
                       </div>
                       <button
-                        className="game-button w-auto min-w-[120px] px-4 py-2.5 rounded-2xl text-sm"
+                        className="glass-button w-12 h-12 rounded-2xl flex items-center justify-center cursor-pointer transition-transform hover:scale-[1.05] active:scale-[0.95]"
                         onClick={() => {
                           triggerHaptic('success');
                           sellItem(item.id);
                         }}
                         onMouseDown={() => triggerHaptic('light')}
+                        title="Продать"
                       >
-                        Продать
+                        <DollarSign size={20} className="text-ink" />
                       </button>
                     </div>
                   </div>
