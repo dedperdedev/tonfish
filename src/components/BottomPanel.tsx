@@ -9,8 +9,8 @@ export function BottomPanel({ onStartClick }: BottomPanelProps) {
   const session = useGameStore((s) => s.getNormalizedSession());
 
   // Кнопка "Закинуть" показывается только когда нет активной сессии
-  // Когда сессия активна, кнопка скрыта (таймер показывается в центре)
-  const showButton = !session || session.status === 'idle';
+  // Когда сессия активна (running или ready), кнопка скрыта (таймер показывается в центре)
+  const showButton = !session || (session.status !== 'running' && session.status !== 'ready');
   const buttonText = 'Закинуть';
 
   const handleClick = () => {
