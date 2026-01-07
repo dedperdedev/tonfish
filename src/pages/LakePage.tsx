@@ -6,7 +6,6 @@ import { StartFishingModal } from '../components/StartFishingModal';
 import { CatchModal } from '../components/CatchModal';
 import { NoRodModal } from '../components/NoRodModal';
 import { LakeBackground } from '../components/LakeBackground';
-import { FishActionButton } from '../components/FishActionButton';
 import { triggerHaptic } from '../utils/haptics';
 import { formatTime, getProgress } from '../utils/session';
 import type { CatchResult } from '../types';
@@ -114,10 +113,17 @@ export function LakePage() {
                 </button>
               )}
               {session.status === 'ready' ? (
-                <FishActionButton
-                  state="hook"
+                <button
+                  className="w-full h-full rounded-full grid place-items-center cursor-pointer hover:opacity-90 transition-opacity z-[2] relative"
                   onClick={handleStartClick}
-                />
+                  onMouseDown={() => triggerHaptic('light')}
+                >
+                  <div className="text-center">
+                    <h2 className="m-0 text-[34px] font-black tracking-wide font-heading pulse">
+                      Подсечь
+                    </h2>
+                  </div>
+                </button>
               ) : (
                 <div className="w-[240px] h-[240px] rounded-full glass-card shadow-game grid place-items-center relative overflow-hidden">
                   <svg

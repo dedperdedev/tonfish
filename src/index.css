@@ -282,8 +282,6 @@ body {
   background: radial-gradient(900px 700px at 50% 30%, rgba(255, 255, 255, 0.14), rgba(0, 0, 0, 0.09));
   pointer-events: none;
 }
-
-/* Fish Action Button - Premium Circular Button */
 :root {
   --btn-size: 200px;
   --btn-size-hook: 240px;
