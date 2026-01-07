@@ -100,7 +100,7 @@ export function LakePage() {
 
 
       {/* Screen content */}
-      <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)]" style={{ overflow: 'visible' }}>
+      <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
         <Header />
         
         {/* Timer circle - show when session is active */}
