@@ -16,8 +16,13 @@ export function BottomPanel({ onStartClick }: BottomPanelProps) {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
+    console.log('BottomPanel: button clicked, calling onStartClick');
     triggerHaptic('medium');
-    onStartClick();
+    if (onStartClick) {
+      onStartClick();
+    } else {
+      console.error('BottomPanel: onStartClick is not defined!');
+    }
   };
 
   if (!showButton) {

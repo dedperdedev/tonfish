@@ -52,20 +52,25 @@ export function LakePage() {
   }, [session]);
 
   const handleStartClick = () => {
+    console.log('LakePage: handleStartClick called', { equippedRodId, session, ownedRods });
+    
     // Если нет удочки - показываем модальное окно
     if (!equippedRodId) {
+      console.log('LakePage: No rod, showing NoRodModal');
       setShowNoRodModal(true);
       return;
     }
 
     // Если нет сессии - показываем модальное окно для начала рыбалки
     if (!session) {
+      console.log('LakePage: No session, showing StartFishingModal');
       setShowStartModal(true);
       return;
     }
 
     // Если сессия готова - забираем улов
     if (session.status === 'ready') {
+      console.log('LakePage: Session ready, claiming catch');
       const result = claimCatch();
       if (result) {
         setCatchResult(result);
