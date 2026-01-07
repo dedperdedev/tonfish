@@ -20,6 +20,7 @@ export function LakePage() {
   const claimCatch = useGameStore((s) => s.claimCatch);
   const buyRod = useGameStore((s) => s.buyRod);
   const ownedRods = useGameStore((s) => s.ownedRods);
+  const fastForwardSession = useGameStore((s) => s.fastForwardSession);
 
   const [showStartModal, setShowStartModal] = useState(false);
   const [showCatchModal, setShowCatchModal] = useState(false);
@@ -135,7 +136,17 @@ export function LakePage() {
         
         {/* Timer circle - show when session is active */}
         {session && (session.status === 'running' || session.status === 'ready') && (
-          <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+70px)] z-[4] transform -translate-x-1/2">
+          <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+90px)] z-[4] transform -translate-x-1/2 flex items-center gap-3">
+            {session.status === 'running' && (
+              <button
+                className="glass-button w-12 h-12 rounded-2xl font-bold cursor-pointer flex items-center justify-center flex-shrink-0"
+                onClick={fastForwardSession}
+                title="Dev: Завершить сессию"
+                onMouseDown={() => triggerHaptic('light')}
+              >
+                ⚡
+              </button>
+            )}
             <div className="w-[240px] h-[240px] rounded-full glass-card shadow-game grid place-items-center relative overflow-hidden">
               {session.status === 'ready' ? (
                 <button

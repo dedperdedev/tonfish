@@ -23,7 +23,7 @@ export function BottomPanel({ onStartClick }: BottomPanelProps) {
   }
 
   return (
-    <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+70px)] z-[4] transform -translate-x-1/2">
+    <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+90px)] z-[4] transform -translate-x-1/2">
       <button
         className="w-[200px] h-[200px] rounded-full glass-card shadow-game grid place-items-center cursor-pointer hover:opacity-90 transition-opacity"
         onClick={handleClick}
