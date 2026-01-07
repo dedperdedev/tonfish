@@ -136,18 +136,19 @@ export function LakePage() {
         
         {/* Timer circle - show when session is active */}
         {session && (session.status === 'running' || session.status === 'ready') && (
-          <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+90px)] z-[4] transform -translate-x-1/2 flex items-center gap-3">
-            {session.status === 'running' && (
-              <button
-                className="glass-button w-12 h-12 rounded-2xl font-bold cursor-pointer flex items-center justify-center flex-shrink-0"
-                onClick={fastForwardSession}
-                title="Dev: Завершить сессию"
-                onMouseDown={() => triggerHaptic('light')}
-              >
-                ⚡
-              </button>
-            )}
-            <div className="w-[240px] h-[240px] rounded-full glass-card shadow-game grid place-items-center relative overflow-hidden">
+          <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+90px)] z-[4] transform -translate-x-1/2">
+            <div className="relative">
+              {session.status === 'running' && (
+                <button
+                  className="absolute -left-14 top-1/2 -translate-y-1/2 glass-button w-12 h-12 rounded-2xl font-bold cursor-pointer flex items-center justify-center flex-shrink-0"
+                  onClick={fastForwardSession}
+                  title="Dev: Завершить сессию"
+                  onMouseDown={() => triggerHaptic('light')}
+                >
+                  ⚡
+                </button>
+              )}
+              <div className="w-[240px] h-[240px] rounded-full glass-card shadow-game grid place-items-center relative overflow-hidden">
               {session.status === 'ready' ? (
                 <button
                   className="w-full h-full rounded-full grid place-items-center cursor-pointer hover:opacity-90 transition-opacity z-[2] relative"
