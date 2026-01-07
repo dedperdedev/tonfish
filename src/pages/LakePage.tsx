@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useGameStore, rods } from '../store/gameStore';
+import { useGameStore } from '../store/gameStore';
 import { Header } from '../components/Header';
 import { BottomPanel } from '../components/BottomPanel';
 import { StartFishingModal } from '../components/StartFishingModal';
