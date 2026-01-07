@@ -11,7 +11,6 @@ export function BottomPanel({ onStartClick }: BottomPanelProps) {
   // Кнопка "Закинуть" показывается только когда нет активной сессии
   // Когда сессия активна (running или ready), кнопка скрыта (таймер показывается в центре)
   const showButton = !session || (session.status !== 'running' && session.status !== 'ready');
-  const buttonState = showButton ? 'cast' : 'disabled';
 
   if (!showButton) {
     return null; // Скрываем кнопку когда сессия активна
