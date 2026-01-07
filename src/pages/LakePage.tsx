@@ -57,35 +57,38 @@ export function LakePage() {
   }, [session]);
 
   const handleStartClick = () => {
-    console.log('LakePage: handleStartClick called', { 
-      equippedRodId, 
-      session: session ? { ...session, status: session.status } : null, 
-      ownedRods 
-    });
-    
     // Если нет удочки - показываем модальное окно
     if (!equippedRodId) {
-      console.log('LakePage: No rod, showing NoRodModal');
       setShowNoRodModal(true);
       return;
     }
 
-    // Если нет сессии - показываем модальное окно для начала рыбалки
+    // Если нет сессии - сразу запускаем рыбалку
     if (!session) {
-      console.log('LakePage: No session, showing StartFishingModal');
-      setShowStartModal(true);
+      const rod = rods.find((r) => r.id === equippedRodId);
+      if (!rod) return;
+
+      // Если удочка не куплена - покупаем её
+      if (!ownedRods.includes(equippedRodId)) {
+        const stakeAmount = rod.currency === 'TON' ? rod.minStake : (rod.priceFish || rod.minStake);
+        buyRod(equippedRodId, stakeAmount);
+        // После покупки запускаем рыбалку
+        startFishing(equippedRodId, stakeAmount);
+      } else {
+        // Если удочка уже куплена - запускаем рыбалку с минимальной ставкой
+        const stakeAmount = rod.currency === 'TON' ? rod.minStake : (rod.priceFish || rod.minStake);
+        startFishing(equippedRodId, stakeAmount);
+      }
       return;
     }
 
     // Если сессия активна (running) - ничего не делаем, кнопка не должна быть видна
     if (session.status === 'running') {
-      console.log('LakePage: Session is running, button should not be visible');
       return;
     }
 
     // Если сессия готова - забираем улов
     if (session.status === 'ready') {
-      console.log('LakePage: Session ready, claiming catch');
       const result = claimCatch();
       if (result) {
         setCatchResult(result);
@@ -94,9 +97,12 @@ export function LakePage() {
       return;
     }
 
-    // Если сессия завершена (claimed) или в статусе idle - показываем модальное окно для начала новой рыбалки
-    console.log('LakePage: Session in status:', session.status, '- showing StartFishingModal');
-    setShowStartModal(true);
+    // Если сессия завершена (claimed) или в статусе idle - запускаем новую рыбалку
+    const rod = rods.find((r) => r.id === equippedRodId);
+    if (!rod) return;
+
+    const stakeAmount = rod.currency === 'TON' ? rod.minStake : (rod.priceFish || rod.minStake);
+    startFishing(equippedRodId, stakeAmount);
   };
 
   const handleStartFishing = (stakeAmount: number) => {
