@@ -171,9 +171,10 @@ export function LakePage() {
             </div>
           </div>
         )}
-        
-        <BottomPanel onStartClick={handleStartClick} />
       </div>
+      
+      {/* BottomPanel outside overflow-hidden container */}
+      <BottomPanel onStartClick={handleStartClick} />
 
       {/* Modals */}
       {showNoRodModal && (
