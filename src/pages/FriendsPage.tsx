@@ -123,9 +123,6 @@ export function FriendsPage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="font-black text-sm">{ref.name}</div>
-                        <div className="text-xs font-extrabold text-muted leading-[1.35] mt-0.5">
-                          {ref.earned} FISH • {ref.active ? 'Активен' : 'Неактивен'}
-                        </div>
                       </div>
                     </div>
                   ))}
@@ -170,9 +167,6 @@ export function FriendsPage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="font-black text-sm">{ref.name}</div>
-                        <div className="text-xs font-extrabold text-muted leading-[1.35] mt-0.5">
-                          {ref.earned} FISH • {ref.active ? 'Активен' : 'Неактивен'}
-                        </div>
                       </div>
                     </div>
                   ))}
@@ -217,9 +211,6 @@ export function FriendsPage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="font-black text-sm">{ref.name}</div>
-                        <div className="text-xs font-extrabold text-muted leading-[1.35] mt-0.5">
-                          {ref.earned} FISH • {ref.active ? 'Активен' : 'Неактивен'}
-                        </div>
                       </div>
                     </div>
                   ))}
