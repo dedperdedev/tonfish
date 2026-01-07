@@ -13,7 +13,10 @@ export function BottomPanel({ onStartClick }: BottomPanelProps) {
   const showButton = !session || (session.status !== 'running' && session.status !== 'ready');
   const buttonText = 'Закинуть';
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('BottomPanel button clicked');
     triggerHaptic('medium');
     onStartClick();
   };
@@ -23,11 +26,12 @@ export function BottomPanel({ onStartClick }: BottomPanelProps) {
   }
 
   return (
-    <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+90px)] z-[4] transform -translate-x-1/2">
+    <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+90px)] z-[5] transform -translate-x-1/2" style={{ pointerEvents: 'auto' }}>
       <button
         className="w-[200px] h-[200px] rounded-full glass-card shadow-game grid place-items-center cursor-pointer hover:opacity-90 transition-opacity"
         onClick={handleClick}
         onMouseDown={() => triggerHaptic('light')}
+        style={{ pointerEvents: 'auto' }}
       >
         <div className="text-center">
           <h2 className="m-0 text-[28px] font-black tracking-wide font-heading">
