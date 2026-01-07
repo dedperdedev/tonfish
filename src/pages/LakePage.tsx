@@ -6,7 +6,6 @@ import { StartFishingModal } from '../components/StartFishingModal';
 import { CatchModal } from '../components/CatchModal';
 import { NoRodModal } from '../components/NoRodModal';
 import { LakeBackground } from '../components/LakeBackground';
-import { LakeCastOverlay } from '../components/LakeCastOverlay';
 import { triggerHaptic } from '../utils/haptics';
 import { formatTime, getProgress } from '../utils/session';
 import type { CatchResult } from '../types';
