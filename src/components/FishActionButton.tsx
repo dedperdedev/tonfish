@@ -53,7 +53,6 @@ export function FishActionButton({ state, onClick, className = '' }: FishActionB
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('FishActionButton clicked', { state, hasOnClick: !!onClick });
     if (state !== 'disabled' && onClick) {
       onClick();
     }

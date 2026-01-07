@@ -20,11 +20,8 @@ export function BottomPanel({ onStartClick }: BottomPanelProps) {
   return (
     <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+90px)] z-[4] transform -translate-x-1/2" style={{ pointerEvents: 'auto' }}>
       <FishActionButton
-        state={buttonState}
-        onClick={() => {
-          console.log('BottomPanel onClick called', { buttonState });
-          onStartClick();
-        }}
+        state="cast"
+        onClick={onStartClick}
       />
     </div>
   );
