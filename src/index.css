@@ -408,6 +408,7 @@ body {
   z-index: 1;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   outline: none;
+  background: transparent;
 }
 
 .fish-action-button-wrapper[data-state="hook"] .fish-action-button {
@@ -438,6 +439,7 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.8),
     inset 0 -2px 8px rgba(0, 0, 0, 0.15);
   border: 1.5px solid rgba(255, 255, 255, 0.6);
+  pointer-events: none;
 }
 
 .fish-action-button-wrapper[data-state="cast"] .fish-action-button-glass {
@@ -503,6 +505,7 @@ body {
   opacity: 0.4;
   pointer-events: none;
   mix-blend-mode: overlay;
+  z-index: 1;
 }
 
 /* Shimmer Effect */
@@ -549,6 +552,7 @@ body {
     transparent 100%
   );
   pointer-events: none;
+  z-index: 1;
 }
 
 /* Content */
@@ -562,6 +566,7 @@ body {
   gap: 8px;
   height: 100%;
   padding: 0;
+  pointer-events: none;
 }
 
 /* Icon */
