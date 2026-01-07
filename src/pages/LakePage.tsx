@@ -86,11 +86,6 @@ export function LakePage() {
     // Не переходим на /fishing, остаемся на /lake
   };
 
-  // Determine if cast overlay should be active
-  const isCastActive = !!equippedRodId || (session?.status === 'running' || session?.status === 'ready');
-  const castKey = session?.startAt || session?.id || Date.now();
-  const equippedRod = equippedRodId ? rods.find((r) => r.id === equippedRodId) : null;
-
   return (
     <div className="relative h-full w-full">
       {/* Lake scene background */}
