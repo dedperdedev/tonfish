@@ -15,13 +15,16 @@ export function BottomPanel({ onStartClick, onOpenFishing }: BottomPanelProps) {
 
   const equippedRod = equippedRodId ? rods.find((r) => r.id === equippedRodId) : null;
 
-  let title = 'Нет удочки';
-  let subtitle = 'Зайди в магазин и выбери свою.';
-  let buttonText = 'Выбрать удочку';
+  let title = '';
+  let subtitle = '';
+  let buttonText = '';
   let pulse = false;
+  let showCircle = false;
 
   if (!equippedRod) {
-    // No rod
+    // No rod - show circle button
+    showCircle = true;
+    buttonText = 'Выбрать удочку';
   } else if (!session) {
     title = 'Удочка готова';
     subtitle = `${equippedRod.name} • ${
@@ -55,6 +58,24 @@ export function BottomPanel({ onStartClick, onOpenFishing }: BottomPanelProps) {
       onStartClick();
     }
   };
+
+  if (showCircle) {
+    return (
+      <div className="absolute left-1/2 bottom-[calc(var(--safe-bottom)+84px)] z-[4] transform -translate-x-1/2">
+        <button
+          className="w-[200px] h-[200px] rounded-full glass-card shadow-game grid place-items-center cursor-pointer hover:opacity-90 transition-opacity"
+          onClick={handleClick}
+          onMouseDown={() => triggerHaptic('light')}
+        >
+          <div className="text-center">
+            <h2 className="m-0 text-[28px] font-black tracking-wide font-heading">
+              {buttonText}
+            </h2>
+          </div>
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="absolute left-3.5 right-3.5 bottom-[calc(var(--safe-bottom)+84px)] z-[4] p-3.5">
