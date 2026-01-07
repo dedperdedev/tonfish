@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useGameStore } from '../store/gameStore';
+import { useGameStore, rods } from '../store/gameStore';
 import { Header } from '../components/Header';
 import { BottomPanel } from '../components/BottomPanel';
-import { StartFishingModal } from '../components/StartFishingModal';
 import { CatchModal } from '../components/CatchModal';
 import { NoRodModal } from '../components/NoRodModal';
 import { LakeBackground } from '../components/LakeBackground';
@@ -21,12 +20,6 @@ export function LakePage() {
   const ownedRods = useGameStore((s) => s.ownedRods);
   const fastForwardSession = useGameStore((s) => s.fastForwardSession);
 
-  const [showStartModal, setShowStartModal] = useState(false);
-  
-  // Debug: log when showStartModal changes
-  useEffect(() => {
-    console.log('LakePage: showStartModal changed to', showStartModal);
-  }, [showStartModal]);
   const [showCatchModal, setShowCatchModal] = useState(false);
   const [showNoRodModal, setShowNoRodModal] = useState(false);
   const [catchResult, setCatchResult] = useState<CatchResult | null>(null);
@@ -105,19 +98,6 @@ export function LakePage() {
     startFishing(equippedRodId, stakeAmount);
   };
 
-  const handleStartFishing = (stakeAmount: number) => {
-    if (!equippedRodId) return;
-    triggerHaptic('light');
-    if (!ownedRods.includes(equippedRodId)) {
-      buyRod(equippedRodId, stakeAmount);
-      // После покупки запускаем рыбалку
-      startFishing(equippedRodId, stakeAmount);
-    } else {
-      startFishing(equippedRodId, stakeAmount);
-    }
-    setShowStartModal(false);
-    // Не переходим на /fishing, остаемся на /lake
-  };
 
   return (
     <div className="relative h-full w-full" style={{ position: 'relative', zIndex: 1 }}>
@@ -205,13 +185,6 @@ export function LakePage() {
       {/* Modals */}
       {showNoRodModal && (
         <NoRodModal onClose={() => setShowNoRodModal(false)} />
-      )}
-      {showStartModal && equippedRodId && (
-        <StartFishingModal
-          rodId={equippedRodId}
-          onStart={handleStartFishing}
-          onClose={() => setShowStartModal(false)}
-        />
       )}
       {showCatchModal && (
         <CatchModal catchResult={catchResult} onClose={() => setShowCatchModal(false)} />
