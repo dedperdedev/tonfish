@@ -14,7 +14,6 @@ import type { CatchResult } from '../types';
 const CIRCUMFERENCE = 590.619;
 
 export function LakePage() {
-  const navigate = useNavigate();
   const equippedRodId = useGameStore((s) => s.equippedRodId);
   const session = useGameStore((s) => s.getNormalizedSession());
   const startFishing = useGameStore((s) => s.startFishing);
