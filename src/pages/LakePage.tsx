@@ -97,38 +97,6 @@ export function LakePage() {
       {/* Lake scene background */}
       <LakeBackground />
 
-      {/* Rod image overlay */}
-      {equippedRod && (
-        <div
-          className="absolute inset-0 pointer-events-none z-[2]"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <img
-            src={equippedRod.icon}
-            alt={equippedRod.name}
-            style={{
-              width: 'auto',
-              height: '60%',
-              maxWidth: '40%',
-              objectFit: 'contain',
-              opacity: 0.15,
-              transform: 'rotate(-5deg)',
-            }}
-          />
-        </div>
-      )}
-
-      {/* Cast overlay */}
-      <LakeCastOverlay
-        rodId={equippedRodId as any}
-        active={isCastActive}
-        castKey={castKey}
-        target={{ x: 0.54, y: 0.56 }}
-      />
 
       {/* Screen content */}
       <div className="absolute inset-0 flex flex-col p-3.5 pb-[calc(var(--safe-bottom)+98px)] overflow-hidden">
