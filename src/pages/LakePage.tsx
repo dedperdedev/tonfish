@@ -52,7 +52,11 @@ export function LakePage() {
   }, [session]);
 
   const handleStartClick = () => {
-    console.log('LakePage: handleStartClick called', { equippedRodId, session, ownedRods });
+    console.log('LakePage: handleStartClick called', { 
+      equippedRodId, 
+      session: session ? { ...session, status: session.status } : null, 
+      ownedRods 
+    });
     
     // Если нет удочки - показываем модальное окно
     if (!equippedRodId) {
@@ -68,6 +72,12 @@ export function LakePage() {
       return;
     }
 
+    // Если сессия активна (running) - ничего не делаем, кнопка не должна быть видна
+    if (session.status === 'running') {
+      console.log('LakePage: Session is running, button should not be visible');
+      return;
+    }
+
     // Если сессия готова - забираем улов
     if (session.status === 'ready') {
       console.log('LakePage: Session ready, claiming catch');
@@ -76,7 +86,12 @@ export function LakePage() {
         setCatchResult(result);
         setShowCatchModal(true);
       }
+      return;
     }
+
+    // Если сессия в другом статусе - показываем модальное окно для начала новой рыбалки
+    console.log('LakePage: Session in unexpected status, showing StartFishingModal');
+    setShowStartModal(true);
   };
 
   const handleStartFishing = (stakeAmount: number) => {
