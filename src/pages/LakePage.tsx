@@ -22,6 +22,11 @@ export function LakePage() {
   const fastForwardSession = useGameStore((s) => s.fastForwardSession);
 
   const [showStartModal, setShowStartModal] = useState(false);
+  
+  // Debug: log when showStartModal changes
+  useEffect(() => {
+    console.log('LakePage: showStartModal changed to', showStartModal);
+  }, [showStartModal]);
   const [showCatchModal, setShowCatchModal] = useState(false);
   const [showNoRodModal, setShowNoRodModal] = useState(false);
   const [catchResult, setCatchResult] = useState<CatchResult | null>(null);
