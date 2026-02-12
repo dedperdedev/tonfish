@@ -36,3 +36,12 @@ git push -u origin main
 gh repo create rybalka --public --source=. --remote=origin --push
 ```
 
+## GitHub Pages (деплой сайта)
+
+Чтобы сайт открывался без ошибки 404 для `src/main.tsx`:
+
+1. В репозитории откройте **Settings** → **Pages**.
+2. В блоке **Build and deployment** выберите источник: **GitHub Actions** (не «Deploy from a branch»).
+3. После каждого пуша в `main` воркфлоу «Deploy to GitHub Pages» соберёт проект и задеплоит папку `dist`.
+4. Сайт будет доступен по адресу: **https://dedperdedev.github.io/tonfish/** (обязательно с путём `/tonfish/`).
+
