@@ -62,18 +62,20 @@ export function Header({ title, rightContent }: HeaderProps) {
             <Languages size={20} strokeWidth={2.5} className="text-ink" />
           </button>
           <button
-            className="inline-flex items-center justify-center px-3 py-2.5 rounded-2xl glass-surface h-[42px] w-[54px] flex-shrink-0 cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            className="inline-flex items-center justify-center px-3 py-2.5 rounded-2xl h-[42px] w-[54px] flex-shrink-0 cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            style={{ background: 'rgba(59, 130, 246, 0.7)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)' }}
             onClick={() => navigate('/wallet')}
             title="Кошелёк"
           >
-            <Wallet size={20} strokeWidth={2.5} className="text-ink" />
+            <Wallet size={20} strokeWidth={2.5} className="text-white" />
           </button>
           <button
-            className="inline-flex items-center justify-center px-3 py-2.5 rounded-2xl glass-surface h-[42px] w-[54px] flex-shrink-0 cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            className="inline-flex items-center justify-center px-3 py-2.5 rounded-2xl h-[42px] w-[54px] flex-shrink-0 cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            style={{ background: 'rgba(245, 190, 30, 0.8)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)' }}
             title="Радио"
             onClick={openRadioModal}
           >
-            <RadioReceiver size={20} strokeWidth={2.5} className="text-ink" />
+            <RadioReceiver size={20} strokeWidth={2.5} className="text-white" />
           </button>
         </div>
       </div>
