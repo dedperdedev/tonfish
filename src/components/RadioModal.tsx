@@ -68,7 +68,7 @@ export function RadioModal({ onClose }: RadioModalProps) {
                 onMouseDown={() => triggerHaptic('light')}
               >
                 <span>{s.name}</span>
-                {s.id === currentStationId && (
+                {s.id === currentStationId && isPlaying && (
                   <span className="text-xs font-extrabold text-muted">● в эфире</span>
                 )}
               </button>

@@ -2,30 +2,58 @@
 export interface RadioStation {
   id: string;
   name: string;
-  /** Прямой URL потока (MP3/ AAC/ HLS). Если не работает — показываем linkUrl */
+  /** Прямой URL потока (MP3 / AAC). */
   streamUrl: string;
   /** Ссылка на страницу радио (например 101.ru) для fallback */
   linkUrl?: string;
 }
 
-/** Охота и Рыбалка — 101.ru user 614435. Поток может требовать CORS/домен 101.ru. */
-const OHOTA_RYBALKA_STREAM = 'https://strm.101.ru:8000/user_614435_128';
+/**
+ * Потоки 101.ru работают по формату:
+ *   https://pub0202.101.ru:8000/stream/trust/mp3/128/{channelId}   — MP3 128 Kbps
+ *   http://pub0302.101.ru:8000/stream/pro/aac/64/{channelId}       — AAC  64 Kbps
+ *
+ * Пользовательские (personal) станции — отдельный формат,
+ * попробуем несколько вариантов; если CORS не пустит — показываем ссылку 101.ru.
+ */
 
 export const RADIO_STATIONS: RadioStation[] = [
+  // ===== 101.ru — Рыбацкая тематика =====
   {
     id: 'ohota-rybalka',
-    name: 'Охота и Рыбалка',
-    streamUrl: OHOTA_RYBALKA_STREAM,
+    name: '🎣 Охота и Рыбалка',
+    streamUrl: 'https://pub0202.101.ru:8000/stream/personal/mp3/128/614435',
     linkUrl: 'https://101.ru/radio/user/614435',
   },
+
+  // ===== 101.ru — Авторская песня (бард, костровые, похожая атмосфера) =====
   {
-    id: 'relax',
-    name: 'Relax',
-    streamUrl: 'https://stream.radioparadise.com/mp3-128',
+    id: 'bard',
+    name: '🎸 Авторская Песня',
+    streamUrl: 'https://ic6.101.ru:8000/stream/pro/aac/64/35',
+    linkUrl: 'https://101.ru/radio/channel/35',
   },
+
+  // ===== 101.ru — Deep House (расслабленный фон) =====
   {
-    id: 'chill',
-    name: 'Chill',
-    streamUrl: 'https://stream.radioparadise.com/aac-128',
+    id: 'deep-house',
+    name: '🎧 Deep House',
+    streamUrl: 'https://pub0202.101.ru:8000/stream/trust/mp3/128/173',
+    linkUrl: 'https://101.ru/radio/channel/173',
+  },
+
+  // ===== 101.ru — Relax FM =====
+  {
+    id: 'relax-fm',
+    name: '🌊 Relax FM',
+    streamUrl: 'https://ic4.101.ru:8000/stream/air/aac/64/200',
+    linkUrl: 'https://relax-fm.ru/',
+  },
+
+  // ===== Radio Paradise (гарантированно работает без CORS) =====
+  {
+    id: 'radio-paradise',
+    name: '🌴 Radio Paradise',
+    streamUrl: 'https://stream.radioparadise.com/mp3-128',
   },
 ];
