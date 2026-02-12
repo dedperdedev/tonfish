@@ -2,7 +2,7 @@ import { useGameStore } from '../store/gameStore';
 import { formatTon, formatFish } from '../utils/formatters';
 import { useState, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Wallet, Languages } from 'lucide-react';
+import { Wallet, Languages, Radio } from 'lucide-react';
 import { useLocale } from '../contexts/LocaleContext';
 
 interface HeaderProps {
@@ -65,6 +65,12 @@ export function Header({ title, rightContent }: HeaderProps) {
             title="Кошелёк"
           >
             <Wallet size={20} strokeWidth={2.5} className="text-ink" />
+          </button>
+          <button
+            className="inline-flex items-center justify-center px-3 py-2.5 rounded-2xl glass-surface h-[42px] w-[54px] flex-shrink-0 cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            title="Радио"
+          >
+            <Radio size={20} strokeWidth={2.5} className="text-ink" />
           </button>
         </div>
       </div>
