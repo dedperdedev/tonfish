@@ -4,6 +4,7 @@ import { useState, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Wallet, Languages, RadioReceiver, Fish } from 'lucide-react';
 import { useLocale } from '../contexts/LocaleContext';
+import { useRadioModal } from '../contexts/RadioModalContext';
 import { TonIcon } from './TonIcon';
 
 interface HeaderProps {
@@ -14,6 +15,7 @@ interface HeaderProps {
 export function Header({ title, rightContent }: HeaderProps) {
   const navigate = useNavigate();
   const { locale, toggleLocale } = useLocale();
+  const { openRadioModal } = useRadioModal();
   const balances = useGameStore((s) => s.balances);
   const devAddResources = useGameStore((s) => s.devAddResources);
   const [tapCount, setTapCount] = useState(0);
@@ -69,6 +71,7 @@ export function Header({ title, rightContent }: HeaderProps) {
           <button
             className="inline-flex items-center justify-center px-3 py-2.5 rounded-2xl glass-surface h-[42px] w-[54px] flex-shrink-0 cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
             title="Радио"
+            onClick={openRadioModal}
           >
             <RadioReceiver size={20} strokeWidth={2.5} className="text-ink" />
           </button>
