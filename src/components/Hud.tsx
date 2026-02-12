@@ -1,6 +1,8 @@
 import { useGameStore } from '../store/gameStore';
 import { formatTon, formatFish } from '../utils/formatters';
 import { useState } from 'react';
+import { Fish } from 'lucide-react';
+import { TonIcon } from './TonIcon';
 
 export function Hud() {
   const balances = useGameStore((s) => s.balances);
@@ -27,16 +29,14 @@ export function Hud() {
           className="inline-flex items-center gap-2 px-3 py-2.5 rounded-full scrim shadow-game-sm cursor-pointer select-none"
           onClick={handleBalanceClick}
         >
-          <span className="w-[22px] h-[22px] rounded-full bg-gradient-to-br from-aqua to-aqua2 shadow-[inset_0_0_0_2px_rgba(255,255,255,.8),0_6px_12px_rgba(0,0,0,.12)]"></span>
-          <small className="text-muted font-extrabold">TON</small>
+          <TonIcon className="w-[22px] h-[22px] flex-shrink-0 text-ink" />
           <b className="font-black tracking-wide">{formatTon(balances.ton)}</b>
         </div>
         <div
           className="inline-flex items-center gap-2 px-3 py-2.5 rounded-full scrim shadow-game-sm cursor-pointer select-none"
           onClick={handleBalanceClick}
         >
-          <span className="w-[22px] h-[22px] rounded-full bg-gradient-to-br from-sun to-sun2 shadow-[inset_0_0_0_2px_rgba(255,255,255,.8),0_6px_12px_rgba(0,0,0,.12)]"></span>
-          <small className="text-muted font-extrabold">FISH</small>
+          <Fish size={22} strokeWidth={2.5} className="text-ink flex-shrink-0" />
           <b className="font-black tracking-wide">{formatFish(balances.fish)}</b>
         </div>
       </div>

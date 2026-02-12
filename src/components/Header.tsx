@@ -2,8 +2,9 @@ import { useGameStore } from '../store/gameStore';
 import { formatTon, formatFish } from '../utils/formatters';
 import { useState, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Wallet, Languages, RadioReceiver } from 'lucide-react';
+import { Wallet, Languages, RadioReceiver, Fish } from 'lucide-react';
 import { useLocale } from '../contexts/LocaleContext';
+import { TonIcon } from './TonIcon';
 
 interface HeaderProps {
   title?: string;
@@ -41,14 +42,14 @@ export function Header({ title, rightContent }: HeaderProps) {
             className="inline-flex items-center gap-2 px-3 py-2.5 rounded-2xl glass-surface cursor-pointer select-none h-[42px] transition-transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={handleBalanceClick}
           >
-            <small className="text-muted font-extrabold">TON</small>
+            <TonIcon className="w-5 h-5 flex-shrink-0" />
             <b className="font-black tracking-wide">{formatTon(balances.ton)}</b>
           </div>
           <div
             className="inline-flex items-center gap-2 px-3 py-2.5 rounded-2xl glass-surface cursor-pointer select-none h-[42px] transition-transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={handleBalanceClick}
           >
-            <small className="text-muted font-extrabold">FISH</small>
+            <Fish size={20} strokeWidth={2.5} className="text-ink flex-shrink-0" />
             <b className="font-black tracking-wide">{formatFish(balances.fish)}</b>
           </div>
           <button
