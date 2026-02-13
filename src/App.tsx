@@ -7,6 +7,7 @@ import { TasksPage } from './pages/TasksPage';
 import { FriendsPage } from './pages/FriendsPage';
 import { WalletPage } from './pages/WalletPage';
 import { BottomTabs } from './components/BottomTabs';
+import { RaffleButton } from './components/RaffleButton';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/friends" element={<FriendsPage />} />
         <Route path="/wallet" element={<WalletPage />} />
       </Routes>
+      <RaffleButton />
       <BottomTabs />
     </div>
   );

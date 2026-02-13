@@ -282,3 +282,17 @@ body {
   background: radial-gradient(900px 700px at 50% 30%, rgba(255, 255, 255, 0.14), rgba(0, 0, 0, 0.09));
   pointer-events: none;
 }
+
+/* Slow bounce for raffle trophy button */
+.animate-bounce-slow {
+  animation: bounce-slow 2.5s ease-in-out infinite;
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0);
+  }
+  50% {
+    transform: translateY(-50%) translateX(-3px);
+  }
+}
