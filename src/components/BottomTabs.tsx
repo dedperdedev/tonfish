@@ -1,11 +1,11 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Waves, ShoppingBag, Store, CheckSquare, Users } from 'lucide-react';
+import { Waves, ShoppingBag, Trophy, CheckSquare, Users } from 'lucide-react';
 import { triggerHaptic } from '../utils/haptics';
 
 const tabs = [
   { id: 'lake', label: 'Озеро', Icon: Waves, path: '/lake' },
   { id: 'shop', label: 'Магазин', Icon: ShoppingBag, path: '/shop' },
-  { id: 'market', label: 'Рынок', Icon: Store, path: '/market' },
+  { id: 'raffle', label: 'Розыгрыш', Icon: Trophy, path: '/raffle' },
   { id: 'tasks', label: 'Таски', Icon: CheckSquare, path: '/tasks' },
   { id: 'friends', label: 'Друзья', Icon: Users, path: '/friends' },
 ];

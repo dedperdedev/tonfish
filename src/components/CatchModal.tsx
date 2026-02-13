@@ -23,7 +23,7 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
         listed: [...state.market.listed, { ...catchResult, status: 'in_inventory' as const }],
       },
     }));
-    navigate('/market');
+    navigate('/shop');
     onClose();
   };
 

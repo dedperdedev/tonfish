@@ -2,12 +2,11 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { LakePage } from './pages/LakePage';
 import { ShopPage } from './pages/ShopPage';
 import { FishingPage } from './pages/FishingPage';
-import { MarketPage } from './pages/MarketPage';
+import { RafflePage } from './pages/RafflePage';
 import { TasksPage } from './pages/TasksPage';
 import { FriendsPage } from './pages/FriendsPage';
 import { WalletPage } from './pages/WalletPage';
 import { BottomTabs } from './components/BottomTabs';
-import { RaffleButton } from './components/RaffleButton';
 
 function App() {
   return (
@@ -17,12 +16,11 @@ function App() {
         <Route path="/lake" element={<LakePage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/fishing" element={<FishingPage />} />
-        <Route path="/market" element={<MarketPage />} />
+        <Route path="/raffle" element={<RafflePage />} />
         <Route path="/tasks" element={<TasksPage />} />
         <Route path="/friends" element={<FriendsPage />} />
         <Route path="/wallet" element={<WalletPage />} />
       </Routes>
-      <RaffleButton />
       <BottomTabs />
     </div>
   );

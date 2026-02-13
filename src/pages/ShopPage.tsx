@@ -5,13 +5,18 @@ import { LakeBackground } from '../components/LakeBackground';
 import { formatTon, formatFish } from '../utils/formatters';
 import { getRarityColors } from '../utils/rarity';
 import { triggerHaptic } from '../utils/haptics';
+import { Coins } from 'lucide-react';
 
 export function ShopPage() {
-  const [tab, setTab] = useState<'shop' | 'inv'>('shop');
+  const [tab, setTab] = useState<'shop' | 'inv' | 'market'>('shop');
   const ownedRods = useGameStore((s) => s.ownedRods);
   const inventory = useGameStore((s) => s.inventory);
   const buyRod = useGameStore((s) => s.buyRod);
   const listItem = useGameStore((s) => s.listItem);
+  const listed = useGameStore((s) => s.market.listed);
+  const history = useGameStore((s) => s.market.history);
+  const sellItem = useGameStore((s) => s.sellItem);
+  const [marketTab, setMarketTab] = useState<'sell' | 'hist'>('sell');
 
   const [stakeAmounts, setStakeAmounts] = useState<Record<string, number>>({});
 
@@ -61,9 +66,137 @@ export function ShopPage() {
               >
                 Инвентарь
               </button>
+              <button
+                className={`border-0 rounded-2xl px-3 py-2.5 font-bold bg-transparent cursor-pointer transition-all ${
+                  tab === 'market'
+                    ? 'bg-white/40 text-ink'
+                    : 'text-muted'
+                }`}
+                onClick={() => setTab('market')}
+              >
+                Рынок
+              </button>
             </div>
           </div>
-          {tab === 'shop' ? (
+          {tab === 'market' ? (
+            <>
+              {/* Market sub-tabs */}
+              <div className="flex justify-center mb-2.5">
+                <div className="inline-flex gap-1 p-1 rounded-xl glass-surface">
+                  <button
+                    className={`border-0 rounded-xl px-3 py-1.5 text-sm font-bold bg-transparent cursor-pointer transition-all ${
+                      marketTab === 'sell' ? 'bg-white/40 text-ink' : 'text-muted'
+                    }`}
+                    onClick={() => setMarketTab('sell')}
+                  >
+                    Продать
+                  </button>
+                  <button
+                    className={`border-0 rounded-xl px-3 py-1.5 text-sm font-bold bg-transparent cursor-pointer transition-all ${
+                      marketTab === 'hist' ? 'bg-white/40 text-ink' : 'text-muted'
+                    }`}
+                    onClick={() => setMarketTab('hist')}
+                  >
+                    История
+                  </button>
+                </div>
+              </div>
+
+              {marketTab === 'sell' ? (
+                <div className="grid gap-2.5">
+                  {listed.length === 0 ? (
+                    <div className="game-card">
+                      <div className="font-black">Пока пусто</div>
+                      <div className="text-xs font-extrabold text-muted leading-[1.35] mt-2">
+                        Поймай улов и выставь на продажу.
+                      </div>
+                    </div>
+                  ) : (
+                    listed.map((item) => (
+                      <div key={item.id} className="game-card">
+                        <div className="flex justify-between items-center gap-2.5">
+                          <div className="flex gap-2.5 items-center min-w-0">
+                            <div className="w-[46px] h-[46px] rounded-2xl glass-surface grid place-items-center">
+                              <img
+                                src={import.meta.env.DEV ? item.icon : `${import.meta.env.BASE_URL}${item.icon.replace(/^\//, '')}`}
+                                alt={item.name}
+                                style={{ width: 32, height: 32, objectFit: 'contain' }}
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).style.display = 'none';
+                                }}
+                              />
+                            </div>
+                            <div className="min-w-0">
+                              <div className="font-black">{item.name}</div>
+                              <div className="text-xs font-extrabold text-muted leading-[1.35] mt-0.5">
+                                {item.type === 'fish' ? 'Рыба' : 'Барахло'} •{' '}
+                                {item.payoutTon > 0
+                                  ? `${formatTon(item.payoutTon)} TON`
+                                  : `${formatFish(item.payoutFish)} FISH`}
+                              </div>
+                            </div>
+                          </div>
+                          <button
+                            className="glass-button w-12 h-12 rounded-2xl flex items-center justify-center cursor-pointer transition-transform hover:scale-[1.05] active:scale-[0.95]"
+                            onClick={() => {
+                              triggerHaptic('success');
+                              sellItem(item.id);
+                            }}
+                            onMouseDown={() => triggerHaptic('light')}
+                            title="Продать"
+                          >
+                            <Coins size={20} className="text-ink" />
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              ) : (
+                <div className="grid gap-2.5">
+                  {history.length === 0 ? (
+                    <div className="game-card">
+                      <div className="font-black">Истории нет</div>
+                      <div className="text-xs font-extrabold text-muted leading-[1.35] mt-2">
+                        Продай что-нибудь.
+                      </div>
+                    </div>
+                  ) : (
+                    [...history].reverse().map((item) => {
+                      const date = new Date(item.soldAt || item.createdAt);
+                      return (
+                        <div key={item.id} className="game-card">
+                          <div className="flex justify-between items-center gap-2.5">
+                            <div className="flex gap-2.5 items-center min-w-0">
+                              <div className="w-[46px] h-[46px] rounded-2xl glass-surface grid place-items-center">
+                                <img
+                                  src={item.icon}
+                                  alt={item.name}
+                                  style={{ width: 32, height: 32, objectFit: 'contain' }}
+                                />
+                              </div>
+                              <div className="min-w-0">
+                                <div className="font-black">{item.name}</div>
+                                <div className="text-xs font-extrabold text-muted leading-[1.35] mt-0.5">
+                                  {date.toLocaleString('ru-RU')} • +{' '}
+                                  {item.payoutTon > 0
+                                    ? `${formatTon(item.payoutTon)} TON`
+                                    : `${formatFish(item.payoutFish)} FISH`}
+                                </div>
+                              </div>
+                            </div>
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full glass-surface text-xs font-bold text-muted">
+                              продано
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              )}
+            </>
+          ) : tab === 'shop' ? (
             <div className="grid gap-2.5">
               {rods.map((rod) => {
                 const owned = ownedRods.includes(rod.id);
