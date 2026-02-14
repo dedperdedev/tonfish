@@ -126,7 +126,7 @@ export function ShopPage() {
               )}
             </div>
           ) : tab === 'shop' ? (
-            <div className="grid gap-2.5">
+            <div className="grid grid-cols-2 gap-3">
               {rods.map((rod) => {
                 const owned = ownedRods.includes(rod.id);
 
@@ -164,64 +164,63 @@ export function ShopPage() {
                 const priceCurrency = rod.currency === 'TON' ? 'TON' : rod.currency === 'STARS' ? 'звёзд' : 'FISH';
 
                 return (
-                  <div
-                    key={rod.id}
-                    className="relative rounded-2xl overflow-hidden flex items-stretch gap-3 p-3"
-                    style={{
-                      background: glassTint,
-                      backdropFilter: 'blur(18px)',
-                      WebkitBackdropFilter: 'blur(18px)',
-                      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.06)',
-                    }}
-                  >
-                    {roiPercent && (
-                      <div
-                        className="absolute top-0 right-0 px-2.5 py-1 text-[10px] font-black text-white rounded-bl-xl z-[2]"
-                        style={{ background: roiBg }}
-                      >
-                        {roiPercent}
-                      </div>
-                    )}
-
-                    <div className="relative w-[72px] h-[72px] rounded-xl flex-shrink-0 grid place-items-center overflow-hidden bg-black/10">
-                      <img
-                        src={import.meta.env.DEV ? rod.icon : `${import.meta.env.BASE_URL}${rod.icon.replace(/^\//, '')}`}
-                        alt=""
-                        className="w-full h-full object-contain"
-                        onError={(e) => {
-                          const el = e.target as HTMLImageElement;
-                          el.style.display = 'none';
-                          const placeholder = el.parentElement?.querySelector('.rod-placeholder');
-                          if (placeholder instanceof HTMLElement) placeholder.style.display = 'flex';
-                        }}
-                      />
-                      <div className="rod-placeholder absolute inset-0 rounded-xl bg-muted/30 items-center justify-center text-muted text-lg font-bold hidden" style={{ display: 'none' }}>
-                        ?
-                      </div>
-                    </div>
-
-                    <div className="flex-1 min-w-0 flex flex-col justify-center py-0.5">
-                      <span className="text-sm font-black text-ink tracking-wide">{rod.name}</span>
-                      {rod.description && (
-                        <p className="text-xs font-bold text-muted leading-snug mt-0.5">{rod.description}</p>
-                      )}
-                      <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
-                        {rod.currency === 'TON' && <TonIcon className="w-3.5 h-3.5 text-blue-500 flex-shrink-0" />}
-                        {rod.currency === 'FISH' && <Fish size={14} strokeWidth={2.5} className="text-amber-500 flex-shrink-0" />}
-                        <span className="text-xs font-black">{priceDisplay}</span>
-                        <span className="text-[10px] font-bold text-muted">{priceCurrency}</span>
-                        {owned && <span className="text-[9px] font-bold text-green-600">✓</span>}
-                      </div>
-                    </div>
-
-                    <button
-                      className="self-center flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-black cursor-pointer transition-all hover:brightness-110 active:scale-[0.97] border-0"
-                      style={{ background: 'rgba(0,0,0,0.15)', color: 'inherit' }}
-                      onClick={() => { triggerHaptic('medium'); handleBuy(rod.id); }}
-                      onMouseDown={() => triggerHaptic('light')}
+                  <div key={rod.id} className="flex flex-col">
+                    <div
+                      className="relative rounded-2xl overflow-hidden"
+                      style={{
+                        background: glassTint,
+                        backdropFilter: 'blur(18px)',
+                        WebkitBackdropFilter: 'blur(18px)',
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.06)',
+                      }}
                     >
-                      {owned ? 'Ещё' : 'Купить'}
-                    </button>
+                      {roiPercent && (
+                        <div
+                          className="absolute top-0 right-0 px-2.5 py-1 text-[10px] font-black text-white rounded-bl-xl z-[2]"
+                          style={{ background: roiBg }}
+                        >
+                          {roiPercent}
+                        </div>
+                      )}
+
+                      <div className="absolute top-2 left-2 z-[2]">
+                        <span className="text-[11px] font-black text-ink tracking-wide">{rod.name}</span>
+                      </div>
+
+                      <div className="flex items-center justify-center p-3 pt-8 pb-2" style={{ minHeight: '140px' }}>
+                        <img
+                          src={import.meta.env.DEV ? rod.icon : `${import.meta.env.BASE_URL}${rod.icon.replace(/^\//, '')}`}
+                          alt={rod.name}
+                          style={{
+                            width: '85%',
+                            maxHeight: 120,
+                            objectFit: 'contain',
+                            filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15))',
+                          }}
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = 'none';
+                          }}
+                        />
+                      </div>
+
+                      <div className="flex items-center justify-center gap-1.5 pb-2">
+                        {rod.currency === 'TON' && <TonIcon className="w-4 h-4 text-blue-500" />}
+                        {rod.currency === 'FISH' && <Fish size={16} strokeWidth={2.5} className="text-amber-500" />}
+                        {rod.currency === 'STARS' && <span className="text-amber-400 text-sm">★</span>}
+                        <span className="text-sm font-black">{priceDisplay}</span>
+                        <span className="text-[10px] font-bold text-muted">{priceCurrency}</span>
+                        {owned && <span className="text-[9px] font-bold text-green-600 ml-0.5">✓</span>}
+                      </div>
+
+                      <button
+                        className="w-full py-2.5 text-sm font-black cursor-pointer transition-all hover:brightness-110 active:scale-[0.97] border-0"
+                        style={{ background: 'rgba(0,0,0,0.15)', color: 'inherit' }}
+                        onClick={() => { triggerHaptic('medium'); handleBuy(rod.id); }}
+                        onMouseDown={() => triggerHaptic('light')}
+                      >
+                        {owned ? 'Купить ещё' : 'Купить'}
+                      </button>
+                    </div>
                   </div>
                 );
               })}
