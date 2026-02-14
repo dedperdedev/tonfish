@@ -4,45 +4,53 @@ export interface RadioStation {
   name: string;
   /** Прямой URL потока (MP3 / AAC). */
   streamUrl: string;
-  /** Ссылка на страницу радио для fallback */
+  /** Ссылка на страницу радио (например 101.ru) для fallback */
   linkUrl?: string;
 }
 
 /**
- * Только станции без CORS-блокировки.
- * Все потоки 101.ru блокируют CORS — не используем.
+ * Потоки 101.ru работают по формату:
+ *   https://pub0202.101.ru:8000/stream/trust/mp3/128/{channelId}   — MP3 128 Kbps
+ *   http://pub0302.101.ru:8000/stream/pro/aac/64/{channelId}       — AAC  64 Kbps
+ *
+ * Пользовательские (personal) станции — отдельный формат,
+ * попробуем несколько вариантов; если CORS не пустит — показываем ссылку 101.ru.
  */
 
 export const RADIO_STATIONS: RadioStation[] = [
+  // ===== 101.ru — Авторская песня (бард, костровые, похожая атмосфера) =====
   {
-    id: 'spokoinoe',
-    name: '🌿 Спокойное радио',
-    streamUrl: 'https://listen1.myradio24.com/6262',
-    linkUrl: 'http://spokoinoeradio.ru/',
+    id: 'bard',
+    name: '🎸 Авторская Песня',
+    streamUrl: 'https://ic6.101.ru:8000/stream/pro/aac/64/35',
+    linkUrl: 'https://101.ru/radio/channel/35',
   },
+
+  // ===== 101.ru — Русский шансон (костровые, дорожные) =====
   {
     id: 'shanson',
-    name: '🎸 Шансон',
-    streamUrl: 'http://chanson.hostingradio.ru:8041/chanson-uncensored256.mp3',
-    linkUrl: 'https://radioshanson.ru/',
+    name: '🎸 Русский Шансон',
+    streamUrl: 'https://pub0202.101.ru:8000/stream/trust/mp3/128/50',
+    linkUrl: 'https://101.ru/radio/channel/50',
   },
+
+  // ===== 101.ru — Deep House (расслабленный фон) =====
   {
-    id: 'retro-fm',
-    name: '📻 Ретро FM',
-    streamUrl: 'http://retroserver.streamr.ru:8043/retro256.mp3',
-    linkUrl: 'http://retrofm.ru/',
+    id: 'deep-house',
+    name: '🎧 Deep House',
+    streamUrl: 'https://pub0202.101.ru:8000/stream/trust/mp3/128/173',
+    linkUrl: 'https://101.ru/radio/channel/173',
   },
+
+  // ===== 101.ru — Relax FM =====
   {
-    id: 'rusrock',
-    name: '🎵 Русский Рок',
-    streamUrl: 'http://rock.volna.top/RusRock',
-    linkUrl: 'https://rusrock.volna.top/',
+    id: 'relax-fm',
+    name: '🌊 Relax FM',
+    streamUrl: 'https://ic4.101.ru:8000/stream/air/aac/64/200',
+    linkUrl: 'https://relax-fm.ru/',
   },
-  {
-    id: 'nature-rain',
-    name: '🌧️ Звуки дождя',
-    streamUrl: 'https://maggie.torontocast.com:2020/stream/natureradiorain',
-  },
+
+  // ===== Radio Paradise (гарантированно работает без CORS) =====
   {
     id: 'radio-paradise',
     name: '🌴 Radio Paradise',
