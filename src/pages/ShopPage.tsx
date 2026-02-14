@@ -227,7 +227,7 @@ export function ShopPage() {
                       <button
                         className="w-full py-2.5 text-sm font-black cursor-pointer transition-all hover:brightness-110 active:scale-[0.97] border-0"
                         style={{
-                          background: 'rgba(255,255,255,0.25)',
+                          background: 'rgba(0,0,0,0.15)',
                           color: 'inherit',
                         }}
                         onClick={() => {
