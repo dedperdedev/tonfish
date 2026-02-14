@@ -132,13 +132,13 @@ export function ShopPage() {
 
                 // Glass card tint per rarity
                 const glassTintMap: Record<string, string> = {
-                  Common: 'rgba(156, 163, 175, 0.25)',
-                  Uncommon: 'rgba(34, 197, 94, 0.2)',
-                  Rare: 'rgba(59, 130, 246, 0.2)',
-                  Epic: 'rgba(168, 85, 247, 0.2)',
-                  Legendary: 'rgba(251, 191, 36, 0.2)',
-                  Mythic: 'rgba(236, 72, 153, 0.2)',
-                  Apex: 'rgba(239, 68, 68, 0.22)',
+                  Common: 'rgba(156, 163, 175, 0.32)',
+                  Uncommon: 'rgba(34, 197, 94, 0.28)',
+                  Rare: 'rgba(59, 130, 246, 0.28)',
+                  Epic: 'rgba(168, 85, 247, 0.28)',
+                  Legendary: 'rgba(251, 191, 36, 0.28)',
+                  Mythic: 'rgba(236, 72, 153, 0.28)',
+                  Apex: 'rgba(239, 68, 68, 0.3)',
                 };
                 const glassTint = glassTintMap[rod.rarity] || 'rgba(156, 163, 175, 0.25)';
 
@@ -155,7 +155,7 @@ export function ShopPage() {
                 const roiBg = roiBgMap[rod.rarity] || '#6b7280';
 
                 const roiPercent = rod.dailyYieldPct > 0
-                  ? `ROI ${(rod.dailyYieldPct * 100 * 365).toFixed(0)}%`
+                  ? `До ${(rod.dailyYieldPct * 100 * 365).toFixed(0)}%`
                   : '';
 
                 const priceDisplay = rod.currency === 'TON'
@@ -224,20 +224,23 @@ export function ShopPage() {
                       </div>
 
                       {/* Buy button */}
-                      <button
-                        className="w-full py-2.5 text-sm font-black cursor-pointer transition-all hover:brightness-110 active:scale-[0.97] border-0"
-                        style={{
-                          background: 'rgba(255,255,255,0.15)',
-                          color: 'inherit',
-                        }}
-                        onClick={() => {
-                          triggerHaptic('medium');
-                          handleBuy(rod.id);
-                        }}
-                        onMouseDown={() => triggerHaptic('light')}
-                      >
-                        {owned ? 'Купить ещё' : 'Купить'}
-                      </button>
+                      <div className="px-2.5 pb-2.5">
+                        <button
+                          className="w-full py-2 text-sm font-black cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.96] border-0 rounded-xl"
+                          style={{
+                            background: 'linear-gradient(135deg, #FF9C1E, #FF7A00)',
+                            color: '#3a1800',
+                            boxShadow: '0 3px 10px rgba(255, 156, 30, 0.35)',
+                          }}
+                          onClick={() => {
+                            triggerHaptic('medium');
+                            handleBuy(rod.id);
+                          }}
+                          onMouseDown={() => triggerHaptic('light')}
+                        >
+                          {owned ? 'Купить ещё' : 'Купить'}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 );
