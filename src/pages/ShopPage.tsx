@@ -5,7 +5,8 @@ import { LakeBackground } from '../components/LakeBackground';
 import { formatTon, formatFish } from '../utils/formatters';
 import { getRarityColors } from '../utils/rarity';
 import { triggerHaptic } from '../utils/haptics';
-import { Coins } from 'lucide-react';
+import { Coins, Fish } from 'lucide-react';
+import { TonIcon } from '../components/TonIcon';
 
 export function ShopPage() {
   const [tab, setTab] = useState<'shop' | 'inv' | 'market'>('shop');
@@ -16,15 +17,13 @@ export function ShopPage() {
   const listed = useGameStore((s) => s.market.listed);
   const sellItem = useGameStore((s) => s.sellItem);
 
-  const [stakeAmounts, setStakeAmounts] = useState<Record<string, number>>({});
-
   const handleBuy = (rodId: string) => {
     const rod = rods.find((r) => r.id === rodId);
     if (!rod) return;
 
     const stake =
       rod.currency === 'TON'
-        ? stakeAmounts[rodId] || rod.minStake
+        ? rod.minStake
         : rod.priceFish || rod.minStake;
 
     if (buyRod(rodId, stake)) {
@@ -127,132 +126,117 @@ export function ShopPage() {
               )}
             </div>
           ) : tab === 'shop' ? (
-            <div className="grid gap-2.5">
+            <div className="grid grid-cols-2 gap-3">
               {rods.map((rod) => {
                 const owned = ownedRods.includes(rod.id);
-
                 const rarityColors = getRarityColors(rod.rarity);
-                // Get rarity tint color for background (5-8% opacity)
-                const rarityTintMap: Record<string, string> = {
-                  Common: 'rgba(156, 163, 175, 0.06)', // gray
-                  Uncommon: 'rgba(34, 197, 94, 0.07)', // green
-                  Rare: 'rgba(59, 130, 246, 0.07)', // blue
-                  Epic: 'rgba(168, 85, 247, 0.08)', // purple
-                  Legendary: 'rgba(251, 191, 36, 0.08)', // yellow
-                  Mythic: 'rgba(236, 72, 153, 0.08)', // pink
-                  Apex: 'rgba(239, 68, 68, 0.08)', // red
+
+                // Dark card bg per rarity
+                const rarityBgMap: Record<string, string> = {
+                  Common: '#2a2e35',
+                  Uncommon: '#1e2e24',
+                  Rare: '#1a2538',
+                  Epic: '#261a38',
+                  Legendary: '#332a14',
+                  Mythic: '#31182a',
+                  Apex: '#351a1a',
                 };
-                const rarityTint = rarityTintMap[rod.rarity] || 'rgba(156, 163, 175, 0.06)';
-                
-                // Get rarity accent line color
-                const rarityLineMap: Record<string, string> = {
-                  Common: 'rgba(156, 163, 175, 0.4)',
-                  Uncommon: 'rgba(34, 197, 94, 0.5)',
-                  Rare: 'rgba(59, 130, 246, 0.5)',
-                  Epic: 'rgba(168, 85, 247, 0.5)',
-                  Legendary: 'rgba(251, 191, 36, 0.5)',
-                  Mythic: 'rgba(236, 72, 153, 0.5)',
-                  Apex: 'rgba(239, 68, 68, 0.6)',
+                const cardBg = rarityBgMap[rod.rarity] || '#2a2e35';
+
+                // ROI badge color
+                const roiBgMap: Record<string, string> = {
+                  Common: '#6b7280',
+                  Uncommon: '#22c55e',
+                  Rare: '#3b82f6',
+                  Epic: '#a855f7',
+                  Legendary: '#f59e0b',
+                  Mythic: '#ec4899',
+                  Apex: '#ef4444',
                 };
-                const rarityLineColor = rarityLineMap[rod.rarity] || 'rgba(156, 163, 175, 0.4)';
+                const roiBg = roiBgMap[rod.rarity] || '#6b7280';
+
+                const roiPercent = rod.dailyYieldPct > 0
+                  ? `ROI ${(rod.dailyYieldPct * 100 * 365).toFixed(0)}%`
+                  : '';
+
+                const priceDisplay = rod.currency === 'TON'
+                  ? `${rod.minStake}${rod.maxStake !== rod.minStake ? '–' + rod.maxStake : ''}`
+                  : `${rod.priceFish}`;
+                const priceCurrency = rod.currency === 'TON' ? 'TON' : 'FISH';
 
                 return (
-                  <div 
-                    key={rod.id} 
-                    className="game-card relative overflow-hidden"
-                    style={{
-                      background: `linear-gradient(to right, ${rarityTint} 0%, transparent 8%)`,
-                    }}
-                  >
-                    {/* Rarity accent line */}
+                  <div key={rod.id} className="flex flex-col">
+                    {/* Card */}
                     <div
-                      className="absolute left-0 top-0 bottom-0 w-1"
-                      style={{
-                        background: rarityLineColor,
+                      className="relative rounded-2xl overflow-hidden cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.97]"
+                      style={{ background: cardBg }}
+                      onClick={() => {
+                        triggerHaptic('medium');
+                        handleBuy(rod.id);
                       }}
-                    />
-                    
-                    <div className="grid grid-cols-[110px_1fr] gap-3 items-start relative">
-                      <div className="flex items-start justify-center relative" style={{ marginTop: '-8px' }}>
+                    >
+                      {/* ROI badge */}
+                      {roiPercent && (
+                        <div
+                          className="absolute top-0 right-0 px-2.5 py-1 text-[10px] font-black text-white rounded-bl-xl z-[2]"
+                          style={{
+                            background: roiBg,
+                            transform: 'rotate(0deg)',
+                          }}
+                        >
+                          {roiPercent}
+                        </div>
+                      )}
+
+                      {/* Rarity badge */}
+                      <div className="absolute top-2 left-2 z-[2]">
+                        <span
+                          className={`inline-flex items-center px-2 py-0.5 rounded-full border text-[9px] font-black ${rarityColors.bg} ${rarityColors.text} ${rarityColors.border}`}
+                        >
+                          {rod.rarity}
+                        </span>
+                      </div>
+
+                      {/* Rod image */}
+                      <div className="flex items-center justify-center p-4 pt-8 pb-2" style={{ minHeight: '140px' }}>
                         <img
                           src={import.meta.env.DEV ? rod.icon : `${import.meta.env.BASE_URL}${rod.icon.replace(/^\//, '')}`}
                           alt={rod.name}
                           style={{
-                            width: 100,
-                            height: 'auto',
+                            width: '85%',
+                            maxHeight: 120,
                             objectFit: 'contain',
-                            transform: 'rotate(-12deg)',
-                            filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12))',
+                            filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4))',
                           }}
                           onError={(e) => {
                             (e.target as HTMLImageElement).style.display = 'none';
                           }}
                         />
                       </div>
-                      <div className="min-w-0 pt-1">
-                        <div className="flex items-center gap-2 flex-wrap mb-1">
-                          <h3 className="m-0 text-base font-black tracking-wide">{rod.name}</h3>
-                          <span
-                            className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[10px] font-black ${rarityColors.bg} ${rarityColors.text} ${rarityColors.border}`}
-                          >
-                            {rod.rarity}
-                          </span>
-                        </div>
-                        {rod.dailyYieldPct > 0 && (
-                          <div className="flex items-center gap-1.5 text-xs font-semibold text-muted mb-2.5">
-                            <span className="w-1 h-1 rounded-full bg-sun/60"></span>
-                            <span>{(rod.dailyYieldPct * 100).toFixed(1)}% / сутки</span>
-                          </div>
-                        )}
 
-                        {rod.currency === 'TON' ? (
-                          <div className="mb-2.5">
-                            <div className="text-xs font-semibold text-muted mb-1.5">
-                              <span>Сумма покупки</span>
-                            </div>
-                            <input
-                              type="number"
-                              min={rod.minStake}
-                              max={rod.maxStake}
-                              step={rod.minStake < 1 ? 0.1 : 1}
-                              value={stakeAmounts[rod.id] || ''}
-                              onChange={(e) => {
-                                const value = e.target.value === '' ? undefined : parseFloat(e.target.value);
-                                if (value !== undefined) {
-                                  const clamped = Math.max(rod.minStake, Math.min(rod.maxStake, value));
-                                  setStakeAmounts({ ...stakeAmounts, [rod.id]: clamped });
-                                } else {
-                                  const newAmounts = { ...stakeAmounts };
-                                  delete newAmounts[rod.id];
-                                  setStakeAmounts(newAmounts);
-                                }
-                              }}
-                              className="w-full px-3 py-2 rounded-2xl glass-surface font-medium text-ink text-sm focus:outline-none focus:ring-2 focus:ring-sun/50 placeholder:text-muted"
-                              placeholder={`${rod.minStake}–${rod.maxStake} TON`}
-                            />
-                          </div>
-                        ) : (
-                          <div className="mb-2.5 px-3 py-2 rounded-2xl glass-surface">
-                            <div className="flex justify-between items-center text-sm font-medium text-muted">
-                              <span>Цена</span>
-                              <span className="text-ink">{rod.priceFish} FISH</span>
-                            </div>
-                          </div>
-                        )}
-
-                        <div className="flex gap-2.5 items-center justify-end">
-                          <button
-                            className="game-button w-auto min-w-[160px] px-3.5 py-2.5 text-sm font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]"
-                            onClick={() => {
-                              triggerHaptic('medium');
-                              handleBuy(rod.id);
-                            }}
-                            onMouseDown={() => triggerHaptic('light')}
-                          >
-                            {owned ? 'Купить ещё' : 'Купить'}
-                          </button>
-                        </div>
+                      {/* Name bar */}
+                      <div
+                        className="px-3 py-2.5 text-center"
+                        style={{ background: 'rgba(255,255,255,0.08)' }}
+                      >
+                        <h3 className="m-0 text-sm font-black text-white tracking-wide uppercase">
+                          {rod.name}
+                        </h3>
                       </div>
+                    </div>
+
+                    {/* Price below card */}
+                    <div className="flex items-center justify-center gap-1.5 mt-2 mb-1">
+                      {rod.currency === 'TON' ? (
+                        <TonIcon className="w-4 h-4 text-blue-400" />
+                      ) : (
+                        <Fish size={16} strokeWidth={2.5} className="text-amber-400" />
+                      )}
+                      <span className="text-sm font-black">{priceDisplay}</span>
+                      <span className="text-xs font-bold text-muted">{priceCurrency}</span>
+                      {owned && (
+                        <span className="text-[10px] font-bold text-green-500 ml-1">Есть</span>
+                      )}
                     </div>
                   </div>
                 );
