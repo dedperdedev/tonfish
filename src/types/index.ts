@@ -46,6 +46,8 @@ export interface CatchResult {
   soldAt?: number;
   status?: 'in_modal' | 'in_inventory' | 'sold';
   icon: string;
+  /** Когда выставлен на рынок (для таймера продажи 1ч) */
+  listedAt?: number;
 }
 
 export interface Task {

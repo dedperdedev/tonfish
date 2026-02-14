@@ -1,14 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useGameStore } from '../store/gameStore';
 import { Header } from '../components/Header';
 import { LakeBackground } from '../components/LakeBackground';
 import { formatTon } from '../utils/formatters';
 import { triggerHaptic } from '../utils/haptics';
-import { Trophy, Ticket, Info, Minus, Plus, ChevronDown, ChevronUp } from 'lucide-react';
+import { Trophy, Ticket, Info, Minus, Plus, ChevronDown, ChevronUp, Clock } from 'lucide-react';
 import { TonIcon } from '../components/TonIcon';
 
 const TICKET_PRICE = 0.01; // TON
 const PRIZE_POOL = 100; // TON
+/** Конец розыгрыша: через 7 дней от текущей даты (для примера; можно заменить на фиксированную дату) */
+const getRaffleEndMs = () => {
+  const d = new Date();
+  d.setDate(d.getDate() + 7);
+  d.setHours(23, 59, 59, 999);
+  return d.getTime();
+};
+const RAFFLE_END_MS = getRaffleEndMs();
+
+function formatTimeLeft(ms: number): string {
+  if (ms <= 0) return '0д 00:00:00';
+  const s = Math.floor(ms / 1000) % 60;
+  const m = Math.floor(ms / 60000) % 60;
+  const h = Math.floor(ms / 3600000) % 24;
+  const d = Math.floor(ms / 86400000);
+  return `${d}д ${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
 
 /** Мок-данные лидерборда */
 const MOCK_LEADERBOARD = [
@@ -29,6 +46,14 @@ export function RafflePage() {
   const [ticketCount, setTicketCount] = useState(1);
   const [myTickets, setMyTickets] = useState(0);
   const [showRules, setShowRules] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(() => Math.max(0, RAFFLE_END_MS - Date.now()));
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setTimeLeft((prev) => Math.max(0, RAFFLE_END_MS - Date.now()));
+    }, 1000);
+    return () => clearInterval(t);
+  }, []);
 
   const totalCost = +(ticketCount * TICKET_PRICE).toFixed(4);
   const canAfford = balances.ton >= totalCost;
@@ -72,6 +97,11 @@ export function RafflePage() {
               <TonIcon className="w-9 h-9 text-blue-500" />
               <span className="text-4xl font-black tracking-wide">{PRIZE_POOL}</span>
               <span className="text-xl font-extrabold text-muted">TON</span>
+            </div>
+            <div className="mt-3 pt-3 border-t border-white/20 flex items-center justify-center gap-2">
+              <Clock size={18} strokeWidth={2.5} className="text-muted" />
+              <span className="text-sm font-bold text-muted">До конца розыгрыша:</span>
+              <span className="text-lg font-black text-ink tabular-nums">{formatTimeLeft(timeLeft)}</span>
             </div>
           </div>
 

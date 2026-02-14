@@ -2,7 +2,7 @@ import { useGameStore } from '../store/gameStore';
 import { formatTon, formatFish } from '../utils/formatters';
 import { useState, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Wallet, Languages, RadioReceiver, Fish } from 'lucide-react';
+import { Wallet, RadioReceiver, Fish } from 'lucide-react';
 import { useLocale } from '../contexts/LocaleContext';
 import { useRadioModal } from '../contexts/RadioModalContext';
 import { TonIcon } from './TonIcon';
@@ -55,11 +55,11 @@ export function Header({ title, rightContent }: HeaderProps) {
             <b className="font-black tracking-wide">{formatFish(balances.fish)}</b>
           </div>
           <button
-            className="inline-flex items-center justify-center px-3 py-2.5 rounded-2xl glass-surface h-[42px] w-[54px] flex-shrink-0 cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-1 px-3 py-2.5 rounded-2xl glass-surface h-[42px] min-w-[54px] flex-shrink-0 cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={toggleLocale}
             title={locale === 'ru' ? 'Переключить на EN' : 'Switch to RU'}
           >
-            <Languages size={20} strokeWidth={2.5} className="text-ink" />
+            <span className="text-xs font-black text-ink">ru/en</span>
           </button>
           <button
             className="inline-flex items-center justify-center px-3 py-2.5 rounded-2xl h-[42px] w-[54px] flex-shrink-0 cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"

@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useGameStore, rods } from '../store/gameStore';
 import { Header } from '../components/Header';
 import { LakeBackground } from '../components/LakeBackground';
-import { formatTon, formatFish } from '../utils/formatters';
-import { getRarityColors } from '../utils/rarity';
 import { triggerHaptic } from '../utils/haptics';
-import { Coins, Fish } from 'lucide-react';
+import { playZakid } from '../utils/sound';
+import { Fish } from 'lucide-react';
 import { TonIcon } from '../components/TonIcon';
 
+const SELL_DURATION_MS = 60 * 60 * 1000; // 1 час
+
 export function ShopPage() {
+  const navigate = useNavigate();
   const [tab, setTab] = useState<'shop' | 'inv' | 'market'>('shop');
   const ownedRods = useGameStore((s) => s.ownedRods);
   const inventory = useGameStore((s) => s.inventory);
@@ -16,6 +19,22 @@ export function ShopPage() {
   const listItem = useGameStore((s) => s.listItem);
   const listed = useGameStore((s) => s.market.listed);
   const sellItem = useGameStore((s) => s.sellItem);
+  const equipRod = useGameStore((s) => s.equipRod);
+  const startFishing = useGameStore((s) => s.startFishing);
+
+  // Автозавершение продажи через 1ч
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = Date.now();
+      listed.forEach((item) => {
+        const listedAt = item.listedAt ?? now - SELL_DURATION_MS;
+        if (now - listedAt >= SELL_DURATION_MS) {
+          sellItem(item.id);
+        }
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [listed, sellItem]);
 
   const handleBuy = (rodId: string) => {
     const rod = rods.find((r) => r.id === rodId);
@@ -76,53 +95,55 @@ export function ShopPage() {
             </div>
           </div>
           {tab === 'market' ? (
-            <div className="grid gap-2.5">
+            <div className="grid grid-cols-2 gap-3">
               {listed.length === 0 ? (
-                <div className="game-card">
+                <div className="col-span-2 rounded-2xl glass-card p-5">
                   <div className="font-black">Пока пусто</div>
                   <div className="text-xs font-extrabold text-muted leading-[1.35] mt-2">
                     Поймай улов и выставь на продажу.
                   </div>
                 </div>
               ) : (
-                listed.map((item) => (
-                  <div key={item.id} className="game-card">
-                    <div className="flex justify-between items-center gap-2.5">
-                      <div className="flex gap-2.5 items-center min-w-0">
-                        <div className="w-[46px] h-[46px] rounded-2xl glass-surface grid place-items-center">
-                          <img
-                            src={import.meta.env.DEV ? item.icon : `${import.meta.env.BASE_URL}${item.icon.replace(/^\//, '')}`}
-                            alt={item.name}
-                            style={{ width: 32, height: 32, objectFit: 'contain' }}
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).style.display = 'none';
-                            }}
-                          />
-                        </div>
-                        <div className="min-w-0">
-                          <div className="font-black">{item.name}</div>
-                          <div className="text-xs font-extrabold text-muted leading-[1.35] mt-0.5">
-                            {item.type === 'fish' ? 'Рыба' : 'Барахло'} •{' '}
-                            {item.payoutTon > 0
-                              ? `${formatTon(item.payoutTon)} TON`
-                              : `${formatFish(item.payoutFish)} FISH`}
-                          </div>
-                        </div>
+                listed.map((item) => {
+                  const listedAt = item.listedAt ?? 0;
+                  const remaining = listedAt > 0 ? Math.max(0, listedAt + SELL_DURATION_MS - Date.now()) : 0;
+                  const selling = remaining > 0;
+                  const minsLeft = Math.ceil(remaining / 60000);
+                  return (
+                    <div
+                      key={item.id}
+                      className="relative flex flex-col rounded-2xl overflow-hidden"
+                      style={{
+                        background: 'rgba(156, 163, 175, 0.25)',
+                        backdropFilter: 'blur(18px)',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                      }}
+                    >
+                      <div className="absolute top-2 left-2 z-[2]">
+                        <span className="text-[11px] font-black text-ink">{item.name}</span>
+                      </div>
+                      <div className="flex items-center justify-center p-3 pt-8 pb-2" style={{ minHeight: '100px' }}>
+                        <img
+                          src={import.meta.env.DEV ? item.icon : `${import.meta.env.BASE_URL}${item.icon.replace(/^\//, '')}`}
+                          alt=""
+                          className="w-[85%] max-h-20 object-contain"
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                        />
+                      </div>
+                      <div className="text-center text-xs font-bold text-muted px-2 pb-1">
+                        {selling ? `Продаётся · ${minsLeft} мин` : 'Продано'}
                       </div>
                       <button
-                        className="glass-button w-12 h-12 rounded-2xl flex items-center justify-center cursor-pointer transition-transform hover:scale-[1.05] active:scale-[0.95]"
-                        onClick={() => {
-                          triggerHaptic('success');
-                          sellItem(item.id);
-                        }}
-                        onMouseDown={() => triggerHaptic('light')}
-                        title="Продать"
+                        className="w-full py-2.5 text-sm font-black border-0 cursor-pointer opacity-50"
+                        style={{ background: 'rgba(0,0,0,0.1)' }}
+                        disabled
+                        title={selling ? `Осталось ${minsLeft} мин` : 'Продано'}
                       >
-                        <Coins size={20} className="text-ink" />
+                        Продать
                       </button>
                     </div>
-                  </div>
-                ))
+                  );
+                })
               )}
             </div>
           ) : tab === 'shop' ? (
@@ -227,96 +248,93 @@ export function ShopPage() {
             </div>
           ) : (
             <>
-              <div className="grid gap-2.5">
-                {ownedRods.map((rodId) => {
-                  const rod = rods.find((r) => r.id === rodId);
-                  if (!rod) return null;
-                  return (
-                    <div key={rodId} className="game-card">
-                      <div className="flex justify-between items-center gap-2.5">
-                        <div className="flex gap-2.5 items-center min-w-0">
-                          <div className="w-[46px] h-[46px] rounded-2xl glass-surface grid place-items-center">
-                            <img
-                              src={import.meta.env.DEV ? rod.icon : `${import.meta.env.BASE_URL}${rod.icon.replace(/^\//, '')}`}
-                              alt={rod.name}
-                              style={{ width: 32, height: 32, objectFit: 'contain' }}
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).style.display = 'none';
-                              }}
-                            />
+              {/* Удочки: квадратные карточки, количество, Закинуть → 24ч */}
+              {(() => {
+                const rodCounts = ownedRods.reduce((acc, id) => {
+                  acc[id] = (acc[id] || 0) + 1;
+                  return acc;
+                }, {} as Record<string, number>);
+                const rodEntries = Object.entries(rodCounts);
+                const glassTint = 'rgba(156, 163, 175, 0.28)';
+                return rodEntries.length === 0 ? null : (
+                  <div className="grid grid-cols-2 gap-3">
+                    {rodEntries.map(([rodId, count]) => {
+                      const rod = rods.find((r) => r.id === rodId);
+                      if (!rod) return null;
+                      const stake = rod.currency === 'TON' || rod.currency === 'STARS' ? rod.minStake : (rod.priceFish ?? rod.minStake);
+                      return (
+                        <div key={rodId} className="relative flex flex-col rounded-2xl overflow-hidden" style={{ background: glassTint, backdropFilter: 'blur(18px)', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+                          <div className="absolute top-2 left-2 z-[2]">
+                            <span className="text-sm font-black text-ink">{rod.name}</span>
+                            <span className="text-xs font-bold text-muted ml-1">({count} шт)</span>
                           </div>
-                          <div className="min-w-0">
-                            <div className="font-black">{rod.name}</div>
-                            <div className="text-xs font-extrabold text-muted leading-[1.35] mt-0.5 flex items-center gap-1.5">
-                              <span
-                                className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full border text-[10px] font-black ${getRarityColors(rod.rarity).bg} ${getRarityColors(rod.rarity).text} ${getRarityColors(rod.rarity).border}`}
-                              >
-                                {rod.rarity}
-                              </span>
-                              <span>•</span>
-                              <span>
-                                {rod.currency === 'TON'
-                                  ? `${rod.minStake}–${rod.maxStake} TON`
-                                  : rod.currency === 'STARS'
-                                    ? `${rod.minStake}–${rod.maxStake} звёзд`
-                                    : `${rod.priceFish} FISH`}
-                              </span>
-                            </div>
+                          <div className="flex items-center justify-center p-3 pt-8 pb-2" style={{ minHeight: '100px' }}>
+                            <img src={import.meta.env.DEV ? rod.icon : `${import.meta.env.BASE_URL}${rod.icon.replace(/^\//, '')}`} alt="" className="w-[85%] max-h-20 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                           </div>
+                          <button
+                            className="w-full py-2.5 text-sm font-black border-0 cursor-pointer transition-all hover:brightness-110 active:scale-[0.97]"
+                            style={{ background: 'rgba(0,0,0,0.15)' }}
+                            onClick={() => {
+                              triggerHaptic('medium');
+                              playZakid();
+                              equipRod(rodId);
+                              startFishing(rodId, stake);
+                              navigate('/lake');
+                            }}
+                            onMouseDown={() => triggerHaptic('light')}
+                          >
+                            Закинуть
+                          </button>
                         </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {inventory.length === 0 ? (
-                <div className="game-card mt-2.5">
-                  <div className="font-black">Мои предметы</div>
-                  <div className="text-xs font-extrabold text-muted leading-[1.35] mt-2">
-                    Пока пусто.
+                      );
+                    })}
                   </div>
+                );
+              })()}
+
+              {/* Предметы (улов): квадратные карточки, количество, На рынок */}
+              {inventory.length === 0 ? (
+                <div className="rounded-2xl glass-card p-5 mt-3">
+                  <div className="font-black">Мои предметы</div>
+                  <div className="text-xs font-extrabold text-muted leading-[1.35] mt-2">Пока пусто.</div>
                 </div>
               ) : (
-                <div className="grid gap-2.5 mt-2.5">
-                {inventory.map((item) => (
-                  <div key={item.id} className="game-card">
-                    <div className="flex justify-between items-center gap-2.5">
-                      <div className="flex gap-2.5 items-center min-w-0">
-                        <div className="w-[46px] h-[46px] rounded-2xl glass-surface grid place-items-center">
-                          <img
-                            src={import.meta.env.DEV ? item.icon : `${import.meta.env.BASE_URL}${item.icon.replace(/^\//, '')}`}
-                            alt={item.name}
-                            style={{ width: 32, height: 32, objectFit: 'contain' }}
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).style.display = 'none';
-                            }}
-                          />
-                        </div>
-                        <div className="min-w-0">
-                          <div className="font-black">{item.name}</div>
-                          <div className="text-xs font-extrabold text-muted leading-[1.35] mt-0.5">
-                            {item.type === 'fish' ? 'Рыба' : 'Барахло'} •{' '}
-                            {item.payoutTon > 0
-                              ? `${formatTon(item.payoutTon)} TON`
-                              : `${formatFish(item.payoutFish)} FISH`}
+                (() => {
+                  const byItemId = inventory.reduce((acc, item) => {
+                    const k = item.itemId;
+                    if (!acc[k]) acc[k] = [];
+                    acc[k].push(item);
+                    return acc;
+                  }, {} as Record<string, typeof inventory>);
+                  const groups = Object.entries(byItemId);
+                  return (
+                    <div className="grid grid-cols-2 gap-3 mt-3">
+                      {groups.map(([itemId, items]) => {
+                        const first = items[0]!;
+                        const count = items.length;
+                        return (
+                          <div key={itemId} className="relative flex flex-col rounded-2xl overflow-hidden" style={{ background: 'rgba(156, 163, 175, 0.25)', backdropFilter: 'blur(18px)', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+                            <div className="absolute top-2 left-2 z-[2]">
+                              <span className="text-sm font-black text-ink">{first.name}</span>
+                              <span className="text-xs font-bold text-muted ml-1">({count} шт)</span>
+                            </div>
+                            <div className="flex items-center justify-center p-3 pt-8 pb-2" style={{ minHeight: '100px' }}>
+                              <img src={import.meta.env.DEV ? first.icon : `${import.meta.env.BASE_URL}${first.icon.replace(/^\//, '')}`} alt="" className="w-[85%] max-h-20 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                            </div>
+                            <button
+                              className="w-full py-2.5 text-sm font-black border-0 cursor-pointer glass-button"
+                              style={{ background: 'rgba(0,0,0,0.15)' }}
+                              onClick={() => { triggerHaptic('light'); listItem(first.id); }}
+                              onMouseDown={() => triggerHaptic('light')}
+                            >
+                              На рынок
+                            </button>
                           </div>
-                        </div>
-                      </div>
-                      <button
-                        className="glass-button px-4 py-2.5 rounded-2xl font-bold cursor-pointer text-sm"
-                        onClick={() => {
-                          triggerHaptic('light');
-                          listItem(item.id);
-                        }}
-                        onMouseDown={() => triggerHaptic('light')}
-                      >
-                        На рынок
-                      </button>
+                        );
+                      })}
                     </div>
-                  </div>
-                ))}
-                </div>
+                  );
+                })()
               )}
             </>
           )}

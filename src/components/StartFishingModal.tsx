@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useGameStore, rods } from '../store/gameStore';
 import { getRarityColors } from '../utils/rarity';
 import { triggerHaptic } from '../utils/haptics';
+import { playZakid } from '../utils/sound';
 
 interface StartFishingModalProps {
   rodId: string;
@@ -34,6 +35,7 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
       return;
     }
     triggerHaptic('success');
+    playZakid();
     const amount = rod.currency === 'TON' || rod.currency === 'STARS' ? currentStake : (rod.priceFish || rod.minStake);
     onStart(amount);
   };

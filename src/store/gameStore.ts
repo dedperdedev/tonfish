@@ -246,12 +246,12 @@ export const useGameStore = create<GameStore>()(
         const state = get();
         const item = state.inventory.find((i) => i.id === itemId);
         if (!item) return;
-
+        const now = Date.now();
         set((s) => ({
           inventory: s.inventory.filter((i) => i.id !== itemId),
           market: {
             ...s.market,
-            listed: [...s.market.listed, { ...item, status: 'in_inventory' as const }],
+            listed: [...s.market.listed, { ...item, status: 'in_inventory' as const, listedAt: now }],
           },
         }));
       },

@@ -6,6 +6,7 @@ import { CatchModal } from '../components/CatchModal';
 import { NoRodModal } from '../components/NoRodModal';
 import { LakeBackground } from '../components/LakeBackground';
 import { triggerHaptic } from '../utils/haptics';
+import { playZakid } from '../utils/sound';
 import { formatTime, getProgress } from '../utils/session';
 import type { CatchResult } from '../types';
 
@@ -65,9 +66,11 @@ export function LakePage() {
       if (!ownedRods.includes(equippedRodId)) {
         const stakeAmount = rod.currency === 'TON' || rod.currency === 'STARS' ? rod.minStake : (rod.priceFish ?? rod.minStake);
         buyRod(equippedRodId, stakeAmount);
+        playZakid();
         startFishing(equippedRodId, stakeAmount);
       } else {
         const stakeAmount = rod.currency === 'TON' || rod.currency === 'STARS' ? rod.minStake : (rod.priceFish ?? rod.minStake);
+        playZakid();
         startFishing(equippedRodId, stakeAmount);
       }
       return;
@@ -93,6 +96,7 @@ export function LakePage() {
     if (!rod) return;
 
     const stakeAmount = rod.currency === 'TON' || rod.currency === 'STARS' ? rod.minStake : (rod.priceFish ?? rod.minStake);
+    playZakid();
     startFishing(equippedRodId, stakeAmount);
   };
 
