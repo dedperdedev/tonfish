@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/gameStore';
 import { formatTon, formatFish } from '../utils/formatters';
 import { triggerHaptic } from '../utils/haptics';
@@ -10,20 +9,18 @@ interface CatchModalProps {
 }
 
 export function CatchModal({ catchResult, onClose }: CatchModalProps) {
-  const navigate = useNavigate();
 
   if (!catchResult) return null;
 
   const handleSell = () => {
     triggerHaptic('success');
-    // Add directly to market.listed (bypass inventory)
     useGameStore.setState((state) => ({
-      market: {
-        ...state.market,
-        listed: [...state.market.listed, { ...catchResult, status: 'in_inventory' as const }],
+      balances: {
+        ...state.balances,
+        ton: state.balances.ton + catchResult.payoutTon,
+        fish: state.balances.fish + catchResult.payoutFish,
       },
     }));
-    navigate('/shop');
     onClose();
   };
 

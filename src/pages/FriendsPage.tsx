@@ -42,7 +42,8 @@ export function FriendsPage() {
         <div className="relative z-[2] flex-1 overflow-auto pt-2.5 pb-24 -webkit-overflow-scrolling-touch">
           {/* Реферальная ссылка */}
           <div className="game-card mb-2.5">
-            <div className="font-black mb-2.5">Реферальная ссылка</div>
+            <div className="font-black mb-1">Реферальная ссылка</div>
+            <p className="text-xs font-bold text-muted mb-2.5">За одного приглашённого друга — 1 FISH</p>
                     <div className="px-3 py-2.5 rounded-2xl glass-surface font-mono text-sm font-bold text-ink break-all mb-2.5">
               {referralLink}
             </div>
