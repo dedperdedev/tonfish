@@ -9,7 +9,7 @@ import { TonIcon } from '../components/TonIcon';
 
 const TICKET_PRICE = 0.01; // TON
 const PRIZE_POOL = 100; // TON
-/** Конец розыгрыша: через 7 дней от текущей даты (для примера; можно заменить на фиксированную дату) */
+/** Конец лотереи: через 7 дней от текущей даты (для примера; можно заменить на фиксированную дату) */
 const getRaffleEndMs = () => {
   const d = new Date();
   d.setDate(d.getDate() + 7);
@@ -100,7 +100,7 @@ export function RafflePage() {
             </div>
             <div className="mt-3 pt-3 border-t border-white/20 flex items-center justify-center gap-2">
               <Clock size={18} strokeWidth={2.5} className="text-muted" />
-              <span className="text-sm font-bold text-muted">До конца розыгрыша:</span>
+              <span className="text-sm font-bold text-muted">До конца лотереи:</span>
               <span className="text-lg font-black text-ink tabular-nums">{formatTimeLeft(timeLeft)}</span>
             </div>
           </div>

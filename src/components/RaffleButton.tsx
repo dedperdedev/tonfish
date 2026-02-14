@@ -10,7 +10,7 @@ export function RaffleButton() {
       <button
         className="fixed right-3 top-1/2 -translate-y-1/2 z-[5] flex flex-col items-center gap-1 cursor-pointer animate-bounce-slow"
         onClick={() => setIsOpen(true)}
-        title="Розыгрыш 100 TON"
+        title="Лотерея 100 TON"
       >
         <div
           className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg transition-transform hover:scale-110 active:scale-95"

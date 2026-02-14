@@ -5,7 +5,7 @@ import { triggerHaptic } from '../utils/haptics';
 const tabs = [
   { id: 'lake', label: 'Озеро', Icon: Waves, path: '/lake' },
   { id: 'shop', label: 'Магазин', Icon: ShoppingBag, path: '/shop' },
-  { id: 'raffle', label: 'Розыгрыш', Icon: Trophy, path: '/raffle' },
+  { id: 'raffle', label: 'Лотерея', Icon: Trophy, path: '/raffle' },
   { id: 'tasks', label: 'Таски', Icon: CheckSquare, path: '/tasks' },
   { id: 'friends', label: 'Друзья', Icon: Users, path: '/friends' },
 ];

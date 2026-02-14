@@ -65,7 +65,7 @@ export function RaffleModal({ onClose }: RaffleModalProps) {
         <div className="p-4 pb-0 flex-shrink-0">
           <h2 className="m-0 text-lg font-black font-heading flex items-center gap-2">
             <Trophy size={22} strokeWidth={2.5} className="text-amber-500" />
-            Розыгрыш
+            Лотерея
           </h2>
         </div>
 
