@@ -26,14 +26,6 @@ export const RADIO_STATIONS: RadioStation[] = [
     linkUrl: 'https://101.ru/radio/channel/35',
   },
 
-  // ===== 101.ru — Русский шансон (костровые, дорожные) =====
-  {
-    id: 'shanson',
-    name: '🎸 Русский Шансон',
-    streamUrl: 'https://pub0202.101.ru:8000/stream/trust/mp3/128/50',
-    linkUrl: 'https://101.ru/radio/channel/50',
-  },
-
   // ===== 101.ru — Deep House (расслабленный фон) =====
   {
     id: 'deep-house',
