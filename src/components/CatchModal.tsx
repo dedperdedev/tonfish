@@ -63,17 +63,24 @@ export function CatchModal({ catchResult, onClose }: CatchModalProps) {
                   {formatTon(catchResult.payoutTon)} TON
                 </div>
               )}
-              <div className="text-sm font-black text-muted whitespace-nowrap">
-                ≈ {formatFish(catchResult.payoutFish)} FISH
-              </div>
+              {(catchResult.payoutStars ?? 0) > 0 && (
+                <div className="text-lg font-black whitespace-nowrap mb-1">
+                  +{catchResult.payoutStars} звёзд
+                </div>
+              )}
+              {catchResult.payoutFish > 0 && (
+                <div className="text-sm font-black text-muted whitespace-nowrap">
+                  ≈ {formatFish(catchResult.payoutFish)} FISH
+                </div>
+              )}
             </div>
           </div>
           <button 
             className="game-button text-sm py-3 px-4 min-h-[48px] flex-shrink-0" 
-            onClick={handleSell}
+            onClick={(catchResult.payoutStars ?? 0) > 0 ? onClose : handleSell}
             onMouseDown={() => triggerHaptic('light')}
           >
-            Продать
+            {(catchResult.payoutStars ?? 0) > 0 ? 'Забрать' : 'Продать'}
           </button>
         </div>
       </div>

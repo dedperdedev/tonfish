@@ -1,11 +1,14 @@
 export interface Rod {
   id: string;
   name: string;
+  /** Краткое описание для карточки в магазине */
+  description?: string;
   rarity: 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary' | 'Mythic' | 'Apex';
-  currency: 'TON' | 'FISH';
+  currency: 'TON' | 'FISH' | 'STARS';
   minStake: number;
   maxStake: number;
   priceFish?: number;
+  /** Годовой доход в долях (0.018 = 1.8%); для отображения "До X%" */
   dailyYieldPct: number;
   loot: string[];
   icon: string;
@@ -24,7 +27,7 @@ export interface FishingSession {
   id: string;
   rodId: string;
   stakeAmount: number;
-  currency: 'TON' | 'FISH';
+  currency: 'TON' | 'FISH' | 'STARS';
   startAt: number;
   endAt: number;
   status: 'idle' | 'running' | 'ready' | 'claimed';
@@ -38,6 +41,7 @@ export interface CatchResult {
   type: 'fish' | 'junk';
   payoutTon: number;
   payoutFish: number;
+  payoutStars?: number;
   createdAt: number;
   soldAt?: number;
   status?: 'in_modal' | 'in_inventory' | 'sold';
@@ -76,6 +80,7 @@ export interface UserState {
   balances: {
     ton: number;
     fish: number;
+    stars?: number;
   };
   ownedRods: string[];
   equippedRodId: string | null;

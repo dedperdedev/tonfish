@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-type RodId = 'stick' | 'reed' | 'bamboo' | 'telescopic' | 'spinning' | 'feeder' | 'boom' | null;
+type RodId = 'stick' | 'slingshot' | 'reed' | 'bamboo' | 'telescopic' | 'spinning' | 'feeder' | 'boom' | 'vip_fish' | null;
 
 interface LakeCastOverlayProps {
   rodId: RodId;
@@ -60,6 +60,18 @@ const SKINS: Record<string, Skin> = {
     bobberGradient: { from: '#F87171', to: '#DC2626' },
     rippleColor: 'rgba(248, 113, 113, 0.4)',
     mode: 'dynamite',
+  },
+  slingshot: {
+    lineColor: '#6B7280',
+    bobberGradient: { from: '#FCD34D', to: '#F59E0B' },
+    rippleColor: 'rgba(252, 211, 77, 0.3)',
+    mode: 'bobber',
+  },
+  vip_fish: {
+    lineColor: '#7C2D12',
+    bobberGradient: { from: '#FBBF24', to: '#D97706' },
+    rippleColor: 'rgba(251, 191, 36, 0.4)',
+    mode: 'lure',
   },
 };
 

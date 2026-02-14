@@ -24,7 +24,9 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
   const canAfford =
     rod.currency === 'TON'
       ? balances.ton >= currentStake
-      : balances.fish >= (rod.priceFish || rod.minStake);
+      : rod.currency === 'STARS'
+        ? (balances.stars ?? 0) >= currentStake
+        : balances.fish >= (rod.priceFish || rod.minStake);
 
   const handleStart = () => {
     if (!canAfford && !isOwned) {
@@ -32,7 +34,8 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
       return;
     }
     triggerHaptic('success');
-    onStart(rod.currency === 'TON' ? currentStake : (rod.priceFish || rod.minStake));
+    const amount = rod.currency === 'TON' || rod.currency === 'STARS' ? currentStake : (rod.priceFish || rod.minStake);
+    onStart(amount);
   };
 
   return (
@@ -72,8 +75,8 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
                     {rod.rarity}
                   </span>
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/58 border border-white/80 text-xs font-black text-muted">
-                    <strong className="text-ink">{rod.currency}</strong>{' '}
-                    {rod.currency === 'TON'
+                    <strong className="text-ink">{rod.currency === 'STARS' ? 'звёзды' : rod.currency}</strong>{' '}
+                    {rod.currency === 'TON' || rod.currency === 'STARS'
                       ? `${rod.minStake}–${rod.maxStake}`
                       : `${rod.priceFish}`}
                   </span>
@@ -85,12 +88,12 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
                     </span>
                   )}
                 </div>
-                {rod.currency === 'TON' && (
+                {(rod.currency === 'TON' || rod.currency === 'STARS') && (
                   <div className="mt-2.5 px-3 py-2.5 rounded-[18px] bg-white/55 border border-white/85">
                     <div className="flex justify-between items-center font-black text-xs text-muted mb-2.5">
-                      <span>Введи сумму покупки</span>
+                      <span>{rod.currency === 'STARS' ? 'Введи ставку (звёзды)' : 'Введи сумму покупки'}</span>
                       <span className="text-xs text-muted">
-                        {rod.minStake}–{rod.maxStake} TON
+                        {rod.minStake}–{rod.maxStake} {rod.currency === 'STARS' ? 'звёзд' : 'TON'}
                       </span>
                     </div>
                     <input
@@ -109,7 +112,7 @@ export function StartFishingModal({ rodId, onStart, onClose }: StartFishingModal
                         }
                       }}
                       className="w-full px-3 py-2.5 rounded-2xl glass-surface font-medium text-ink text-sm focus:outline-none focus:ring-2 focus:ring-sun/50 placeholder:text-muted"
-                      placeholder={`${rod.minStake}–${rod.maxStake} TON`}
+                      placeholder={`${rod.minStake}–${rod.maxStake} ${rod.currency === 'STARS' ? 'звёзд' : 'TON'}`}
                     />
                   </div>
                 )}

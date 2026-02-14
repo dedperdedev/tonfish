@@ -18,7 +18,7 @@ function generateReferralCode(): string {
 function getDefaultState(): UserState {
   const refCode = generateReferralCode();
   return {
-    balances: { ton: 12.45, fish: 3200 },
+    balances: { ton: 12.45, fish: 3200, stars: 0 },
     ownedRods: ['stick'],
     equippedRodId: 'stick',
     session: null,
@@ -111,6 +111,12 @@ export const useGameStore = create<GameStore>()(
           set((s) => ({
             balances: { ...s.balances, ton: s.balances.ton - stakeAmount },
           }));
+        } else if (rod.currency === 'STARS') {
+          const stars = state.balances.stars ?? 0;
+          if (stars < stakeAmount) return false;
+          set((s) => ({
+            balances: { ...s.balances, stars: (s.balances.stars ?? 0) - stakeAmount },
+          }));
         } else {
           if (state.balances.fish < rod.priceFish!) return false;
           set((s) => ({
@@ -169,10 +175,13 @@ export const useGameStore = create<GameStore>()(
 
         let payoutTon = 0;
         let payoutFish = 0;
+        let payoutStars = 0;
 
         if (rod.currency === 'TON') {
           payoutTon = session.stakeAmount * payoutPct;
           payoutFish = Math.round(payoutTon * EXCHANGE_TON_TO_FISH);
+        } else if (rod.currency === 'STARS') {
+          payoutStars = Math.round(session.stakeAmount * payoutPct);
         } else {
           payoutFish = Math.round(session.stakeAmount * (0.06 * multiplier));
         }
@@ -185,13 +194,20 @@ export const useGameStore = create<GameStore>()(
           type: picked.type,
           payoutTon,
           payoutFish,
+          payoutStars,
           createdAt: Date.now(),
           status: 'in_modal',
           icon: picked.icon,
         };
 
-        set({
-          session: { ...session, status: 'claimed' },
+        set((s) => {
+          const next: { session: FishingSession; balances?: typeof s.balances } = {
+            session: { ...session, status: 'claimed' },
+          };
+          if (payoutStars > 0) {
+            next.balances = { ...s.balances, stars: (s.balances.stars ?? 0) + payoutStars };
+          }
+          return next;
         });
 
         return catchResult;

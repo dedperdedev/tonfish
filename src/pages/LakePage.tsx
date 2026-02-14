@@ -63,13 +63,11 @@ export function LakePage() {
 
       // Если удочка не куплена - покупаем её
       if (!ownedRods.includes(equippedRodId)) {
-        const stakeAmount = rod.currency === 'TON' ? rod.minStake : (rod.priceFish || rod.minStake);
+        const stakeAmount = rod.currency === 'TON' || rod.currency === 'STARS' ? rod.minStake : (rod.priceFish ?? rod.minStake);
         buyRod(equippedRodId, stakeAmount);
-        // После покупки запускаем рыбалку
         startFishing(equippedRodId, stakeAmount);
       } else {
-        // Если удочка уже куплена - запускаем рыбалку с минимальной ставкой
-        const stakeAmount = rod.currency === 'TON' ? rod.minStake : (rod.priceFish || rod.minStake);
+        const stakeAmount = rod.currency === 'TON' || rod.currency === 'STARS' ? rod.minStake : (rod.priceFish ?? rod.minStake);
         startFishing(equippedRodId, stakeAmount);
       }
       return;
@@ -94,7 +92,7 @@ export function LakePage() {
     const rod = rods.find((r) => r.id === equippedRodId);
     if (!rod) return;
 
-    const stakeAmount = rod.currency === 'TON' ? rod.minStake : (rod.priceFish || rod.minStake);
+    const stakeAmount = rod.currency === 'TON' || rod.currency === 'STARS' ? rod.minStake : (rod.priceFish ?? rod.minStake);
     startFishing(equippedRodId, stakeAmount);
   };
 

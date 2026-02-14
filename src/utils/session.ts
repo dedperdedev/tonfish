@@ -11,7 +11,7 @@ export function normalizeSession(session: FishingSession | null): FishingSession
   return session;
 }
 
-export function createSession(rodId: string, stakeAmount: number, currency: 'TON' | 'FISH'): FishingSession {
+export function createSession(rodId: string, stakeAmount: number, currency: 'TON' | 'FISH' | 'STARS'): FishingSession {
   const now = Date.now();
   return {
     id: `session_${now}`,
