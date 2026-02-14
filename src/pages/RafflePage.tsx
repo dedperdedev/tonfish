@@ -50,7 +50,7 @@ export function RafflePage() {
 
   useEffect(() => {
     const t = setInterval(() => {
-      setTimeLeft((prev) => Math.max(0, RAFFLE_END_MS - Date.now()));
+      setTimeLeft(() => Math.max(0, RAFFLE_END_MS - Date.now()));
     }, 1000);
     return () => clearInterval(t);
   }, []);
