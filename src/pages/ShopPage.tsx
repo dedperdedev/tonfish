@@ -92,7 +92,7 @@ export function ShopPage() {
                 };
                 const roiBg = roiBgMap[rod.rarity] || '#6b7280';
 
-                const roiPercent = rod.dailyYieldPct > 0
+                const roiPercent = rod.dailyYieldPct > 0 && rod.id !== 'slingshot'
                   ? `До ${(rod.dailyYieldPct * 100 * 365).toFixed(1)}%`
                   : '';
 
