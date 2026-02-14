@@ -59,7 +59,7 @@ export function Header({ title, rightContent }: HeaderProps) {
             onClick={toggleLocale}
             title={locale === 'ru' ? 'Переключить на EN' : 'Switch to RU'}
           >
-            <span className="text-xs font-black text-ink">ru/en</span>
+            <span className="text-xs font-black text-ink">{locale === 'ru' ? 'RU' : 'EN'}</span>
           </button>
           <button
             className="inline-flex items-center justify-center px-3 py-2.5 rounded-2xl h-[42px] w-[54px] flex-shrink-0 cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
