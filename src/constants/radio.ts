@@ -33,6 +33,12 @@ export const RADIO_STATIONS: RadioStation[] = [
     linkUrl: 'http://retrofm.ru/',
   },
   {
+    id: 'rusrock',
+    name: '🎵 Русский Рок',
+    streamUrl: 'http://rock.volna.top/RusRock',
+    linkUrl: 'https://rusrock.volna.top/',
+  },
+  {
     id: 'nature-rain',
     name: '🌧️ Звуки дождя',
     streamUrl: 'https://maggie.torontocast.com:2020/stream/natureradiorain',
