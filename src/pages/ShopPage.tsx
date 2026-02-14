@@ -129,19 +129,18 @@ export function ShopPage() {
             <div className="grid grid-cols-2 gap-3">
               {rods.map((rod) => {
                 const owned = ownedRods.includes(rod.id);
-                const rarityColors = getRarityColors(rod.rarity);
 
-                // Dark card bg per rarity
-                const rarityBgMap: Record<string, string> = {
-                  Common: '#2a2e35',
-                  Uncommon: '#1e2e24',
-                  Rare: '#1a2538',
-                  Epic: '#261a38',
-                  Legendary: '#332a14',
-                  Mythic: '#31182a',
-                  Apex: '#351a1a',
+                // Glass card tint per rarity
+                const glassTintMap: Record<string, string> = {
+                  Common: 'rgba(156, 163, 175, 0.25)',
+                  Uncommon: 'rgba(34, 197, 94, 0.2)',
+                  Rare: 'rgba(59, 130, 246, 0.2)',
+                  Epic: 'rgba(168, 85, 247, 0.2)',
+                  Legendary: 'rgba(251, 191, 36, 0.2)',
+                  Mythic: 'rgba(236, 72, 153, 0.2)',
+                  Apex: 'rgba(239, 68, 68, 0.22)',
                 };
-                const cardBg = rarityBgMap[rod.rarity] || '#2a2e35';
+                const glassTint = glassTintMap[rod.rarity] || 'rgba(156, 163, 175, 0.25)';
 
                 // ROI badge color
                 const roiBgMap: Record<string, string> = {
@@ -168,37 +167,33 @@ export function ShopPage() {
                   <div key={rod.id} className="flex flex-col">
                     {/* Card */}
                     <div
-                      className="relative rounded-2xl overflow-hidden cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.97]"
-                      style={{ background: cardBg }}
-                      onClick={() => {
-                        triggerHaptic('medium');
-                        handleBuy(rod.id);
+                      className="relative rounded-2xl overflow-hidden"
+                      style={{
+                        background: glassTint,
+                        backdropFilter: 'blur(18px)',
+                        WebkitBackdropFilter: 'blur(18px)',
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.06)',
                       }}
                     >
                       {/* ROI badge */}
                       {roiPercent && (
                         <div
                           className="absolute top-0 right-0 px-2.5 py-1 text-[10px] font-black text-white rounded-bl-xl z-[2]"
-                          style={{
-                            background: roiBg,
-                            transform: 'rotate(0deg)',
-                          }}
+                          style={{ background: roiBg }}
                         >
                           {roiPercent}
                         </div>
                       )}
 
-                      {/* Rarity badge */}
+                      {/* Rod name badge (top-left) */}
                       <div className="absolute top-2 left-2 z-[2]">
-                        <span
-                          className={`inline-flex items-center px-2 py-0.5 rounded-full border text-[9px] font-black ${rarityColors.bg} ${rarityColors.text} ${rarityColors.border}`}
-                        >
-                          {rod.rarity}
+                        <span className="text-[11px] font-black text-ink tracking-wide">
+                          {rod.name}
                         </span>
                       </div>
 
                       {/* Rod image */}
-                      <div className="flex items-center justify-center p-4 pt-8 pb-2" style={{ minHeight: '140px' }}>
+                      <div className="flex items-center justify-center p-3 pt-8 pb-2" style={{ minHeight: '140px' }}>
                         <img
                           src={import.meta.env.DEV ? rod.icon : `${import.meta.env.BASE_URL}${rod.icon.replace(/^\//, '')}`}
                           alt={rod.name}
@@ -206,7 +201,7 @@ export function ShopPage() {
                             width: '85%',
                             maxHeight: 120,
                             objectFit: 'contain',
-                            filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4))',
+                            filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15))',
                           }}
                           onError={(e) => {
                             (e.target as HTMLImageElement).style.display = 'none';
@@ -214,29 +209,35 @@ export function ShopPage() {
                         />
                       </div>
 
-                      {/* Name bar */}
-                      <div
-                        className="px-3 py-2.5 text-center"
-                        style={{ background: 'rgba(255,255,255,0.08)' }}
-                      >
-                        <h3 className="m-0 text-sm font-black text-white tracking-wide uppercase">
-                          {rod.name}
-                        </h3>
+                      {/* Price row */}
+                      <div className="flex items-center justify-center gap-1.5 pb-2">
+                        {rod.currency === 'TON' ? (
+                          <TonIcon className="w-4 h-4 text-blue-500" />
+                        ) : (
+                          <Fish size={16} strokeWidth={2.5} className="text-amber-500" />
+                        )}
+                        <span className="text-sm font-black">{priceDisplay}</span>
+                        <span className="text-[10px] font-bold text-muted">{priceCurrency}</span>
+                        {owned && (
+                          <span className="text-[9px] font-bold text-green-600 ml-0.5">✓</span>
+                        )}
                       </div>
-                    </div>
 
-                    {/* Price below card */}
-                    <div className="flex items-center justify-center gap-1.5 mt-2 mb-1">
-                      {rod.currency === 'TON' ? (
-                        <TonIcon className="w-4 h-4 text-blue-400" />
-                      ) : (
-                        <Fish size={16} strokeWidth={2.5} className="text-amber-400" />
-                      )}
-                      <span className="text-sm font-black">{priceDisplay}</span>
-                      <span className="text-xs font-bold text-muted">{priceCurrency}</span>
-                      {owned && (
-                        <span className="text-[10px] font-bold text-green-500 ml-1">Есть</span>
-                      )}
+                      {/* Buy button */}
+                      <button
+                        className="w-full py-2.5 text-sm font-black cursor-pointer transition-all hover:brightness-110 active:scale-[0.97] border-0"
+                        style={{
+                          background: 'rgba(255,255,255,0.15)',
+                          color: 'inherit',
+                        }}
+                        onClick={() => {
+                          triggerHaptic('medium');
+                          handleBuy(rod.id);
+                        }}
+                        onMouseDown={() => triggerHaptic('light')}
+                      >
+                        {owned ? 'Купить ещё' : 'Купить'}
+                      </button>
                     </div>
                   </div>
                 );
