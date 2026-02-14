@@ -184,12 +184,12 @@ export function ShopPage() {
                       )}
 
                       <div className="absolute top-2 left-2 z-[2]">
-                        <span className="text-[11px] font-black text-ink tracking-wide">{rod.name}</span>
+                        <span className="text-sm font-black text-ink tracking-wide">{rod.name}</span>
                       </div>
 
                       <div
-                        className="flex items-center justify-center p-3 pt-8 pb-2 mx-2 mt-2 rounded-xl"
-                        style={{ minHeight: '140px', background: 'rgba(0,0,0,0.12)' }}
+                        className="flex items-center justify-center p-3 pt-8 pb-2 mx-2.5 mt-7 rounded-xl border border-black/10"
+                        style={{ minHeight: '140px', background: 'rgba(0,0,0,0.22)' }}
                       >
                         <img
                           src={import.meta.env.DEV ? rod.icon : `${import.meta.env.BASE_URL}${rod.icon.replace(/^\//, '')}`}
