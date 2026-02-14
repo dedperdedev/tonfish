@@ -224,23 +224,20 @@ export function ShopPage() {
                       </div>
 
                       {/* Buy button */}
-                      <div className="px-2.5 pb-2.5">
-                        <button
-                          className="w-full py-2 text-sm font-black cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.96] border-0 rounded-xl"
-                          style={{
-                            background: 'linear-gradient(135deg, #FF9C1E, #FF7A00)',
-                            color: '#3a1800',
-                            boxShadow: '0 3px 10px rgba(255, 156, 30, 0.35)',
-                          }}
-                          onClick={() => {
-                            triggerHaptic('medium');
-                            handleBuy(rod.id);
-                          }}
-                          onMouseDown={() => triggerHaptic('light')}
-                        >
-                          {owned ? 'Купить ещё' : 'Купить'}
-                        </button>
-                      </div>
+                      <button
+                        className="w-full py-2.5 text-sm font-black cursor-pointer transition-all hover:brightness-110 active:scale-[0.97] border-0"
+                        style={{
+                          background: 'rgba(255,255,255,0.25)',
+                          color: 'inherit',
+                        }}
+                        onClick={() => {
+                          triggerHaptic('medium');
+                          handleBuy(rod.id);
+                        }}
+                        onMouseDown={() => triggerHaptic('light')}
+                      >
+                        {owned ? 'Купить ещё' : 'Купить'}
+                      </button>
                     </div>
                   </div>
                 );
